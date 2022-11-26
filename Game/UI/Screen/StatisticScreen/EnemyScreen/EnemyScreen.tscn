@@ -1,0 +1,281 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Game/UI/Screen/StatisticScreen/EnemyScreen/EnemyScreen.gd" type="Script" id=1]
+[ext_resource path="res://Resource/Buttons/Return-1-v2.png" type="Texture" id=2]
+[ext_resource path="res://Resource/Buttons/Return-2.png" type="Texture" id=3]
+[ext_resource path="res://Resource/Maps/spring_title.png" type="Texture" id=4]
+[ext_resource path="res://Resource/Maps/winter_title.png" type="Texture" id=5]
+[ext_resource path="res://Game/Characters/Enemies/Chicken/Chicken.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Resource/Fonts/Bungee-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Resource/Maps/autumn_title.png" type="Texture" id=8]
+[ext_resource path="res://Resource/Maps/summer_title.png" type="Texture" id=9]
+[ext_resource path="res://Resource/Maps/sun.png" type="Texture" id=10]
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id=11]
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+
+[sub_resource type="DynamicFont" id=9]
+size = 12
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 6
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id=20]
+content_margin_left = 1.0
+content_margin_right = 1.0
+content_margin_top = 1.0
+content_margin_bottom = 1.0
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0.333333, 0.584314, 0.678431, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="EnemyScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Return" type="TouchScreenButton" parent="."]
+position = Vector2( 10, 10 )
+scale = Vector2( 0.1, 0.1 )
+normal = ExtResource( 2 )
+pressed = ExtResource( 3 )
+
+[node name="OuterBorder" type="Label" parent="."]
+anchor_left = 0.512
+anchor_top = 0.364
+anchor_right = 0.512
+anchor_bottom = 0.364
+margin_left = -73.84
+margin_top = -51.52
+margin_right = 74.16
+margin_bottom = 48.48
+rect_min_size = Vector2( 148, 100 )
+custom_styles/normal = SubResource( 7 )
+align = 1
+valign = 1
+
+[node name="Background" type="Label" parent="OuterBorder"]
+anchor_left = 0.512
+anchor_top = 0.364
+anchor_right = 0.512
+anchor_bottom = 0.364
+margin_left = -75.776
+margin_top = -36.4
+margin_right = 72.224
+margin_bottom = 63.6
+rect_min_size = Vector2( 0, 100 )
+custom_styles/normal = SubResource( 11 )
+align = 1
+valign = 1
+
+[node name="EnemyName" type="Label" parent="OuterBorder/Background"]
+anchor_right = 1.0
+margin_top = 5.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 9 )
+text = "Bat"
+align = 1
+valign = 1
+
+[node name="Description" type="Label" parent="OuterBorder/Background"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -7.0
+margin_right = -10.0
+margin_bottom = -10.0
+grow_vertical = 0
+rect_min_size = Vector2( 0, 10 )
+custom_fonts/font = SubResource( 8 )
+custom_styles/normal = SubResource( 10 )
+text = "the blue bird have unique skin colasdasdasdasdasdasdasdasd"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="CenterContainer" type="CenterContainer" parent="OuterBorder/Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Avatar" type="Container" parent="OuterBorder/Background/CenterContainer"]
+margin_left = 74.0
+margin_top = 50.0
+margin_right = 74.0
+margin_bottom = 50.0
+
+[node name="Chicken" parent="OuterBorder/Background/CenterContainer/Avatar" instance=ExtResource( 6 )]
+position = Vector2( -1.52588e-05, -8 )
+scale = Vector2( 1.5, 1.5 )
+script = null
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -59.0
+margin_right = -10.0
+custom_styles/bg = SubResource( 20 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 1.0
+margin_bottom = 1.0
+custom_constants/separation = 3
+
+[node name="SeasonContainer" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SeasonContainer"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 206.0
+margin_top = 18.0
+margin_right = 226.0
+margin_bottom = 70.0
+custom_constants/separation = 4
+
+[node name="Spring" type="Label" parent="SeasonContainer/VBoxContainer"]
+margin_right = 20.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+custom_styles/normal = SubResource( 19 )
+
+[node name="Background" type="Label" parent="SeasonContainer/VBoxContainer/Spring"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+rect_min_size = Vector2( 18, 18 )
+custom_styles/normal = SubResource( 21 )
+
+[node name="SpringButton" type="TouchScreenButton" parent="SeasonContainer/VBoxContainer/Spring/Background"]
+position = Vector2( 1, 1 )
+scale = Vector2( 0.03125, 0.03125 )
+normal = ExtResource( 4 )
+
+[node name="Summer" type="Label" parent="SeasonContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 20.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 20, 20 )
+custom_styles/normal = SubResource( 19 )
+
+[node name="Background" type="Label" parent="SeasonContainer/VBoxContainer/Summer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+rect_min_size = Vector2( 18, 18 )
+custom_styles/normal = SubResource( 21 )
+
+[node name="SummerButton" type="TouchScreenButton" parent="SeasonContainer/VBoxContainer/Summer/Background"]
+position = Vector2( 1, 1 )
+scale = Vector2( 0.03125, 0.03125 )
+normal = ExtResource( 9 )
+
+[node name="Autumn" type="Label" parent="SeasonContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 20.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 20, 20 )
+custom_styles/normal = SubResource( 19 )
+
+[node name="Background" type="Label" parent="SeasonContainer/VBoxContainer/Autumn"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+rect_min_size = Vector2( 18, 18 )
+custom_styles/normal = SubResource( 21 )
+
+[node name="AutumnButton" type="TouchScreenButton" parent="SeasonContainer/VBoxContainer/Autumn/Background"]
+position = Vector2( 1, 1 )
+scale = Vector2( 0.03125, 0.03125 )
+normal = ExtResource( 8 )
+
+[node name="Winter" type="Label" parent="SeasonContainer/VBoxContainer"]
+margin_top = 72.0
+margin_right = 20.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 20, 20 )
+custom_styles/normal = SubResource( 19 )
+
+[node name="Background" type="Label" parent="SeasonContainer/VBoxContainer/Winter"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+rect_min_size = Vector2( 18, 18 )
+custom_styles/normal = SubResource( 21 )
+
+[node name="WinterButton" type="TouchScreenButton" parent="SeasonContainer/VBoxContainer/Winter/Background"]
+position = Vector2( 1, 1 )
+scale = Vector2( 0.03125, 0.03125 )
+normal = ExtResource( 5 )
+
+[node name="SeasonIcon" type="Sprite" parent="."]
+visible = false
+position = Vector2( 101, 25 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 10 )
+
+[connection signal="button_click" from="." to="." method="_on_EnemyScreen_button_click"]
+[connection signal="released" from="Return" to="." method="_on_Return_released"]
+[connection signal="pressed" from="SeasonContainer/VBoxContainer/Spring/Background/SpringButton" to="." method="_on_SpringButton_pressed"]
+[connection signal="pressed" from="SeasonContainer/VBoxContainer/Summer/Background/SummerButton" to="." method="_on_SummerButton_pressed"]
+[connection signal="pressed" from="SeasonContainer/VBoxContainer/Autumn/Background/AutumnButton" to="." method="_on_AutumnButton_pressed"]
+[connection signal="pressed" from="SeasonContainer/VBoxContainer/Winter/Background/WinterButton" to="." method="_on_WinterButton_pressed"]

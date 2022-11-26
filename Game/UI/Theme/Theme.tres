@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=4 format=2]
+
+[sub_resource type="StyleBoxLine" id=7]
+color = Color( 0.196078, 1, 0.196078, 1 )
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id=8]
+color = Color( 0.196078, 1, 0.196078, 1 )
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id=9]
+color = Color( 0.156863, 0.196078, 0.196078, 1 )
+thickness = 8
+
+[resource]
+HSlider/icons/grabber = null
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = null
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = SubResource( 7 )
+HSlider/styles/grabber_area_highlight = SubResource( 8 )
+HSlider/styles/slider = SubResource( 9 )

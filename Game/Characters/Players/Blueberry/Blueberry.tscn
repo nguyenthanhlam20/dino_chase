@@ -1,0 +1,219 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Game/Characters/Players/Player.gd" type="Script" id=1]
+[ext_resource path="res://Game/Characters/Players/Blueberry/Blueberry.tres" type="SpriteFrames" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.5, 8.55556 )
+
+[sub_resource type="Animation" id=20]
+resource_name = "bend_down"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "bend_down" ]
+}
+
+[sub_resource type="Animation" id=38]
+resource_name = "bend_down_lock"
+length = 0.05
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "bend_down_lock" ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "fall"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "fall" ]
+}
+
+[sub_resource type="Animation" id=32]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "hit" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_hit_effect"
+}, {
+"args": [  ],
+"method": "animation_finished"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_invicible_time"
+} ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "idle"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "idle" ]
+}
+
+[sub_resource type="Animation" id=36]
+resource_name = "jump"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "jump" ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "run"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "run" ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "hit"
+
+[sub_resource type="AnimationNodeOneShot" id=34]
+
+[sub_resource type="AnimationNodeAnimation" id=23]
+animation = "bend_down"
+
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "run"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "bend_down"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=26]
+blend_point_0/node = SubResource( 23 )
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource( 24 )
+blend_point_1/pos = 0.0
+blend_point_2/node = SubResource( 25 )
+blend_point_2/pos = 1.0
+
+[sub_resource type="AnimationNodeBlendTree" id=27]
+graph_offset = Vector2( 355.666, 0 )
+nodes/Animation/node = SubResource( 33 )
+nodes/Animation/position = Vector2( 500, 280 )
+nodes/hit/node = SubResource( 34 )
+nodes/hit/position = Vector2( 740, 180 )
+nodes/move/node = SubResource( 26 )
+nodes/move/position = Vector2( 480, 80 )
+nodes/output/position = Vector2( 1200, 180 )
+node_connections = [ "output", 0, "hit", "hit", 0, "move", "hit", 1, "Animation" ]
+
+[node name="Blueberry" type="KinematicBody2D"]
+collision_layer = 8
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 3, 1.5 )
+scale = Vector2( 1.2, 0.88 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
+animation = "bend_down"
+frame = 2
+playing = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/bend_down = SubResource( 20 )
+anims/bend_down_lock = SubResource( 38 )
+anims/fall = SubResource( 37 )
+anims/hit = SubResource( 32 )
+anims/idle = SubResource( 21 )
+anims/jump = SubResource( 36 )
+anims/run = SubResource( 22 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 27 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/hit/active = false
+parameters/move/blend_position = -1.0
+
+[node name="InvincibleTime" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="InvincibleTime" to="." method="_on_InvincibleTime_timeout"]

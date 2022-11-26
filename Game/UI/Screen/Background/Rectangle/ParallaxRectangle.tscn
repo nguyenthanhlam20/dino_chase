@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/UI/Screen/Background/ParallaxScript.gd" type="Script" id=1]
+[ext_resource path="res://Game/UI/Screen/Background/Rectangle/rectangle.png" type="Texture" id=2]
+
+[node name="ParallaxRectangle" type="ParallaxBackground"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 825.0 ]
+}
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+z_index = -128
+motion_mirroring = Vector2( 900, 600 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer"]
+texture = ExtResource( 2 )
