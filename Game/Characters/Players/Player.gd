@@ -3,14 +3,13 @@ extends Character
 class_name Player
 		
 onready var animated_sprite = $AnimatedSprite
-onready var animation_tree = $AnimationTree
 onready var animation_player = $AnimationPlayer
 onready var collision_shape = $CollisionShape2D
 onready var invicible_time = $InvincibleTime
 
 # Properties
 export(int) var move_speed = 100
-export(int) var jump_force = 500
+export(int) var jump_force = 450
 export(int) var knock_speed = 300
 export(int) var knock_impulse = 200
 export(int) var health = 3
@@ -18,7 +17,7 @@ export(bool) var invicible = false
 
 var root_node setget set_root_node
 
-var velocity : Vector2
+export(Vector2) var velocity : Vector2
 
 var current_health = 3
 var score = 0 
@@ -29,10 +28,11 @@ var play_time setget set_play_time, get_play_time
 
 var sec_elapsed = 0
 
-enum STATE {RUN, JUMP, BEND_DOWN, HIT}
-var current_state = STATE.RUN 
+enum STATE {EGG_MOVE, EGG_CRACK, EGG_HATCH, APPEAR, IDLE, RUN, JUMP, FALL, BEND_DOWN, HIT}
+var current_state = STATE.EGG_MOVE 
 
 func _ready():
+	animation_player.play("egg_move")
 #	print(User.data)
 	if(self.name == "Rainbow"):
 		health = 4
@@ -40,42 +40,89 @@ func _ready():
 	highest_score = float(User.data.best.score.value)
 
 func _process(_delta):
-	sec_elapsed += 1
-	var minutes = sec_elapsed / 3600
-	var miliseconds = sec_elapsed % 60
-	var seconds = sec_elapsed % 3600 / 60
-	var time = "%02d:%02d.%02d" % [minutes, seconds, miliseconds]
-	set_play_time(time)
-	root_node.update_time(time)
+	if(current_state != STATE.IDLE):
+#		sec_elapsed += 1
+#		var minutes = sec_elapsed / 3600
+#		var miliseconds = sec_elapsed % 60
+#		var seconds = sec_elapsed % 3600 / 60
+#		var time = "%02d:%02d.%02d" % [minutes, seconds, miliseconds]
+#		set_play_time(time)
+#		root_node.update_time(time)
+		pass
+		
+
 	
 func _physics_process(_delta):
 	match(current_state):
-		STATE.RUN:
-			collision_shape.position.y = 0.444
+		STATE.EGG_MOVE: 
+			collision_shape.position.x = 0
+			collision_shape.position.y = -0.2
+			
+			
+			collision_shape.scale.y = 0.8
+			
+			collision_shape.scale.x = 0.8
+			root_node.set_running(false)
+			animation_player.play("egg_move")
+			normal_run()
+		STATE.EGG_CRACK: 
+			root_node.set_running(false)
+			animation_player.play("egg_crack")
+			normal_run()
+		STATE.EGG_HATCH: 
+			root_node.set_running(false)
+			animation_player.play("egg_hatch")
+			normal_run()
+		STATE.APPEAR: 
+			collision_shape.position.y = 0
+			root_node.set_running(false)
+			animation_player.play("appear")
+			normal_run()
+		STATE.IDLE: 
+			collision_shape.position.y = 0.5
 			collision_shape.position.x = -0.5
-			collision_shape.scale.y = 1
-			collision_shape.scale.x = 1
+			collision_shape.scale.y = 0.85
+			collision_shape.scale.x = 0.75
+			root_node.set_running(false)
+			animation_player.play("idle")
+			normal_run()
+		STATE.RUN:
+			collision_shape.position.y = 0.5
+			collision_shape.position.x = -0.5
+			collision_shape.scale.y = 0.85
+			collision_shape.scale.x = 0.75
 			animation_player.play("run")
+			root_node.set_running(true)
 			normal_run()
 		STATE.BEND_DOWN:
+			print("dm ebnd dasdf")
 			collision_shape.position.y = 1.5
 			collision_shape.position.x = 3
-			collision_shape.scale.y = 0.88
-			collision_shape.scale.x = 1.2
+			collision_shape.scale.y = 0.75
+			collision_shape.scale.x = 0.9
 			animation_player.play("bend_down")
+			root_node.set_running(true)
 			normal_run()
 		STATE.JUMP:
 			if(is_on_floor()):
+				print("in the floor")
+				root_node.set_running(true)
 				jump()
+		STATE.FALL:
+			animation_player.play("fall")
+			normal_run()
+			if(is_on_floor()):
+				current_state = STATE.RUN
 		STATE.HIT:
-			collision_shape.position.y = 1.5
-			collision_shape.position.x = 3
+			collision_shape.position.x = -1.5
+			collision_shape.position.y = 0
 			collision_shape.scale.y = 0.9
-			collision_shape.scale.x = 1.2
+			collision_shape.scale.x = 0.85
 			animation_player.play("hit")
 			root_node.set_running(false)
 			normal_run()
-			
+	if(velocity.y == -jump_force):
+		current_state = STATE.FALL
 	if move_and_slide(velocity, Vector2.UP): 
 		pass
 #	print(GameSettings.is_effect_playing)
@@ -104,6 +151,7 @@ func set_root_node(value):
 
 
 func normal_run():
+	
 	velocity = Vector2(
 		0,
 		min(velocity.y + GameSettings.gravity, GameSettings.terminal_gravity)
@@ -137,6 +185,25 @@ func increase_score():
 		root_node.update_score(score)
 	else:
 		current_health = self.health
+
+func egg_move_animation_finished():
+	current_state = STATE.EGG_CRACK
+
+func egg_crack_animation_finished():
+	current_state = STATE.EGG_HATCH
+	
+func egg_hatch_animation_finished():
+	current_state = STATE.APPEAR
+	
+func appear_animation_finished():
+	current_state = STATE.IDLE
+	collision_shape.position.y = 0
+
+func jump_animation_finished():
+	current_state = STATE.FALL
+
+func idle_animation_finished():
+	root_node.enable_touch_screen_btns(true)
 		
 func animation_finished():
 	current_state = STATE.RUN
@@ -169,12 +236,13 @@ func start_invicible_time():
 	invicible_time.start()
 	
 func pick_new_state():
-	if(Input.is_action_just_pressed("jump")):
+	if(Input.is_action_just_pressed("jump") && is_on_floor()):
 		current_state = STATE.JUMP
-	elif(Input.is_action_pressed("bend_down")):
+	elif(Input.is_action_pressed("bend_down") && is_on_floor()):
 		current_state = STATE.BEND_DOWN
-	else:
+	elif(current_state == STATE.BEND_DOWN):
 		current_state = STATE.RUN
+		
 
 func _on_InvincibleTime_timeout():
 	invicible = false

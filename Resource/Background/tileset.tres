@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=4 format=2]
 
-[ext_resource path="res://Resource/Arts/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" type="Texture" id=1]
+[ext_resource path="res://Resource/Arts/Others/Terrain_16x16.png" type="Texture" id=1]
 
 [sub_resource type="ConvexPolygonShape2D" id=21]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )

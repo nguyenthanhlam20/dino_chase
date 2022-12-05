@@ -1,13 +1,15 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Game/UI/Screen/Background/Chervon/ParallaxChervon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resource/Buttons/Score-2.png" type="Texture" id=2]
 [ext_resource path="res://Game/UI/Screen/StatisticScreen/StatisticScreen.gd" type="Script" id=3]
 [ext_resource path="res://Resource/Buttons/Return-1-v2.png" type="Texture" id=4]
+[ext_resource path="res://Game/UI/Screen/StatisticScreen/StatsScreen/StatsScreen.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Resource/Buttons/Return-2.png" type="Texture" id=6]
 [ext_resource path="res://Resource/Buttons/Score-1-v2.png" type="Texture" id=7]
 [ext_resource path="res://Resource/Buttons/Enemies-2.png" type="Texture" id=8]
 [ext_resource path="res://Resource/Buttons/Enemies-1-v2.png" type="Texture" id=9]
+[ext_resource path="res://Game/UI/Screen/StatisticScreen/EnemyScreen/EnemyScreen.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Resource/Buttons/Exit-2.png" type="Texture" id=12]
 [ext_resource path="res://Resource/Buttons/Exit-1-v2.png" type="Texture" id=13]
 
@@ -17,47 +19,47 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
 
-[node name="MainContent" type="CenterContainer" parent="."]
+[node name="ButtonGroup" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainContent"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ButtonGroup"]
 margin_left = 160.0
 margin_top = 90.0
 margin_right = 160.0
 margin_bottom = 90.0
 
-[node name="Score" type="TouchScreenButton" parent="MainContent/VBoxContainer"]
+[node name="Score" type="TouchScreenButton" parent="ButtonGroup/VBoxContainer"]
 position = Vector2( -40, -50 )
 scale = Vector2( 0.15, 0.15 )
 normal = ExtResource( 7 )
 pressed = ExtResource( 2 )
 
-[node name="Enemies" type="TouchScreenButton" parent="MainContent/VBoxContainer"]
+[node name="Enemies" type="TouchScreenButton" parent="ButtonGroup/VBoxContainer"]
 position = Vector2( -40, -18 )
 scale = Vector2( 0.15, 0.15 )
 normal = ExtResource( 9 )
 pressed = ExtResource( 8 )
 
-[node name="Exit" type="TouchScreenButton" parent="MainContent/VBoxContainer"]
+[node name="Exit" type="TouchScreenButton" parent="ButtonGroup/VBoxContainer"]
 position = Vector2( -40, 14 )
 scale = Vector2( 0.15, 0.15 )
 normal = ExtResource( 13 )
 pressed = ExtResource( 12 )
 
-[node name="Back" type="TouchScreenButton" parent="MainContent"]
+[node name="Back" type="TouchScreenButton" parent="ButtonGroup"]
 position = Vector2( 10, 10 )
 scale = Vector2( 0.1, 0.1 )
 normal = ExtResource( 4 )
 pressed = ExtResource( 6 )
 
-[node name="PopupScreen" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
 [node name="ParallaxRectangle" parent="." instance=ExtResource( 1 )]
 
-[connection signal="released" from="MainContent/VBoxContainer/Score" to="." method="_on_Score_released"]
-[connection signal="released" from="MainContent/VBoxContainer/Enemies" to="." method="_on_Enemies_released"]
-[connection signal="released" from="MainContent/VBoxContainer/Exit" to="." method="_on_Exit_released"]
-[connection signal="released" from="MainContent/Back" to="." method="_on_Back_released"]
+[node name="EnemyScreen" parent="." instance=ExtResource( 10 )]
+
+[node name="StatsScreen" parent="." instance=ExtResource( 5 )]
+
+[connection signal="released" from="ButtonGroup/VBoxContainer/Score" to="." method="_on_Score_released"]
+[connection signal="released" from="ButtonGroup/VBoxContainer/Enemies" to="." method="_on_Enemies_released"]
+[connection signal="released" from="ButtonGroup/VBoxContainer/Exit" to="." method="_on_Exit_released"]
+[connection signal="released" from="ButtonGroup/Back" to="." method="_on_Back_released"]

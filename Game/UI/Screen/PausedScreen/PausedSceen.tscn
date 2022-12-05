@@ -48,8 +48,3 @@ position = Vector2( 184, 88 )
 scale = Vector2( 0.11, 0.11 )
 normal = ExtResource( 3 )
 pressed = ExtResource( 2 )
-
-[connection signal="released" from="CenterContainer/Home" to="." method="_on_Home_released"]
-[connection signal="released" from="CenterContainer/Settings" to="." method="_on_Settings_released"]
-[connection signal="released" from="CenterContainer/Restart" to="." method="_on_Restart_released"]
-[connection signal="released" from="CenterContainer/Play" to="." method="_on_Play_released"]

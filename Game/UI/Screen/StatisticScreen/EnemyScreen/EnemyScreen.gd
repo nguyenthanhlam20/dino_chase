@@ -1,4 +1,4 @@
-extends Control
+extends Popup
 
 onready var scroll_container = $ScrollContainer
 onready var enemy_container = $ScrollContainer/VBoxContainer
@@ -17,6 +17,7 @@ onready var spring_background = $SeasonContainer/VBoxContainer/Spring/Background
 onready var summer_background = $SeasonContainer/VBoxContainer/Summer/Background
 onready var autumn_background = $SeasonContainer/VBoxContainer/Autumn/Background
 onready var winnter_background = $SeasonContainer/VBoxContainer/Winter/Background
+onready var root_node = self.get_parent()
 
 var enemies = []
 
@@ -34,11 +35,6 @@ var background_season_deactive = StyleBoxFlat.new()
 var first_line : HBoxContainer
 var second_line : HBoxContainer
 
-var root_node setget set_root_node
-
-func set_root_node(value) -> void: 
-	root_node = value
-
 var list_btn_first = []
 var list_btn_second = []
 
@@ -55,6 +51,7 @@ func _ready() -> void:
 	scroll_container.get_h_scrollbar().modulate.a = 0
 	create_style_box()
 	generate_everything(EnemySettings.spring_enemies)
+	$ScrollContainer/VBoxContainer.set("mouse_filter", Control.MOUSE_FILTER_PASS)
 	
 func create_style_box() -> void: 
 	set_style(styled_background, "ffffff", 9)
@@ -70,6 +67,10 @@ func create_style_box() -> void:
 func generate_container():
 	first_line = HBoxContainer.new()
 	second_line = HBoxContainer.new()
+	
+	first_line.set("mouse_filter", Control.MOUSE_FILTER_PASS)
+	second_line.set("mouse_filter", Control.MOUSE_FILTER_PASS)
+	
 	first_line.set("custom_constants/separation", 3)
 	second_line.set("custom_constants/separation", 3)
 	enemy_container.add_child(first_line)
@@ -82,6 +83,7 @@ func generate_enemy() -> void:
 	
 	var index = 0
 	for enemy in enemies: 
+		print("fail at index", index)
 		create_label(enemy)
 		index = index + 1
 		if(index <= first_part):
@@ -100,16 +102,16 @@ func create_label(enemy) -> void:
 	label.set("custom_styles/normal", background_btn_deactive)
 	
 	var avt = load(enemy.get("avatar")).instance()
-	avt.set("scale", Vector2(0.7, 0.7))
+	avt.adjust_scale(Vector2(0.7, 0.7))
+	avt.enable_playing(false)
 	avt.set("position", Vector2(11, 11))
-
 	label.add_child(avt)
 
 			
 func create_btn(container : HBoxContainer):
 	button = Button.new()
 	button.connect("pressed", self, "_on_button_pressed")
-
+	button.set("mouse_filter", Control.MOUSE_FILTER_PASS)
 	button.set("rect_min_size", Vector2(24, 24))
 	button.set("custom_styles/hover", border_btn_deactive)
 	button.set("custom_styles/pressed", border_btn_active)
@@ -166,8 +168,8 @@ func set_season_style(active_season):
 			
 func _on_Return_released():
 	yield(get_tree().create_timer(0.2), "timeout")
-	self.queue_free()
-	root_node.show_main_content()
+	self.hide()
+	root_node.show_button_group(true)
 	root_node.enable_buttons()
 
 func change_background_color(styled_node, color):
@@ -175,25 +177,39 @@ func change_background_color(styled_node, color):
 
 func _on_EnemyScreen_button_click(index):
 	var enemy = enemies[index]
-	change_background_color(background_btn_active, enemy.get("color"))
+	var colo = Color(randf(), randf(), randf())
+	var crt_avt_container
+	var pre_avt_container 
+	var crt_avt
+	change_background_color(background_btn_active, colo)
 	
-	styled_background.set("bg_color", enemy.get("color"))
+	styled_background.set("bg_color", colo)
 	enemy_background.set("custom_styles/normal", styled_background)
 	
 	var first_part = list_btn_first.size()
 #	var second_part = list_btn_second.size() 
 	if(index >= first_part):
-		list_btn_second[index - first_part].get_child(0).set("custom_styles/normal", background_btn_active)
+		crt_avt_container = list_btn_second[index - first_part].get_child(0)
+		crt_avt_container.set("custom_styles/normal", background_btn_active)
+		crt_avt = crt_avt_container.get_child(0)
+		crt_avt.enable_playing(true)
 	else:
-		list_btn_first[index].get_child(0).set("custom_styles/normal", background_btn_active)
+		crt_avt_container = list_btn_first[index].get_child(0)
+		crt_avt_container.set("custom_styles/normal", background_btn_active)
+		crt_avt = crt_avt_container.get_child(0)
+		crt_avt.enable_playing(true)
 
 	if(previous_index != -1):
 		if(previous_index >= first_part):
 			list_btn_second[previous_index - first_part].set_pressed(false)
-			list_btn_second[previous_index - first_part].get_child(0).set("custom_styles/normal", background_btn_deactive)
+			pre_avt_container = list_btn_second[previous_index - first_part].get_child(0)
+			pre_avt_container.set("custom_styles/normal", background_btn_deactive)
+			pre_avt_container.get_child(0).enable_playing(false)
 		else:
 			list_btn_first[previous_index].set_pressed(false)
-			list_btn_first[previous_index].get_child(0).set("custom_styles/normal", background_btn_deactive)
+			pre_avt_container = list_btn_first[previous_index].get_child(0)
+			pre_avt_container.set("custom_styles/normal", background_btn_deactive)
+			pre_avt_container.get_child(0).enable_playing(false)
 			
 	
 	
@@ -201,8 +217,9 @@ func _on_EnemyScreen_button_click(index):
 	description.text = enemy.get("description")
 	avatar.remove_child(avatar.get_child(0))
 	var avt = load(enemy.get("avatar")).instance()
-	avt.set("scale", Vector2(1.5, 1.5))
 	avatar.add_child(avt)
+	avt.adjust_scale(Vector2(1.5, 1.5))
+	avt.enable_playing(true)
 
 
 func _on_button_pressed():
@@ -228,7 +245,7 @@ func _on_button_pressed():
 				emit_signal("button_click", index)
 #			break
 		index = index + 1
-	print("ok ", previous_index, " ",current_index)
+
 	
 func generate_everything(enem):
 	enemies = enem

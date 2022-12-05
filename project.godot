@@ -12,22 +12,22 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
-"path": "res://Game/Characters/Character.gd"
+"path": "res://Game/Characters/CharacterClass/Character.gd"
 }, {
 "base": "Character",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://Game/Characters/Enemies/EnemyClass/Enemy.gd"
+"path": "res://Game/Characters/CharacterClass/Enemy.gd"
 }, {
 "base": "Enemy",
 "class": "FlyingEnemy",
 "language": "GDScript",
-"path": "res://Game/Characters/Enemies/EnemyClass/FlyingEnemy.gd"
+"path": "res://Game/Characters/CharacterClass/FlyingEnemy.gd"
 }, {
 "base": "Enemy",
 "class": "JumpingEnemy",
 "language": "GDScript",
-"path": "res://Game/Characters/Enemies/EnemyClass/JumpingEnemy.gd"
+"path": "res://Game/Characters/CharacterClass/JumpingEnemy.gd"
 }, {
 "base": "Character",
 "class": "Player",
@@ -37,7 +37,7 @@ _global_script_classes=[ {
 "base": "Enemy",
 "class": "RunningEnemy",
 "language": "GDScript",
-"path": "res://Game/Characters/Enemies/EnemyClass/RunningEnemy.gd"
+"path": "res://Game/Characters/CharacterClass/RunningEnemy.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
@@ -51,20 +51,21 @@ _global_script_class_icons={
 [application]
 
 config/name="Dinosaur"
-run/main_scene="res://Game/UI/Screen/HomeScreen/HomeScreen.tscn"
+run/main_scene="res://Game/UI/Screen/OpeningScene/MadeBy.tscn"
+boot_splash/show_image=false
+boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 
 [autoload]
 
 GameSettings="*res://Game/Singleton/GameSettings.tscn"
-Screen="*res://Game/UI/Screen.gd"
-User="*res://Game/Data/User.gd"
+ScreenSettings="*res://Game/Data/ScreenSettings.gd"
+User="*res://Game/Data/UserData.gd"
 Common="*res://Game/Singleton/Common.gd"
-LoadingScene="*res://Game/UI/Screen/SceneTransition/LoadingScene.tscn"
-SceneTransition="*res://Game/UI/Screen/SceneTransition/SceneTransition.tscn"
 EnemyFactory="*res://Game/Singleton/EnemyFactory.gd"
 PlayerSettings="*res://Game/Data/PlayerSettings.gd"
-MapSettings="*res://Game/Data/MapSettings.gd"
 EnemySettings="*res://Game/Data/EnemySettings.gd"
+MapSettings="*res://Game/Data/MapSettings.gd"
+SceneTransition="*res://Game/UI/Screen/SceneTransition/SceneTransition.gd"
 
 [display]
 
@@ -106,6 +107,7 @@ pointing/emulate_touch_from_mouse=true
 [layer_names]
 
 2d_physics/layer_1="World"
+2d_physics/layer_2="Start"
 2d_physics/layer_4="Player"
 2d_physics/layer_5="Enemy"
 

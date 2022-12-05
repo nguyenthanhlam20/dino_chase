@@ -4,6 +4,7 @@ onready var main_content = $MainContent
 onready var option_btn = $MainContent/HBoxContainerBottom/Options
 onready var play_btn = $MainContent/HBoxContainerBottom/Play
 onready var more_btn = $MainContent/HBoxContainerBottom/More
+onready var screens = ScreenSettings.get_screens()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,7 +27,7 @@ func enable_buttons():
 func _on_Options_released():
 	disable_buttons()
 	yield(get_tree().create_timer(0.2), "timeout")
-	var settings_screen = Screen.settings_screen.instance()
+	var settings_screen = load(screens.get("SETTINGS_SCREEN")).instance()
 	settings_screen.set_home_screen(self)
 	self.add_child(settings_screen)
 	settings_screen.showPopup()
@@ -34,9 +35,9 @@ func _on_Options_released():
 func _on_Play_released():
 	disable_buttons()
 	yield(get_tree().create_timer(0.2), "timeout")
-	SceneTransition.change_scene("res://Game/UI/Screen/CharacterScreen/CharacterScreen.tscn")
+	SceneTransition.change_scene(self, screens.get("CHARACTER_SCREEN"))
 
 func _on_More_released():
 	disable_buttons()
 	yield(get_tree().create_timer(0.2), "timeout")
-	SceneTransition.change_scene("res://Game/UI/Screen/StatisticScreen/StatisticScreen.tscn")
+	SceneTransition.change_scene(self, screens.get("STATISTIC_SCREEN"))

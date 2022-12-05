@@ -198,20 +198,20 @@ func _on_player_navigation_pressed():
 func _on_Back_released():
 	disable_buttons()
 	yield(get_tree().create_timer(0.2), "timeout")
-	SceneTransition.change_scene("res://Game/UI/Screen/HomeScreen/HomeScreen.tscn")
+	SceneTransition.change_scene(self, "res://Game/UI/Screen/HomeScreen/HomeScreen.tscn")
 	
 func _on_Play_released():
 	var is_unlock = current_index in character_unlock
 	if(is_unlock):
 		disable_buttons()
 		yield(get_tree().create_timer(0.2), "timeout")
-		SceneTransition.change_scene("res://Game/World/World.tscn")
+		SceneTransition.change_scene(self,"res://Game/World/World.tscn")
 		GameSettings.save_settings_data()
 
 func _on_Map_released():
 	disable_buttons()
 	yield(get_tree().create_timer(0.2), "timeout")
-	SceneTransition.change_scene("res://Game/UI/Screen/MapScreen/MapScreen.tscn")
+	SceneTransition.change_scene(self,"res://Game/UI/Screen/MapScreen/MapScreen.tscn")
 	
 
 

@@ -115,11 +115,12 @@ func get_map_name(index):
 func _on_Back_released():
 	disable_buttons()
 	yield(get_tree().create_timer(0.2), "timeout")
-	SceneTransition.change_scene("res://Game/UI/Screen/CharacterScreen/CharacterScreen.tscn")
+	SceneTransition.change_scene(self, "res://Game/UI/Screen/CharacterScreen/CharacterScreen.tscn")
 	
 func _on_Choose_released():
 	disable_buttons()
 	yield(get_tree().create_timer(0.2), "timeout")
-	SceneTransition.change_scene("res://Game/UI/Screen/CharacterScreen/CharacterScreen.tscn")
+	SceneTransition.change_scene(self, "res://Game/UI/Screen/CharacterScreen/CharacterScreen.tscn")
 	MapSettings.current_map_index = card_current_index
+	EnemyFactory.set_enemies(card_current_index)
 	GameSettings.save_settings_data()

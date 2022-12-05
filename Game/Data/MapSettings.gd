@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 var maps = [
 	{
 		"index": 0,
@@ -40,3 +40,4 @@ func get_current_map():
 	var url = maps[current_map_index].get("url")
 	var map = load(url)
 	return map.instance()
+	

@@ -63,14 +63,14 @@ func _on_Home_released():
 	yield(get_tree().create_timer(0.2), "timeout")
 	Common.paused_game(false)
 	root_node.pause_mode = PAUSE_MODE_STOP
-	SceneTransition.change_scene("res://Game/UI/Screen/HomeScreen/HomeScreen.tscn")
+	SceneTransition.change_scene(self, "res://Game/UI/Screen/HomeScreen/HomeScreen.tscn")
 	self.queue_free()
 
 func _on_PlayAgain_released():
 	disable_buttons()
 	yield(get_tree().create_timer(0.2), "timeout")	
 	var count_down_screen = Screen.countdown_screen.instance()
-	root_node.emit_signal("add_popup_screen", count_down_screen)
+	root_node.add_popup_screen(count_down_screen)
 	count_down_screen.set_root_node(root_node)
 	count_down_screen.set_is_reload(true)
 	count_down_screen.show_popup()

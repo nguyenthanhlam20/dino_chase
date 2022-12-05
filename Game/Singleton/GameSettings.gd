@@ -1,6 +1,6 @@
 extends Node2D
 
-export(int) var gravity = 50
+export(int) var gravity = 35
 export(int) var terminal_gravity = 400
 export(int) var music_volume = 0 setget set_music_volume
 export(int) var effect_volume = 0 setget set_effect_volume
