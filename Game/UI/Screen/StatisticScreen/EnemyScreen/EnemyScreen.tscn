@@ -1,15 +1,15 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Game/UI/Screen/StatisticScreen/EnemyScreen/EnemyScreen.gd" type="Script" id=1]
-[ext_resource path="res://Resource/Buttons/Return-1-v2.png" type="Texture" id=2]
+[ext_resource path="res://Resource/Buttons/Return-1.png" type="Texture" id=2]
 [ext_resource path="res://Resource/Buttons/Return-2.png" type="Texture" id=3]
 [ext_resource path="res://Resource/Maps/spring_title.png" type="Texture" id=4]
 [ext_resource path="res://Resource/Maps/winter_title.png" type="Texture" id=5]
-[ext_resource path="res://Game/Characters/Enemies/Spring/Chicken/Chicken.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/Characters/Enemies/Spring/Chicken/ChickenAvt.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Resource/Fonts/Bungee-Regular.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://Resource/Maps/autumn_title.png" type="Texture" id=8]
 [ext_resource path="res://Resource/Maps/summer_title.png" type="Texture" id=9]
-[ext_resource path="res://Resource/Maps/sun.png" type="Texture" id=10]
+[ext_resource path="res://Resource/Icons/best-score-96.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0, 0, 0, 1 )
@@ -52,6 +52,8 @@ expand_margin_bottom = 5.0
 [sub_resource type="StyleBoxEmpty" id=22]
 content_margin_left = 12.0
 content_margin_right = 10.0
+content_margin_top = 1.0
+content_margin_bottom = 1.0
 
 [sub_resource type="StyleBoxFlat" id=19]
 bg_color = Color( 0, 0, 0, 1 )
@@ -67,7 +69,21 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="DynamicFont" id=23]
+size = 5
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=24]
+content_margin_left = 14.0
+content_margin_right = 10.0
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
 [node name="EnemyScreen" type="Popup"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -142,21 +158,65 @@ margin_top = 50.0
 margin_right = 74.0
 margin_bottom = 50.0
 
-[node name="Chicken" parent="OuterBorder/Background/CenterContainer/Avatar" instance=ExtResource( 6 )]
-position = Vector2( -1.52588e-05, -8 )
-scale = Vector2( 1.5, 1.5 )
-script = null
+[node name="ChickenAvt" parent="OuterBorder/Background/CenterContainer/Avatar" instance=ExtResource( 6 )]
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="Spring" type="ScrollContainer" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -58.0
 custom_styles/bg = SubResource( 22 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Spring"]
 margin_left = 12.0
+margin_top = 1.0
 margin_right = 12.0
+margin_bottom = 1.0
+custom_constants/separation = 3
+
+[node name="Summer" type="ScrollContainer" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -58.0
+custom_styles/bg = SubResource( 22 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Summer"]
+margin_left = 12.0
+margin_top = 1.0
+margin_right = 12.0
+margin_bottom = 1.0
+custom_constants/separation = 3
+
+[node name="Autumn" type="ScrollContainer" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -58.0
+custom_styles/bg = SubResource( 22 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Autumn"]
+margin_left = 12.0
+margin_top = 1.0
+margin_right = 12.0
+margin_bottom = 1.0
+custom_constants/separation = 3
+
+[node name="Winter" type="ScrollContainer" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -58.0
+custom_styles/bg = SubResource( 22 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Winter"]
+margin_left = 12.0
+margin_top = 1.0
+margin_right = 12.0
+margin_bottom = 1.0
 custom_constants/separation = 3
 
 [node name="SeasonContainer" type="Control" parent="."]
@@ -260,10 +320,22 @@ position = Vector2( 1, 1 )
 scale = Vector2( 0.03125, 0.03125 )
 normal = ExtResource( 5 )
 
-[node name="SeasonIcon" type="Sprite" parent="."]
-visible = false
-position = Vector2( 101, 25 )
-scale = Vector2( 0.5, 0.5 )
+[node name="LongestRun" type="Label" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 12.0
+margin_top = 10.0
+margin_right = 44.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = SubResource( 23 )
+custom_styles/normal = SubResource( 24 )
+text = "0m"
+valign = 1
+
+[node name="Sprite" type="Sprite" parent="LongestRun"]
+position = Vector2( 8, 7.5 )
+scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 10 )
 
 [connection signal="button_click" from="." to="." method="_on_EnemyScreen_button_click"]

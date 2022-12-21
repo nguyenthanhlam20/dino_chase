@@ -1,11 +1,10 @@
 extends Control
 
-onready var popup_screen = $PopupScreen
+
 onready var button_group = $ButtonGroup
 onready var enemy_screen = $EnemyScreen
 onready var stats_screen = $StatsScreen
 onready var back_btn = $ButtonGroup/Back
-onready var parallax = $ParallaxRectangle
 onready var exit_btn = $ButtonGroup/VBoxContainer/Exit
 onready var score_btn = $ButtonGroup/VBoxContainer/Score
 onready var ememy_btn = $ButtonGroup/VBoxContainer/Enemies
@@ -22,10 +21,6 @@ func enable_buttons():
 	ememy_btn.connect("released", self, "_on_Enemies_released")
 	back_btn.connect("released", self, "_on_Back_released")
 	
-
-func _ready():
-	parallax.start = true
-
 func show_button_group(value: bool):
 	button_group.set("visible", value)
 	
@@ -37,6 +32,7 @@ func _on_Score_released():
 	stats_screen.show()
 
 func _on_Back_released():
+	disable_buttons()
 	SceneTransition.change_scene(self, screens.get("HOME_SCREEN"))
 
 func _on_Enemies_released():
@@ -47,5 +43,6 @@ func _on_Enemies_released():
 
 
 func _on_Exit_released():
+	disable_buttons()
 	yield(get_tree().create_timer(0.2), "timeout")
 	get_tree().quit()

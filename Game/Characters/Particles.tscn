@@ -57,7 +57,7 @@ animations = [ {
 "frames": [  ],
 "loop": true,
 "name": "fall",
-"speed": 5.0
+"speed": 15.0
 }, {
 "frames": [  ],
 "loop": true,
@@ -82,6 +82,7 @@ animations = [ {
 
 [sub_resource type="Animation" id=9]
 resource_name = "fall"
+length = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -89,10 +90,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [  ]
+"values": [ "fall" ]
 }
 
 [sub_resource type="Animation" id=32]
@@ -126,6 +127,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=10]
 resource_name = "idle"
+length = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -171,6 +173,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=12]
 resource_name = "run"
+length = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -185,10 +188,10 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=25]
-extents = Vector2( 17.875, 8 )
+extents = Vector2( 17.875, 1 )
 
 [node name="Particles" type="KinematicBody2D"]
-collision_layer = 8
+collision_layer = 32
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -206,5 +209,5 @@ anims/jump = SubResource( 11 )
 anims/run = SubResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -2 )
+position = Vector2( 0, 5 )
 shape = SubResource( 25 )

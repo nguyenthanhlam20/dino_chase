@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Game/Characters/Enemies/Summer/Olivia/BlueBird.gd" type="Script" id=1]
+[ext_resource path="res://Game/Characters/CharacterClass/FlyingEnemy.gd" type="Script" id=1]
 [ext_resource path="res://Resource/Arts/Enemies/Summer/Olivia/Olivia_32x28.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=12]
@@ -58,7 +58,7 @@ script = ExtResource( 1 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 10 )
 animation = "run"
-frame = 7
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

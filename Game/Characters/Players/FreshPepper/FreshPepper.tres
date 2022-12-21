@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=57 format=2]
+[gd_resource type="SpriteFrames" load_steps=72 format=2]
 
 [ext_resource path="res://Resource/Arts/Players/fresh_pepper.png" type="Texture" id=1]
 [ext_resource path="res://Resource/Arts/Others/Egg/disapearing_96x96.png" type="Texture" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://Resource/Arts/Others/Egg/apearing_96x96.png" type="Texture" id=6]
 [ext_resource path="res://Resource/Arts/Others/fresh_pepper.png" type="Texture" id=7]
 [ext_resource path="res://Resource/Arts/Players/FreshPepper/fresh_pepper_run.png" type="Texture" id=8]
+[ext_resource path="res://Resource/Arts/Players/FreshPepper/fresh_pepper_bend_down.png" type="Texture" id=9]
+[ext_resource path="res://Resource/Arts/Players/grave.png" type="Texture" id=10]
+[ext_resource path="res://Resource/Arts/Players/FreshPepper/fresh_pepper_post_death.png" type="Texture" id=11]
+[ext_resource path="res://Resource/Arts/Players/FreshPepper/fresh_pepper_death.png" type="Texture" id=12]
 
 [sub_resource type="AtlasTexture" id=55]
 atlas = ExtResource( 2 )
@@ -89,6 +93,18 @@ region = Rect2( 528, 0, 24, 24 )
 atlas = ExtResource( 8 )
 region = Rect2( 552, 0, 24, 24 )
 
+[sub_resource type="AtlasTexture" id=80]
+atlas = ExtResource( 9 )
+region = Rect2( 408, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=81]
+atlas = ExtResource( 9 )
+region = Rect2( 456, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=89]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 18, 18 )
+
 [sub_resource type="AtlasTexture" id=43]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 24, 24 )
@@ -141,6 +157,10 @@ region = Rect2( 72, 0, 24, 24 )
 atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 19, 24 )
 
+[sub_resource type="AtlasTexture" id=82]
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 25, 18 )
+
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
 region = Rect2( 312, 0, 24, 24 )
@@ -176,6 +196,34 @@ region = Rect2( 72, 0, 24, 24 )
 [sub_resource type="AtlasTexture" id=72]
 atlas = ExtResource( 1 )
 region = Rect2( 288, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=83]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=84]
+atlas = ExtResource( 11 )
+region = Rect2( 18, 0, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=85]
+atlas = ExtResource( 11 )
+region = Rect2( 36, 0, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=86]
+atlas = ExtResource( 11 )
+region = Rect2( 54, 0, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=87]
+atlas = ExtResource( 11 )
+region = Rect2( 72, 0, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=88]
+atlas = ExtResource( 11 )
+region = Rect2( 90, 0, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=90]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 1 )
@@ -213,6 +261,16 @@ animations = [ {
 "name": "bend_down",
 "speed": 10.0
 }, {
+"frames": [ SubResource( 80 ), SubResource( 81 ) ],
+"loop": true,
+"name": "bend_down_idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 89 ) ],
+"loop": true,
+"name": "death",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ) ],
 "loop": true,
 "name": "egg_crack",
@@ -233,6 +291,11 @@ animations = [ {
 "name": "fall",
 "speed": 10.0
 }, {
+"frames": [ SubResource( 82 ) ],
+"loop": true,
+"name": "grave",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "hit",
@@ -247,6 +310,16 @@ animations = [ {
 "loop": true,
 "name": "jump",
 "speed": 4.0
+}, {
+"frames": [ SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), SubResource( 86 ), SubResource( 87 ), SubResource( 88 ) ],
+"loop": true,
+"name": "post_death",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 90 ) ],
+"loop": true,
+"name": "pre_death",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
 "loop": true,

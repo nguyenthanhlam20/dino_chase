@@ -9,37 +9,26 @@ var _down_anchor = Vector2(1,1+menu_size)
 var _target_anchor = _down_anchor
 
 
-onready var message_label = $VBoxContainer/Message
-onready var miles_label = $VBoxContainer/Miles
-onready var longest_run_label = $ColorRect/CenterContainer/GridContainer/LRunContainer/LongestRunValue
-onready var score_label = $ColorRect/CenterContainer/GridContainer/ScoreContainer/ScoreValue
-onready var highest_score_label = $ColorRect/CenterContainer/GridContainer/HScoreContainer/HighestScoreValue
-onready var time_label = $ColorRect/CenterContainer/GridContainer/TimeContainer/TimeValue
 onready var home_btn = $Home
 onready var play_again_btn = $PlayAgain
+onready var miles_label = $VBoxContainer/Miles
+onready var message_label = $VBoxContainer/Message
+onready var coin_label = $ColorRect/CenterContainer/GridContainer/CoinContainer/CoinValue
+onready var time_label = $ColorRect/CenterContainer/GridContainer/TimeContainer/TimeValue
+onready var longest_run_label = $ColorRect/CenterContainer/GridContainer/LRunContainer/LongestRunValue
+onready var screens = ScreenSettings.get_screens()
+
 var root_node setget set_root_node
-
-
-func disable_buttons():
-	home_btn.disconnect("released", self, "_on_Home_released")
-	play_again_btn.disconnect("released", self, "_on_PlayAgain_released")
-
-	
-func enable_buttons():
-	home_btn.disconnect("released", self, "_on_Home_released")
-	play_again_btn.disconnect("released", self, "_on_PlayAgain_released")
-
-
 func set_root_node(value):
 	root_node = value
+
 
 func show_result(player):
 	var message = Common.get_random_message()
 	miles_label.text = str(player.miles) + "m"
 	message_label.text = message
 	longest_run_label.text = str(player.longest_distance) + "m"
-	score_label.text = str(player.score)
-	highest_score_label.text = str(player.highest_score)
+	coin_label.text = "+" + str(player.coin)
 	time_label.text = player.get_play_time()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,20 +45,29 @@ func show_popup():
 	_popped_up = !_popped_up
 	if(_popped_up):
 		self.show()
+		
+		
+func disable_buttons():
+	home_btn.disconnect("released", self, "_on_Home_released")
+	play_again_btn.disconnect("released", self, "_on_PlayAgain_released")
 
+	
+func enable_buttons():
+	home_btn.disconnect("released", self, "_on_Home_released")
+	play_again_btn.disconnect("released", self, "_on_PlayAgain_released")
 
 func _on_Home_released():
 	disable_buttons()
 	yield(get_tree().create_timer(0.2), "timeout")
 	Common.paused_game(false)
 	root_node.pause_mode = PAUSE_MODE_STOP
-	SceneTransition.change_scene(self, "res://Game/UI/Screen/HomeScreen/HomeScreen.tscn")
+	SceneTransition.change_scene(root_node, screens.get("HOME_SCREEN"))
 	self.queue_free()
 
 func _on_PlayAgain_released():
 	disable_buttons()
 	yield(get_tree().create_timer(0.2), "timeout")	
-	var count_down_screen = Screen.countdown_screen.instance()
+	var count_down_screen = load(screens.get("COUNTDOWN_SCREEN")).instance()
 	root_node.add_popup_screen(count_down_screen)
 	count_down_screen.set_root_node(root_node)
 	count_down_screen.set_is_reload(true)

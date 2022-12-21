@@ -19,6 +19,6 @@ func set_value(title, data):
 	enemy_completion.set_value(data.enemy_completion)
 	
 	
-	var height = (game_time.rect_size.y * (data.keys().size() + 1)) + 60
+	var height = data.keys().size() * 19
 #	print(height)
 	self.rect_min_size.y = height

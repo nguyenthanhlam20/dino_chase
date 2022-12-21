@@ -1,6 +1,6 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=34 format=2]
 
-[ext_resource path="res://Game/Characters/Enemies/Autumn/Bat/Bat.gd" type="Script" id=1]
+[ext_resource path="res://Game/Characters/CharacterClass/SwordEnemy.gd" type="Script" id=1]
 [ext_resource path="res://Resource/Arts/Enemies/Autumn/EvilChest/evil_chest_48x41.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=10]
@@ -112,7 +112,7 @@ animations = [ {
 "frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
 "loop": true,
 "name": "attack",
-"speed": 13.0
+"speed": 16.0
 }, {
 "frames": [ SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
 "loop": true,
@@ -120,22 +120,74 @@ animations = [ {
 "speed": 13.0
 } ]
 
+[sub_resource type="Animation" id=36]
+resource_name = "attack"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "attack" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "run"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "run" ]
+}
+
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 9.5, 8.76923 )
+extents = Vector2( 7.5, 6.49039 )
+
+[sub_resource type="RectangleShape2D" id=38]
+extents = Vector2( 70, 48.5 )
 
 [node name="EvilChest" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.35, 0.35 )
 frames = SubResource( 8 )
 animation = "attack"
-frame = 7
+frame = 13
 playing = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/attack = SubResource( 36 )
+anims/run = SubResource( 37 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -2.5, 1.12 )
+position = Vector2( -1, 0.25 )
 scale = Vector2( 1, 1.04 )
 shape = SubResource( 9 )
 
@@ -148,4 +200,11 @@ collision_mask = 8
 position = Vector2( -1, 1.19209e-07 )
 scale = Vector2( 1.08, 0.971445 )
 
+[node name="AttackZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]
+position = Vector2( -79, -41.5 )
+shape = SubResource( 38 )
+
 [connection signal="body_shape_entered" from="HitBox" to="." method="_on_HitBox_body_shape_entered"]
+[connection signal="body_shape_entered" from="AttackZone" to="." method="_on_AttackZone_body_shape_entered"]

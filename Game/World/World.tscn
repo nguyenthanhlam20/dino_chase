@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Resource/Fonts/Bungee-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Resource/Buttons/Paused-1.png" type="Texture" id=2]
@@ -32,7 +32,19 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 10, 47.0625 )
+extents = Vector2( 10, 73.5935 )
+
+[sub_resource type="RectangleShape2D" id=30]
+extents = Vector2( 11.9904, 69.5849 )
+
+[sub_resource type="RectangleShape2D" id=28]
+extents = Vector2( 20.8654, 22.5347 )
+
+[sub_resource type="RectangleShape2D" id=29]
+extents = Vector2( 10, 50.25 )
+
+[sub_resource type="RectangleShape2D" id=31]
+extents = Vector2( 8, 51 )
 
 [node name="World" type="Control"]
 anchor_right = 1.0
@@ -77,52 +89,58 @@ action = "jump"
 visibility_mode = 1
 
 [node name="Profile" type="Container" parent="MainContent"]
-anchor_right = 1.0
-margin_bottom = 57.0
+margin_left = 15.0
+margin_top = 13.0
+margin_right = 102.0
+margin_bottom = 19.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Health" type="HBoxContainer" parent="MainContent/Profile"]
-margin_left = 15.0
-margin_top = 20.0
-margin_right = 45.0
-margin_bottom = 20.0
+margin_right = 102.0
+margin_bottom = 19.0
 custom_constants/separation = 15
 
-[node name="TopControls" type="GridContainer" parent="MainContent"]
+[node name="TopControls" type="HBoxContainer" parent="MainContent"]
 anchor_right = 1.0
-margin_top = 10.0
-margin_bottom = 31.0
+margin_top = 5.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 3
 
-[node name="Left" type="GridContainer" parent="MainContent/TopControls"]
-margin_right = 104.0
-margin_bottom = 21.0
+[node name="Left" type="MarginContainer" parent="MainContent/TopControls"]
+margin_right = 105.5
+margin_bottom = 19.0
+rect_min_size = Vector2( 105.5, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="MainContent/TopControls"]
-margin_left = 108.0
-margin_right = 212.0
-margin_bottom = 21.0
+margin_left = 109.0
+margin_right = 214.5
+margin_bottom = 19.0
+rect_min_size = Vector2( 105.5, 0 )
 size_flags_horizontal = 3
 
 [node name="Score" type="Label" parent="MainContent/TopControls/CenterContainer"]
-margin_left = 29.0
-margin_top = 5.0
-margin_right = 74.0
-margin_bottom = 15.0
+margin_left = 33.0
+margin_top = 4.0
+margin_right = 71.0
+margin_bottom = 14.0
 custom_fonts/font = SubResource( 24 )
-text = "Score: 0"
+text = "Coin: 0"
 align = 1
 valign = 1
 
-[node name="Pause" type="TouchScreenButton" parent="MainContent/TopControls"]
-position = Vector2( 290, 0 )
-scale = Vector2( 0.1, 0.1 )
+[node name="Right" type="MarginContainer" parent="MainContent/TopControls"]
+margin_left = 218.0
+margin_right = 323.5
+margin_bottom = 19.0
+rect_min_size = Vector2( 105.5, 0 )
+
+[node name="Pause" type="TouchScreenButton" parent="MainContent/TopControls/Right"]
+position = Vector2( 80, 2 )
+scale = Vector2( 0.08, 0.08 )
 normal = ExtResource( 2 )
 
 [node name="LabelGroup" type="Control" parent="MainContent"]
@@ -134,7 +152,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
-margin_top = -33.0
+margin_top = -23.0
 custom_constants/separation = 1
 
 [node name="TimeLabel" type="Label" parent="MainContent/LabelGroup/VBoxContainer"]
@@ -160,20 +178,58 @@ autostart = true
 wait_time = 0.5
 autostart = true
 
+[node name="CoinTimer" type="Timer" parent="MainContent/TimerGroup"]
+wait_time = 3.2
+one_shot = true
+
+[node name="RemoveCoinTimer" type="Timer" parent="MainContent/TimerGroup"]
+wait_time = 5.0
+one_shot = true
+
 [node name="DeathZone" type="Area2D" parent="MainContent"]
 collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainContent/DeathZone"]
-position = Vector2( -20, 80 )
+position = Vector2( -19, 8.502 )
+scale = Vector2( 1.00137, 0.998757 )
 shape = SubResource( 15 )
+
+[node name="DeathZoneRight" type="Area2D" parent="MainContent"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainContent/DeathZoneRight"]
+position = Vector2( 397, 68.4985 )
+scale = Vector2( 1.00137, 0.998757 )
+shape = SubResource( 30 )
+
+[node name="StopZone" type="Area2D" parent="MainContent"]
+scale = Vector2( 1.05438, 1.00085 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainContent/StopZone"]
+position = Vector2( 55.0086, 104.465 )
+scale = Vector2( 1, 0.999999 )
+shape = SubResource( 28 )
+
+[node name="GoDownZone" type="Area2D" parent="MainContent"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainContent/GoDownZone"]
+position = Vector2( 223, 81.75 )
+shape = SubResource( 29 )
+
+[node name="StopZoneRight" type="Area2D" parent="MainContent"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainContent/StopZoneRight"]
+position = Vector2( 285, 81 )
+shape = SubResource( 31 )
 
 [node name="Camera2D" type="Camera2D" parent="MainContent"]
 anchor_mode = 0
 current = true
 
 [node name="StartObject" parent="MainContent" instance=ExtResource( 3 )]
-position = Vector2( 22, 100 )
+position = Vector2( -71, 102 )
 
 [node name="Background" type="ColorRect" parent="."]
 visible = false
@@ -189,7 +245,13 @@ anchor_bottom = 1.0
 
 [node name="PausedSceen" parent="PopupScreens" instance=ExtResource( 7 )]
 
-[connection signal="pressed" from="MainContent/TopControls/Pause" to="." method="_on_Pause_pressed"]
+[connection signal="pressed" from="MainContent/TopControls/Right/Pause" to="." method="_on_Pause_pressed"]
 [connection signal="timeout" from="MainContent/TimerGroup/SpawnEnemyTimer" to="." method="_on_SpawnEnemyTimer_timeout"]
 [connection signal="timeout" from="MainContent/TimerGroup/MileTimer" to="." method="_on_MileTimer_timeout"]
+[connection signal="timeout" from="MainContent/TimerGroup/CoinTimer" to="." method="_on_CoinTimer_timeout"]
+[connection signal="timeout" from="MainContent/TimerGroup/RemoveCoinTimer" to="." method="_on_RemoveCoinTimer_timeout"]
 [connection signal="body_shape_entered" from="MainContent/DeathZone" to="." method="_on_DeathZone_body_shape_entered"]
+[connection signal="body_shape_entered" from="MainContent/DeathZoneRight" to="." method="_on_DeathZone_body_shape_entered"]
+[connection signal="body_shape_entered" from="MainContent/StopZone" to="." method="_on_StopZone_body_shape_entered"]
+[connection signal="body_shape_entered" from="MainContent/GoDownZone" to="." method="_on_GoDownZone_body_shape_entered"]
+[connection signal="body_shape_entered" from="MainContent/StopZoneRight" to="." method="_on_StopZoneRight_body_shape_entered"]

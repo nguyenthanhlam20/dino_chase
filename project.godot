@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Enemy",
+"class": "BulletEnemy",
+"language": "GDScript",
+"path": "res://Game/Characters/CharacterClass/BulletEnemy.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
@@ -20,14 +25,44 @@ _global_script_classes=[ {
 "path": "res://Game/Characters/CharacterClass/Enemy.gd"
 }, {
 "base": "Enemy",
-"class": "FlyingEnemy",
+"class": "FatBird",
+"language": "GDScript",
+"path": "res://Game/Characters/Enemies/Spring/FatBird/FatBird.gd"
+}, {
+"base": "Enemy",
+"class": "FlashEnemy",
+"language": "GDScript",
+"path": "res://Game/Characters/CharacterClass/FlashEnemy.gd"
+}, {
+"base": "Enemy",
+"class": "Flying_Enemy",
 "language": "GDScript",
 "path": "res://Game/Characters/CharacterClass/FlyingEnemy.gd"
+}, {
+"base": "Enemy",
+"class": "Ghost",
+"language": "GDScript",
+"path": "res://Game/Characters/Enemies/Autumn/Ghost/Ghost.gd"
+}, {
+"base": "Enemy",
+"class": "JRAEnemy",
+"language": "GDScript",
+"path": "res://Game/Characters/CharacterClass/JRAEnemy.gd"
+}, {
+"base": "Enemy",
+"class": "Jackson",
+"language": "GDScript",
+"path": "res://Game/Characters/Enemies/Spring/Jackson/Jackson.gd"
 }, {
 "base": "Enemy",
 "class": "JumpingEnemy",
 "language": "GDScript",
 "path": "res://Game/Characters/CharacterClass/JumpingEnemy.gd"
+}, {
+"base": "Enemy",
+"class": "Orange",
+"language": "GDScript",
+"path": "res://Game/Characters/Enemies/Autumn/Orange/Orange.gd"
 }, {
 "base": "Character",
 "class": "Player",
@@ -35,17 +70,48 @@ _global_script_classes=[ {
 "path": "res://Game/Characters/Players/Player.gd"
 }, {
 "base": "Enemy",
+"class": "Radish_Enemy",
+"language": "GDScript",
+"path": "res://Game/Characters/Enemies/Spring/Radish/Radish.gd"
+}, {
+"base": "Enemy",
 "class": "RunningEnemy",
 "language": "GDScript",
 "path": "res://Game/Characters/CharacterClass/RunningEnemy.gd"
+}, {
+"base": "Enemy",
+"class": "SwordEnemy",
+"language": "GDScript",
+"path": "res://Game/Characters/CharacterClass/SwordEnemy.gd"
+}, {
+"base": "Enemy",
+"class": "TurnBackEnemy",
+"language": "GDScript",
+"path": "res://Game/Characters/CharacterClass/TurnBackEnemy.gd"
+}, {
+"base": "Enemy",
+"class": "ZicZacEnemy",
+"language": "GDScript",
+"path": "res://Game/Characters/CharacterClass/ZicZacEnemy.gd"
 } ]
 _global_script_class_icons={
+"BulletEnemy": "",
 "Character": "",
 "Enemy": "",
-"FlyingEnemy": "",
+"FatBird": "",
+"FlashEnemy": "",
+"Flying_Enemy": "",
+"Ghost": "",
+"JRAEnemy": "",
+"Jackson": "",
 "JumpingEnemy": "",
+"Orange": "",
 "Player": "",
-"RunningEnemy": ""
+"Radish_Enemy": "",
+"RunningEnemy": "",
+"SwordEnemy": "",
+"TurnBackEnemy": "",
+"ZicZacEnemy": ""
 }
 
 [application]
@@ -57,6 +123,7 @@ boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 
 [autoload]
 
+EffectSettings="*res://Game/Data/EffectSettings.gd"
 GameSettings="*res://Game/Singleton/GameSettings.tscn"
 ScreenSettings="*res://Game/Data/ScreenSettings.gd"
 User="*res://Game/Data/UserData.gd"
@@ -110,7 +177,13 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_2="Start"
 2d_physics/layer_4="Player"
 2d_physics/layer_5="Enemy"
+2d_physics/layer_6="Object"
+2d_physics/layer_8="AreaZone"
 
 [physics]
 
 common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_clear_color=Color( 0.945098, 0.768627, 0.768627, 1 )

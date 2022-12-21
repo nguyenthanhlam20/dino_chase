@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Game/Characters/Enemies/Autumn/Bat/Bat.gd" type="Script" id=1]
+[ext_resource path="res://Game/Characters/CharacterClass/RunningEnemy.gd" type="Script" id=1]
 [ext_resource path="res://Resource/Arts/Enemies/Autumn/Oyster/Oyster_27x28.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=10]
@@ -38,7 +38,7 @@ script = ExtResource( 1 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 8 )
 animation = "run"
-frame = 2
+frame = 1
 playing = true
 flip_h = true
 

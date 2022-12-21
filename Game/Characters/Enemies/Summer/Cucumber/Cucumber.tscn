@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://Game/Characters/Enemies/Spring/Chicken/Chicken.gd" type="Script" id=1]
+[ext_resource path="res://Game/Characters/CharacterClass/RunningEnemy.gd" type="Script" id=1]
 [ext_resource path="res://Resource/Arts/Enemies/Summer/Cucumber/Cucumber_32x63.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=17]
@@ -60,20 +60,21 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 5.71429 )
+extents = Vector2( 4, 8.57143 )
 
 [node name="Cucumber" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.2, 0.2 )
+scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 16 )
 animation = "run"
-frame = 9
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 0.2 )
 scale = Vector2( 1, 1.05 )
 shape = SubResource( 1 )
 

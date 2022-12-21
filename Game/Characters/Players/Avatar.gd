@@ -17,7 +17,7 @@ func _ready():
 		"UNLOCK":
 #			print("unlock")
 			$AnimationPlayer.play("bend_down")
-#func _physics_process(delta):
-	
-		
+		"IDLE":
+			$AnimationPlayer.play("idle")
+			$AnimatedSprite.flip_h = true
 	

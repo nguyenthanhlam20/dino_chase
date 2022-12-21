@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game/UI/Screen/HomeScreen/HomeScreen.gd" type="Script" id=1]
-[ext_resource path="res://Resource/Buttons/Option-1-v2.png" type="Texture" id=2]
-[ext_resource path="res://Resource/Buttons/Play-1-v2.png" type="Texture" id=3]
-[ext_resource path="res://Resource/Buttons/More-1-v2.png" type="Texture" id=4]
+[ext_resource path="res://Resource/Buttons/More-1.png" type="Texture" id=2]
+[ext_resource path="res://Resource/Buttons/Play-1.png" type="Texture" id=3]
+[ext_resource path="res://Resource/Buttons/Option-1.png" type="Texture" id=4]
 [ext_resource path="res://Resource/Buttons/Play-2.png" type="Texture" id=6]
 [ext_resource path="res://Resource/Buttons/More-2.png" type="Texture" id=12]
 [ext_resource path="res://Resource/Buttons/Option-2.png" type="Texture" id=14]
@@ -24,21 +24,21 @@ anchor_bottom = 1.0
 margin_top = -3.0
 margin_right = -214.0
 
-[node name="Options" type="TouchScreenButton" parent="MainContent/HBoxContainerBottom"]
-position = Vector2( 10, 90 )
-scale = Vector2( 0.15, 0.15 )
-z_as_relative = false
-normal = ExtResource( 2 )
-pressed = ExtResource( 14 )
-
 [node name="Play" type="TouchScreenButton" parent="MainContent/HBoxContainerBottom"]
 position = Vector2( 10, 60 )
 scale = Vector2( 0.15, 0.15 )
 normal = ExtResource( 3 )
 pressed = ExtResource( 6 )
 
+[node name="Options" type="TouchScreenButton" parent="MainContent/HBoxContainerBottom"]
+position = Vector2( 10, 90 )
+scale = Vector2( 0.15, 0.15 )
+z_as_relative = false
+normal = ExtResource( 4 )
+pressed = ExtResource( 14 )
+
 [node name="More" type="TouchScreenButton" parent="MainContent/HBoxContainerBottom"]
 position = Vector2( 10, 120 )
 scale = Vector2( 0.15, 0.15 )
-normal = ExtResource( 4 )
+normal = ExtResource( 2 )
 pressed = ExtResource( 12 )

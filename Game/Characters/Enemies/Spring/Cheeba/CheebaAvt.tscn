@@ -98,8 +98,8 @@ animations = [ {
 }, {
 "frames": [ SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ) ],
 "loop": true,
-"name": "lock",
-"speed": 5.0
+"name": "lock_active",
+"speed": 10.0
 }, {
 "frames": [ SubResource( 56 ) ],
 "loop": true,
@@ -116,8 +116,8 @@ script = ExtResource( 2 )
 position = Vector2( 1, -1 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 8 )
-animation = "active"
-frame = 4
+animation = "lock_active"
+frame = 5
 playing = true
 flip_h = true
 

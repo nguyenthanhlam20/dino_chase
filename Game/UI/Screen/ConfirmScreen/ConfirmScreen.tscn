@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Game/UI/Screen/ConfirmScreen/ConfirmScreen.gd" type="Script" id=1]
+[ext_resource path="res://Resource/Buttons/Yes-1.png" type="Texture" id=2]
+[ext_resource path="res://Resource/Fonts/Bungee-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Resource/Buttons/Yes-2.png" type="Texture" id=4]
+[ext_resource path="res://Resource/Buttons/No-1.png" type="Texture" id=5]
+[ext_resource path="res://Resource/Buttons/No-2.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=6]
+size = 9
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+content_margin_left = 10.0
+content_margin_right = 10.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color( 0.466667, 0.352941, 0.352941, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="ConfirmScreen" type="Popup"]
+pause_mode = 2
+visible = true
+anchor_top = -1.0
+anchor_bottom = -1.0
+script = ExtResource( 1 )
+
+[node name="Message" type="Label" parent="."]
+margin_left = 67.0
+margin_top = 57.0
+margin_right = 252.0
+margin_bottom = 87.0
+custom_fonts/font = SubResource( 6 )
+custom_styles/normal = SubResource( 5 )
+text = "Are you sure you want to buy?"
+align = 1
+valign = 1
+
+[node name="YES" type="TouchScreenButton" parent="."]
+position = Vector2( 165, 93 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 2 )
+pressed = ExtResource( 4 )
+
+[node name="NO" type="TouchScreenButton" parent="."]
+position = Vector2( 75, 93 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 5 )
+pressed = ExtResource( 6 )
+
+[connection signal="released" from="YES" to="." method="_on_YES_released"]
+[connection signal="released" from="NO" to="." method="_on_NO_released"]

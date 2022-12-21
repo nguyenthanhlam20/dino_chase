@@ -1,10 +1,93 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=28 format=2]
 
-[ext_resource path="res://Game/Characters/Enemies/Spring/Chicken/Chicken.gd" type="Script" id=1]
+[ext_resource path="res://Game/Characters/CharacterClass/JumpingEnemy.gd" type="Script" id=1]
+[ext_resource path="res://Resource/Arts/Enemies/Summer/Duck/Fall_36x36.png" type="Texture" id=2]
+[ext_resource path="res://Resource/Arts/Enemies/Summer/Duck/JumpAnticipation_36x36.png" type="Texture" id=3]
+[ext_resource path="res://Resource/Arts/Enemies/Summer/Duck/Jump_36x36.png" type="Texture" id=4]
+[ext_resource path="res://Resource/Arts/Enemies/Summer/Duck/Idle_36x36.png" type="Texture" id=5]
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 3 )
+region = Rect2( 36, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 3 )
+region = Rect2( 72, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 3 )
+region = Rect2( 108, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 5 )
+region = Rect2( 36, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 5 )
+region = Rect2( 72, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 5 )
+region = Rect2( 108, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 5 )
+region = Rect2( 144, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 5 )
+region = Rect2( 180, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 5 )
+region = Rect2( 216, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 5 )
+region = Rect2( 252, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 5 )
+region = Rect2( 288, 0, 36, 36 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 5 )
+region = Rect2( 324, 0, 36, 36 )
 
 [sub_resource type="SpriteFrames" id=16]
 animations = [ {
-"frames": [  ],
+"frames": [ SubResource( 17 ) ],
+"loop": true,
+"name": "fall",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 18 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"loop": true,
+"name": "jump_ani",
+"speed": 4.0
+}, {
+"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
 "loop": true,
 "name": "run",
 "speed": 20.0
@@ -12,6 +95,56 @@ animations = [ {
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 8 )
+
+[sub_resource type="Animation" id=34]
+resource_name = "fall"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "fall" ]
+}
+
+[sub_resource type="Animation" id=35]
+resource_name = "jump"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "jump" ]
+}
+
+[sub_resource type="Animation" id=36]
+resource_name = "run"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "run" ]
+}
+
+[sub_resource type="RectangleShape2D" id=33]
 
 [node name="Duck" type="KinematicBody2D"]
 collision_layer = 16
@@ -21,11 +154,18 @@ script = ExtResource( 1 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 16 )
 animation = "run"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2( 0, 1 )
+scale = Vector2( 1, 0.97 )
 shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fall = SubResource( 34 )
+anims/jump = SubResource( 35 )
+anims/run = SubResource( 36 )
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 0
@@ -34,4 +174,14 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( -0.5, 0 )
 
+[node name="JumpZone" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpZone"]
+position = Vector2( -22, -21 )
+scale = Vector2( 1.5, 3 )
+shape = SubResource( 33 )
+
 [connection signal="body_shape_entered" from="HitBox" to="." method="_on_HitBox_body_shape_entered"]
+[connection signal="body_shape_entered" from="JumpZone" to="." method="_on_JumpZone_body_shape_entered"]

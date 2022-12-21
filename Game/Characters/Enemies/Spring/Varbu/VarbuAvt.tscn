@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Resource/Arts/Enemies/Spring/Varbu/Varbu_35x28.png" type="Texture" id=1]
 [ext_resource path="res://Game/Characters/Enemies/AvatarScript.gd" type="Script" id=2]
@@ -41,47 +41,22 @@ atlas = ExtResource( 1 )
 region = Rect2( 35, 0, 35, 28 )
 
 [sub_resource type="AtlasTexture" id=33]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 35, 28 )
 
 [sub_resource type="AtlasTexture" id=34]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 35, 0, 35, 28 )
 
 [sub_resource type="AtlasTexture" id=35]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 70, 0, 35, 28 )
 
 [sub_resource type="AtlasTexture" id=36]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 105, 0, 35, 28 )
 
-[sub_resource type="AtlasTexture" id=37]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 140, 0, 35, 28 )
-
-[sub_resource type="AtlasTexture" id=38]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 175, 0, 35, 28 )
-
-[sub_resource type="AtlasTexture" id=39]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 210, 0, 35, 28 )
-
-[sub_resource type="AtlasTexture" id=40]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 245, 0, 35, 28 )
-
 [sub_resource type="AtlasTexture" id=41]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 35, 0, 35, 28 )
 
@@ -97,7 +72,7 @@ animations = [ {
 "name": "deactive",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ) ],
+"frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
 "loop": true,
 "name": "lock_active",
 "speed": 10.0

@@ -11,6 +11,7 @@
 [ext_resource path="res://Resource/Buttons/Options-short-2.png" type="Texture" id=9]
 
 [node name="PausedSceen" type="Popup"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -26,25 +27,25 @@ margin_right = 160.0
 margin_bottom = 90.0
 
 [node name="Home" type="TouchScreenButton" parent="CenterContainer"]
-position = Vector2( 112, 88 )
-scale = Vector2( 0.11, 0.11 )
+position = Vector2( 110, 86 )
+scale = Vector2( 0.13, 0.13 )
 normal = ExtResource( 5 )
 pressed = ExtResource( 4 )
 
 [node name="Settings" type="TouchScreenButton" parent="CenterContainer"]
-position = Vector2( 136, 88 )
-scale = Vector2( 0.11, 0.11 )
+position = Vector2( 137, 86 )
+scale = Vector2( 0.13, 0.13 )
 normal = ExtResource( 6 )
 pressed = ExtResource( 9 )
 
 [node name="Restart" type="TouchScreenButton" parent="CenterContainer"]
-position = Vector2( 160, 88 )
-scale = Vector2( 0.11, 0.11 )
+position = Vector2( 164, 86 )
+scale = Vector2( 0.13, 0.13 )
 normal = ExtResource( 8 )
 pressed = ExtResource( 7 )
 
 [node name="Play" type="TouchScreenButton" parent="CenterContainer"]
-position = Vector2( 184, 88 )
-scale = Vector2( 0.11, 0.11 )
+position = Vector2( 191, 86 )
+scale = Vector2( 0.13, 0.13 )
 normal = ExtResource( 3 )
 pressed = ExtResource( 2 )

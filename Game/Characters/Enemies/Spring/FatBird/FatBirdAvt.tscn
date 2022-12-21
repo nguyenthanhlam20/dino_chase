@@ -41,47 +41,38 @@ atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 40, 48 )
 
 [sub_resource type="AtlasTexture" id=27]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 40, 48 )
 
 [sub_resource type="AtlasTexture" id=28]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 40, 0, 40, 48 )
 
 [sub_resource type="AtlasTexture" id=29]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 80, 0, 40, 48 )
 
 [sub_resource type="AtlasTexture" id=30]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 120, 0, 40, 48 )
 
 [sub_resource type="AtlasTexture" id=31]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 160, 0, 40, 48 )
 
 [sub_resource type="AtlasTexture" id=32]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 200, 0, 40, 48 )
 
 [sub_resource type="AtlasTexture" id=33]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 240, 0, 40, 48 )
 
 [sub_resource type="AtlasTexture" id=34]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 280, 0, 40, 48 )
 
 [sub_resource type="AtlasTexture" id=35]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 40, 48 )
 
@@ -100,7 +91,7 @@ animations = [ {
 "frames": [ SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ) ],
 "loop": true,
 "name": "lock_active",
-"speed": 5.0
+"speed": 15.0
 }, {
 "frames": [ SubResource( 35 ) ],
 "loop": true,

@@ -1,26 +1,36 @@
 extends Popup
 
-onready var scroll_container = $ScrollContainer
-onready var enemy_container = $ScrollContainer/VBoxContainer
+onready var spring_container = $Spring/VBoxContainer
+onready var summer_container = $Summer/VBoxContainer
+onready var autumn_container = $Autumn/VBoxContainer
+onready var winter_container = $Winter/VBoxContainer
+
 onready var enemy_name = $OuterBorder/Background/EnemyName
 onready var enemy_background = $OuterBorder/Background
 onready var description = $OuterBorder/Background/Description
 onready var avatar = $OuterBorder/Background/CenterContainer/Avatar
-onready var season_icon = $SeasonIcon
 
 onready var spring = $SeasonContainer/VBoxContainer/Spring
 onready var summer = $SeasonContainer/VBoxContainer/Summer
 onready var autumn = $SeasonContainer/VBoxContainer/Autumn
 onready var winnter = $SeasonContainer/VBoxContainer/Winter
 
+onready var longest_run = $LongestRun
+
 onready var spring_background = $SeasonContainer/VBoxContainer/Spring/Background
 onready var summer_background = $SeasonContainer/VBoxContainer/Summer/Background
 onready var autumn_background = $SeasonContainer/VBoxContainer/Autumn/Background
 onready var winnter_background = $SeasonContainer/VBoxContainer/Winter/Background
 onready var root_node = self.get_parent()
+onready var maps = MapSettings.maps
+onready var map_unlock = User.data.completion.map
+onready var map_btns_container = $SeasonContainer/VBoxContainer
+
+enum SEASON {SPRING, SUMMER, AUTUMN, WINTER}
+var current_season = SEASON.SPRING
 
 var enemies = []
-
+var enemies_unlock = []
 var button = Button.new()
 var label = Label.new()
 var border_btn_active = StyleBoxFlat.new()
@@ -40,19 +50,89 @@ var list_btn_second = []
 
 var current_index = 0
 var previous_index = -1
-
-var current_season_index = 0
-
 var is_first_time = true
 
 signal button_click(index)
 
-func _ready() -> void:
-	scroll_container.get_h_scrollbar().modulate.a = 0
-	create_style_box()
-	generate_everything(EnemySettings.spring_enemies)
-	$ScrollContainer/VBoxContainer.set("mouse_filter", Control.MOUSE_FILTER_PASS)
+func hide_scrollbar():
+	spring_container.get_parent().get_h_scrollbar().modulate.a = 0
+	summer_container.get_parent().get_h_scrollbar().modulate.a = 0
+	autumn_container.get_parent().get_h_scrollbar().modulate.a = 0
+	winter_container.get_parent().get_h_scrollbar().modulate.a = 0
 	
+func _ready() -> void:
+#	hide vertical scroll bar
+	hide_scrollbar()
+#	create default style box
+	create_style_box()
+#	generate seasons 
+	generate_seasons()
+	
+	hide_season_btns()
+	
+	show_desired_season(true, false, false, false)
+	
+#	focus on spring enemies when first time user enter this screen
+	set_focus_enemies("Spring", EnemySettings.spring_enemies)
+	get_longest_run("spring")
+func hide_season_btns():
+	
+	var index : int
+	var map_btn : Label
+	for map in maps:
+		index = map.get("index")
+		map_btn = map_btns_container.get_node(map.get("map_name"))
+		if(index in map_unlock):
+			map_btn.visible = true
+		else:
+			map_btn.visible = false
+			
+func show_desired_season(spring_visible, summer_visible, autumn_visible, winter_visible):
+	var season = self.get_node("Spring")
+	season.set("visible", spring_visible)
+	
+	season = self.get_node("Summer")
+	season.set("visible", summer_visible)
+
+	season = self.get_node("Autumn")
+	season.set("visible", autumn_visible)
+	
+	season = self.get_node("Winter")
+	season.set("visible", winter_visible)
+
+func set_focus_enemies(season_name: String, enem):
+	
+	var season = self.get_node(season_name).get_child(0)
+	var line_one = season.get_child(0)
+	var line_two = season.get_child(1)
+	
+	list_btn_first = line_one.get_children()
+	list_btn_second = line_two.get_children()
+	
+	
+	enemies = enem
+	on_season_pressed(season_name)
+	
+
+func generate_seasons():
+	get_enemies_unlock("spring")
+	put_enemies(spring_container, EnemySettings.spring_enemies)
+	
+	get_enemies_unlock("summer")
+	put_enemies(summer_container, EnemySettings.summer_enemies)
+	
+	get_enemies_unlock("autumn")
+	put_enemies(autumn_container, EnemySettings.autumn_enemies)
+
+	get_enemies_unlock("winter")
+	put_enemies(winter_container, EnemySettings.winter_enemies)
+	
+	get_enemies_unlock("spring")
+
+func put_enemies(parent_container: VBoxContainer, enem: Array) -> void:
+	generate_container(parent_container)
+	generate_enemy(enem)
+
 func create_style_box() -> void: 
 	set_style(styled_background, "ffffff", 9)
 	set_style(border_btn_active, "ffffff", 5)
@@ -64,26 +144,23 @@ func create_style_box() -> void:
 	set_style(background_season_active, "ffffff", 4)
 	set_style(background_season_deactive, "404040", 4)
 
-func generate_container():
+func generate_container(parent_container: VBoxContainer):
 	first_line = HBoxContainer.new()
 	second_line = HBoxContainer.new()
-	
-	first_line.set("mouse_filter", Control.MOUSE_FILTER_PASS)
-	second_line.set("mouse_filter", Control.MOUSE_FILTER_PASS)
-	
+
 	first_line.set("custom_constants/separation", 3)
 	second_line.set("custom_constants/separation", 3)
-	enemy_container.add_child(first_line)
-	enemy_container.add_child(second_line)
+	parent_container.add_child(first_line)
+	parent_container.add_child(second_line)
 
-func generate_enemy() -> void:
-	var total = enemies.size()
+func generate_enemy(enem: Array) -> void:
+	var total = enem.size()
 	var first_part = total / 2
 #	var second_part = total - first_part
 	
 	var index = 0
-	for enemy in enemies: 
-		print("fail at index", index)
+	for enemy in enem: 
+#		print("fail at index", index)
 		create_label(enemy)
 		index = index + 1
 		if(index <= first_part):
@@ -103,6 +180,11 @@ func create_label(enemy) -> void:
 	
 	var avt = load(enemy.get("avatar")).instance()
 	avt.adjust_scale(Vector2(0.7, 0.7))
+	var enemy_index = enemy.get("index")
+	if(enemy_index in enemies_unlock):
+		avt.set_is_unlock(true)
+	else:
+		avt.set_is_unlock(false)
 	avt.enable_playing(false)
 	avt.set("position", Vector2(11, 11))
 	label.add_child(avt)
@@ -111,7 +193,6 @@ func create_label(enemy) -> void:
 func create_btn(container : HBoxContainer):
 	button = Button.new()
 	button.connect("pressed", self, "_on_button_pressed")
-	button.set("mouse_filter", Control.MOUSE_FILTER_PASS)
 	button.set("rect_min_size", Vector2(24, 24))
 	button.set("custom_styles/hover", border_btn_deactive)
 	button.set("custom_styles/pressed", border_btn_active)
@@ -149,22 +230,18 @@ func set_season_style(active_season):
 			background_season_active.set("bg_color", "81B622")
 			spring.set("custom_styles/normal", border_season_active)
 			spring_background.set("custom_styles/normal", background_season_active)
-			season_icon.texture = load(MapSettings.maps[0].get("map_icon"))
 		"Summer":
 			background_season_active.set("bg_color", "FAC12F")
 			summer.set("custom_styles/normal", border_season_active)
 			summer_background.set("custom_styles/normal", background_season_active)
-			season_icon.texture = load(MapSettings.maps[1].get("map_icon"))
 		"Autumn":
 			background_season_active.set("bg_color", "914110")
 			autumn.set("custom_styles/normal", border_season_active)
 			autumn_background.set("custom_styles/normal", background_season_active)
-			season_icon.texture = load(MapSettings.maps[2].get("map_icon"))
 		"Winter":
 			background_season_active.set("bg_color", "CADAE3")
 			winnter.set("custom_styles/normal", border_season_active)
 			winnter_background.set("custom_styles/normal", background_season_active)
-			season_icon.texture = load(MapSettings.maps[3].get("map_icon"))
 			
 func _on_Return_released():
 	yield(get_tree().create_timer(0.2), "timeout")
@@ -177,7 +254,7 @@ func change_background_color(styled_node, color):
 
 func _on_EnemyScreen_button_click(index):
 	var enemy = enemies[index]
-	var colo = Color(randf(), randf(), randf())
+	var colo = enemy.get("color")
 	var crt_avt_container
 	var pre_avt_container 
 	var crt_avt
@@ -213,20 +290,23 @@ func _on_EnemyScreen_button_click(index):
 			
 	
 	
-	enemy_name.text = enemy.get("enemy_name")
-	description.text = enemy.get("description")
 	avatar.remove_child(avatar.get_child(0))
 	var avt = load(enemy.get("avatar")).instance()
-	avatar.add_child(avt)
 	avt.adjust_scale(Vector2(1.5, 1.5))
+	var enemy_index = enemy.get("index")
+	if(enemy_index in enemies_unlock):
+		enemy_name.text = enemy.get("enemy_name")
+		description.text = enemy.get("description")
+		avt.set_is_unlock(true)
+	else:
+		enemy_name.text = "???"
+		description.text = enemy.get("lock_message")
+		avt.set_is_unlock(false)
 	avt.enable_playing(true)
+	avatar.add_child(avt)
 
 
 func _on_button_pressed():
-	if(is_first_time && current_index == 0):
-		list_btn_first[0].set_pressed(false)
-		list_btn_first[0].get_child(0).set("custom_styles/normal", background_btn_deactive)
-		is_first_time = false
 	var index = 0
 	for btn in list_btn_first:
 		if btn.is_pressed():
@@ -234,6 +314,7 @@ func _on_button_pressed():
 				previous_index = current_index
 				current_index = index
 				emit_signal("button_click", index)
+#				print("im come here for index: ", index)
 #			break
 		index = index + 1
 
@@ -246,37 +327,63 @@ func _on_button_pressed():
 #			break
 		index = index + 1
 
+
+func get_previous_index():
+	var index = 0
+	for btn in list_btn_first:
+		if btn.is_pressed() && index != 0:
+			return index
+		index = index + 1
+
+	for btn in list_btn_second:
+		if btn.is_pressed() :
+			return index
+		index = index + 1
 	
-func generate_everything(enem):
-	enemies = enem
-	previous_index = -1
+	return -1
+	
+func on_season_pressed(season_name):
 	current_index = 0
-	generate_container()
-	generate_enemy()
-	set_season_style("Spring")
-	list_btn_first = first_line.get_children()
-	list_btn_second = second_line.get_children()
+	previous_index = get_previous_index()
 	list_btn_first[0].set_pressed(true)
 	emit_signal("button_click", 0)
+	set_season_style(season_name)
+
+func get_enemies_unlock(season_key: String):
+	enemies_unlock = User.data.completion.enemy.get(season_key)
 	
-
-func on_season_pressed(season_index, season_enemies, season_name):
-	if(current_season_index != season_index):
-		first_line.queue_free()
-		second_line.queue_free()
-		generate_everything(season_enemies)
-		set_season_style(season_name)
-		current_season_index = season_index
-
+func get_longest_run(season_key: String):
+	longest_run.text = str(User.data.best_distance.get(season_key).value) + "m"
+	
 func _on_SpringButton_pressed():
-	on_season_pressed(0, EnemySettings.spring_enemies, "Spring")
+	if(current_season != SEASON.SPRING):
+		set_focus_enemies("Spring", EnemySettings.spring_enemies)
+		show_desired_season(true, false, false, false)
+		current_season = SEASON.SPRING
+		get_enemies_unlock("spring")
+		get_longest_run("spring")
 
 func _on_SummerButton_pressed():
-	on_season_pressed(1, EnemySettings.summer_enemies, "Summer")
+	if(current_season != SEASON.SUMMER):
+		set_focus_enemies("Summer", EnemySettings.summer_enemies)
+		show_desired_season(false, true, false, false)
+		current_season = SEASON.SUMMER
+		get_enemies_unlock("summer")
+		get_longest_run("summer")
 
 func _on_AutumnButton_pressed():
-	on_season_pressed(2, EnemySettings.autumn_enemies, "Autumn")
+	if(current_season != SEASON.AUTUMN):
+		set_focus_enemies("Autumn", EnemySettings.autumn_enemies)
+		show_desired_season(false, false, true, false)
+		current_season = SEASON.AUTUMN
+		get_enemies_unlock("autumn")
+		get_longest_run("autumn")
 	
 func _on_WinterButton_pressed():
-	on_season_pressed(3, EnemySettings.winter_enemies, "Winter")
+	if(current_season != SEASON.WINTER):
+		set_focus_enemies("Winter", EnemySettings.winter_enemies)
+		show_desired_season(false, false, false, true)
+		current_season = SEASON.WINTER
+		get_enemies_unlock("winter")
+		get_longest_run("winter")
 

@@ -6,15 +6,20 @@ onready var character_container =  $MainContent/BorderColor/GridContainer/ColorC
 onready var color_character = $MainContent/BorderColor/GridContainer/ColorCharacter
 onready var color_text = $MainContent/BorderColor/GridContainer/ColorText
 onready var main_content = $MainContent
-onready var parallax = $ParallaxCirle
 onready var player_navigation = $MainContent/PlayerNavigation
 
 onready var play_btn = $MainContent/Buttons/Play
 onready var back_btn = $MainContent/Buttons/Back
 onready var map_btn = $MainContent/Buttons/Map
 
-onready var bar_nomal = load("res://Resource/Buttons/Play-1-v2.png")
+onready var cover_background = load(ScreenSettings.screens.get("COVER_BACKGROUND"))
+onready var not_enough_screen = load(ScreenSettings.screens.get("NOT_ENOUGH_SCREEN"))
+onready var confirm_screen = load(ScreenSettings.screens.get("CONFIRM_SCREEN"))
+
+onready var bar_nomal = load("res://Resource/Buttons/Play-1.png")
 onready var bar_pressed = load("res://Resource/Buttons/Play-2.png")
+
+signal buy
 
 var style_box_flat = StyleBoxFlat.new()
 var background_btn_active = StyleBoxFlat.new()
@@ -31,19 +36,34 @@ var character_unlock : Array
 
 var current_index = 0
 
-
 func disable_buttons():
-	back_btn.disconnect("released", self, "_on_Back_released")
-	play_btn.disconnect("released", self, "_on_Play_released")
-	map_btn.disconnect("released", self, "_on_Map_released")
+	if(back_btn.is_connected("released", self, "_on_Back_released")):
+		back_btn.disconnect("released", self, "_on_Back_released")
+		
+	if(play_btn.is_connected("released", self, "_on_Play_released")):
+		play_btn.disconnect("released", self, "_on_Play_released")
+		
+	if(map_btn.is_connected("released", self, "_on_Map_released")):
+		map_btn.disconnect("released", self, "_on_Map_released")
 	
 func enable_buttons():
-	back_btn.disconnect("released", self, "_on_Back_released")
-	play_btn.disconnect("released", self, "_on_Play_released")
-	map_btn.disconnect("released", self, "_on_Map_released")
+	if(!back_btn.is_connected("released", self, "_on_Back_released")):
+		back_btn.disconnect("released", self, "_on_Back_released")
+		
+	if(!play_btn.is_connected("released", self, "_on_Play_released")):
+		play_btn.disconnect("released", self, "_on_Play_released")
+		
+	if(!map_btn.is_connected("released", self, "_on_Map_released")):
+		map_btn.disconnect("released", self, "_on_Map_released")
 	
+	
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_tree().paused = false
+	get_tree().set_current_scene(self)
 	character_unlock = User.data.completion.character
 	create_style_box()
 	add_style_box()
@@ -51,7 +71,7 @@ func _ready():
 	buttons_in_navigation = player_navigation.get_children()
 	set_player_info(PlayerSettings.current_player_index)
 	current_index =  player_info.get("index");
-	parallax.start_moving(true)
+
 
 func change_background_color(styled_node, color):
 	styled_node.set("bg_color",color)
@@ -151,20 +171,29 @@ func set_player_info(index : int):
 	buttons_in_navigation[index].set_pressed(true)
 	
 	current_index = index 
+	set_style_box_flat(9, 0, 9, 0,color)
 	if(is_unlock):
 		PlayerSettings.current_player_index = index
-		set_style_box_flat(9, 0, 9, 0, color)
 		character_name.text = player_info.get("character_name")
 		character_detail.text = player_info.get("character_detail")
 		play_btn.normal = bar_nomal
 		play_btn.pressed = bar_pressed
+		if(play_btn.is_connected("released", self, "_on_CharacterScreen_buy")):
+			play_btn.disconnect("released", self, "_on_CharacterScreen_buy")
+		if(!play_btn.is_connected("released", self, "_on_Play_released")):
+			play_btn.connect("released", self, "_on_Play_released")
 	else:
-		set_style_box_flat(9, 0, 9, 0, "#fff")
 		character_name.text = "???"
 		character_detail.text = "???"
-		var unlock_at_button = player_info.get("unlock_at_button")
-		play_btn.normal = load(unlock_at_button)
-		play_btn.pressed = load(unlock_at_button)
+		var buy_btn_normal = player_info.get("buy_btn_normal")
+		var buy_btn_pressed = player_info.get("buy_btn_pressed")
+		play_btn.normal = load(buy_btn_normal)
+		play_btn.pressed = load(buy_btn_pressed)
+		if(!play_btn.is_connected("released", self, "_on_CharacterScreen_buy")):
+			play_btn.connect("released", self, "_on_CharacterScreen_buy")
+		if(play_btn.is_connected("released", self, "_on_Play_released")):
+			play_btn.disconnect("released", self, "_on_Play_released")
+		
 		
 	color_character.set("custom_styles/normal", style_box_flat)
 	change_background_color(background_btn_active, color)
@@ -212,6 +241,37 @@ func _on_Map_released():
 	disable_buttons()
 	yield(get_tree().create_timer(0.2), "timeout")
 	SceneTransition.change_scene(self,"res://Game/UI/Screen/MapScreen/MapScreen.tscn")
-	
 
 
+
+func _on_CharacterScreen_buy():
+	get_tree().paused = true
+	var coins = User.data.general.coins.value
+	var price = PlayerSettings.players[current_index].get("price")
+	if(coins > price): 
+		if(!self.has_node("ConfirmScreen")):
+			var cover_background_instance = cover_background.instance()
+			self.add_child(cover_background_instance)
+			
+			var confirm_screen_instance = confirm_screen.instance()
+			confirm_screen_instance.set_root_node(self)
+			confirm_screen_instance.set_item(current_index, price, "character")
+			self.add_child(confirm_screen_instance)
+			confirm_screen_instance.show_popup()
+	else: 
+		if(!self.has_node("NotEnoughScreen")):
+			var cover_background_instance = cover_background.instance()
+			var not_enough_instance = not_enough_screen.instance()
+			self.add_child(cover_background_instance)
+			not_enough_instance.set_root_node(self)
+			self.add_child(not_enough_instance)
+			not_enough_instance.show_popup()
+		
+func clear_cover_background():
+	get_tree().paused = false
+	self.remove_child(self.get_node("CoverBackground"))
+
+func add_new_child(new_child : Popup):
+	self.add_child(new_child)
+	new_child.show_popup()
+		

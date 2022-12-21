@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Game/Characters/Players/Player.gd" type="Script" id=1]
 [ext_resource path="res://Game/Characters/Players/Rainbow/Rainbow.tres" type="SpriteFrames" id=2]
@@ -51,7 +51,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=38]
-resource_name = "bend_down_lock"
+resource_name = "bend_down_idle"
 length = 0.05
 loop = true
 tracks/0/type = "value"
@@ -64,7 +64,36 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "bend_down_lock" ]
+"values": [ "bend_down_idle" ]
+}
+
+[sub_resource type="Animation" id=44]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "death_animation_finished"
+} ]
 }
 
 [sub_resource type="Animation" id=40]
@@ -165,10 +194,39 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.5 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ "fall" ]
+}
+
+[sub_resource type="Animation" id=45]
+resource_name = "grave"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "grave" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "game_over"
+} ]
 }
 
 [sub_resource type="Animation" id=32]
@@ -199,7 +257,7 @@ tracks/1/keys = {
 "method": "play_hit_effect"
 }, {
 "args": [  ],
-"method": "animation_finished"
+"method": "hit_animation_finished"
 } ]
 }
 tracks/2/type = "method"
@@ -209,7 +267,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -249,6 +307,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=36]
 resource_name = "jump"
+length = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -256,10 +315,56 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ "jump" ]
+}
+
+[sub_resource type="Animation" id=46]
+resource_name = "post_death"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "post_death" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "post_death_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=47]
+resource_name = "pre_death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "pre_death" ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -287,21 +392,24 @@ shape = SubResource( 43 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
-animation = "hit"
-frame = 1
+animation = "idle"
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/appear = SubResource( 39 )
 anims/bend_down = SubResource( 20 )
-anims/bend_down_lock = SubResource( 38 )
+anims/bend_down_idle = SubResource( 38 )
+anims/death = SubResource( 44 )
 anims/egg_crack = SubResource( 40 )
 anims/egg_hatch = SubResource( 41 )
 anims/egg_move = SubResource( 42 )
 anims/fall = SubResource( 37 )
+anims/grave = SubResource( 45 )
 anims/hit = SubResource( 32 )
 anims/idle = SubResource( 21 )
 anims/jump = SubResource( 36 )
+anims/post_death = SubResource( 46 )
+anims/pre_death = SubResource( 47 )
 anims/run = SubResource( 22 )
 
 [node name="InvincibleTime" type="Timer" parent="."]

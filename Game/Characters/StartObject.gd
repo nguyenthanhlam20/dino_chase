@@ -2,15 +2,14 @@ extends KinematicBody2D
 
 
 export(int) var move_speed = 10
-onready var animated_sprite = $AnimatedSprite
-# Declare member variables here. Examples:
+onready var animation_player = $AnimationPlayer
 # var a = 2
 # var b = "text"
-enum STATE {IDLE, MOVE}
+enum STATE {IDLE, MOVE_BACKWARD, MOVE_FORWARD, STOP}
 
 var velocity : Vector2
 
-var current_state = STATE.IDLE
+var current_state = STATE.MOVE_FORWARD
 var root_node setget set_root_node
 
 func set_root_node(value):
@@ -19,28 +18,47 @@ func set_root_node(value):
 # Called when the node enters the scene tree for the first time.
 func _physics_process(delta):
 	if(Input.is_action_just_pressed("jump")):
-		current_state = STATE.MOVE
+		print("start object jump")
+		current_state = STATE.MOVE_BACKWARD
 		root_node.starting()
 		root_node.change_start_object_layer()
+
 #		player.position.x = 25
 	match(current_state):
 		STATE.IDLE: 
-			animated_sprite.play("idle")
+			animation_player.play("idle")
 			velocity = Vector2(
 				0,
-				min(velocity.y + GameSettings.gravity, GameSettings.terminal_gravity)
+				min(velocity.y + 50, GameSettings.terminal_gravity)
 			)	
-		STATE.MOVE:
-			animated_sprite.play("moving")
+		STATE.MOVE_BACKWARD:
+			animation_player.play("moving_backward")
 			velocity = Vector2(
 				velocity.x - move_speed,
-				min(velocity.y + GameSettings.gravity, GameSettings.terminal_gravity)
+				min(velocity.y + 50, GameSettings.terminal_gravity)
 			)
-
+		STATE.MOVE_FORWARD:
+			animation_player.play("moving_forward")
+			velocity = Vector2(
+				velocity.x + move_speed,
+				min(velocity.y + 50, GameSettings.terminal_gravity)
+			)
+		STATE.STOP:
+			animation_player.play("stop")
+			velocity = Vector2(
+				0,
+				min(velocity.y + 50, GameSettings.terminal_gravity)
+			)
 	if move_and_slide(velocity, Vector2.UP): 
 		pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func play_stop():
+	current_state = STATE.STOP
+	
+func stop_animation_finished():
+	current_state = STATE.IDLE
+	
+func moving_animation_finished():
+	self.queue_free()
+

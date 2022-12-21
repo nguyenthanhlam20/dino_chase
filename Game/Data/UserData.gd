@@ -1,9 +1,14 @@
 extends Node
 
-var FILE_PATH = "user://pspdssp.tres"
-
+var FILE_PATH = "user://sgsgsgd.tres"
 var data = {
 	"general": {
+		"coins": {
+			"title": "Coins",
+			"value": 6000,
+			"value_format": "0", 
+			"sprite": "res://Resource/Icons/time-96.png"
+		},
 		"game_time": {
 			"title": "Game Time",
 			"value": 0,
@@ -35,18 +40,82 @@ var data = {
 			"sprite": "res://Resource/Icons/enemy-completion-96.png"
 		}
 	},
-	"best": {
-		"distance": {
-			"title": "Distance",
-			"value": 112345,
-			"value_format": "0m", 
-			"sprite": "res://Resource/Icons/best-distant-96.png"
+	"best_distance": {
+		"spring": {
+			"title": "Spring",
+			"value": 0,
+			"value_format": "0", 
+			"sprite": "res://Resource/Icons/spring_icon.png"
 		},
-		"score": {
-			"title": "Score",
-			"value": 1000,
-			"value_format": "1000", 
-			"sprite": "res://Resource/Icons/best-score-96.png"
+		"summer": {
+			"title": "Summer",
+			"value": 0,
+			"value_format": "0", 
+			"sprite": "res://Resource/Icons/summer_icon.png"
+		},
+		"autumn": {
+			"title": "Autumn",
+			"value": 0,
+			"value_format": "0", 
+			"sprite": "res://Resource/Icons/autumn_icon.png"
+		},
+		"winter": {
+			"title": "Winter",
+			"value": 0,
+			"value_format": "0", 
+			"sprite": "res://Resource/Icons/winter_icon.png"
+		}
+	},
+	"character_pick": {
+		"tomato": {
+			"title": "Tomato",
+			"value": 0,
+			"value_format": "0", 
+			"sprite": "res://Resource/Icons/tomato_96.png"
+		},
+		"fresh_pepper": {
+			"title": "Fresh Pepper",
+			"value": 0,
+			"value_format": "0", 
+			"sprite": "res://Resource/Icons/fresh_pepper_96.png"
+		},
+		"blue_berry": {
+			"title": "Blue Berry",
+			"value": 0,
+			"value_format": "0", 
+			"sprite": "res://Resource/Icons/blue_berry_96.png"
+		},
+		"rainbow": {
+			"title": "Rainbow",
+			"value": 0,
+			"value_format": "0", 
+			"sprite": "res://Resource/Icons/rain_bow_90.png"
+		}
+	},
+	"map_pick": {
+		"spring": {
+			"title": "Spring",
+			"value": 0,
+			"value_format": "0", 
+			"sprite": "res://Resource/Icons/spring_icon.png"
+		},
+		"summer": {
+			"title": "Summer",
+			"value": 0,
+			"value_format": "0", 
+			"sprite": "res://Resource/Icons/summer_icon.png"
+		},
+		"autumn": {
+			"title": "Autumn",
+			"value": 0,
+			"value_format": "0", 
+			"sprite": "res://Resource/Icons/autumn_icon.png"
+		},
+		"winter": {
+			"title": "Winter",
+			"value": 0,
+			"value_format": "0", 
+			"sprite": "res://Resource/Icons/winter_icon.png"
 		}
 	},
 	"settings": {
@@ -56,59 +125,53 @@ var data = {
 		"effect_volume": 0,
 	},
 	"completion": {
-		"character": [0, 1, 2, 3],
-		"map": [0, 1, 2, 3],
-		"enemy": [0, 1, 2, 3]
+		"character": [0],
+		"map": [0],
+		"enemy": {
+			"spring": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+			"summer": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+			"autumn": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+			"winter": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+		}
 	}
 }
 
+
+func get_unlock_enemies():
+	var map_unlock = data.completion.map
+	var count = 0
+	var map_index : int
+	for map in MapSettings.maps:
+		map_index = map.get("index")
+		if(map_index in map_unlock):
+			var map_name = map.get("map_name").to_lower()
+			count += data.completion.enemy.get(map_name).size()
+	return count
+
 func format_data():
-	var value = data.best.distance.value;
-	var percent : String
-#	var enemey_percent : String
-	if(value < 1000000): 
-		data.best.distance.value_format = str(value) + "m"
-	else: 
-		data.best.distance.value_format = str(value / 1000)  + "km"
+	data.general.game_time.value_format = Common.format_time(data.general.game_time.value)
+	data.general.runs.value_format = Common.format_number(data.general.runs.value)
 	
-	if(value >= 400):
-		percent = "100%"
-	elif(value >= 200):
-		percent = "50%"
-	elif(value >= 100): 
-		percent = "25%"
-	else: 
-		percent = "0%"
-	data.general.map_completion.value_format = percent
+	data.general.character_completion.value_format = Common.format_percent(data.completion.character.size(), 4)
+	data.general.map_completion.value_format = Common.format_percent(data.completion.map.size(), 4)
 	
-	value = data.best.score.value;
-	if(value < 10000): 
-		data.best.score.value_format = str(value)
-	else: 
-		data.best.score.value_format = str(value / 1000)  + "k"
-		
-		
-	if(value >= 200):
-		percent = "100%"
-	elif(value >= 100):
-		percent = "50%"
-	elif(value >= 50): 
-		percent = "25%"
-	else: 
-		percent = "0%"
-	data.general.character_completion.value_format = percent
+	var number_of_enemies = get_unlock_enemies()
+	data.general.enemy_completion.value_format = Common.format_percent(number_of_enemies, 21 * 4)
 	
-	value = data.general.game_time.value
-	data.general.game_time.value_format = str(value) + "s"
+	data.character_pick.tomato.value_format = Common.format_number(data.character_pick.tomato.value)
+	data.character_pick.fresh_pepper.value_format = Common.format_number(data.character_pick.fresh_pepper.value)
+	data.character_pick.blue_berry.value_format = Common.format_number(data.character_pick.blue_berry.value)
+	data.character_pick.rainbow.value_format = Common.format_number(data.character_pick.rainbow.value)
 	
+	data.map_pick.spring.value_format = Common.format_number(data.map_pick.spring.value)
+	data.map_pick.summer.value_format = Common.format_number(data.map_pick.summer.value)
+	data.map_pick.autumn.value_format = Common.format_number(data.map_pick.autumn.value)
+	data.map_pick.winter.value_format = Common.format_number(data.map_pick.winter.value)
 	
-	value = data.general.runs.value
-	
-	if(value > 100000):
-		data.general.runs.value_format = str(value / 1000) + "k"
-	else: 
-		data.general.runs.value_format = str(value)
-	
+	data.best_distance.spring.value_format = Common.format_distance(data.best_distance.spring.value)
+	data.best_distance.summer.value_format = Common.format_distance(data.best_distance.summer.value)
+	data.best_distance.autumn.value_format = Common.format_distance(data.best_distance.autumn.value)
+	data.best_distance.winter.value_format = Common.format_distance(data.best_distance.winter.value)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

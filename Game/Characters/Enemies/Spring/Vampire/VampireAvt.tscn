@@ -51,7 +51,7 @@ animations = [ {
 "frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
 "name": "lock_active",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [ SubResource( 17 ) ],
 "loop": true,

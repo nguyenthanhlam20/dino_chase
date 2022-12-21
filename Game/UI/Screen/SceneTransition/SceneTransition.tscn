@@ -82,6 +82,7 @@ size = 10
 font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=24]
+bg_color = Color( 0.956863, 0.698039, 0.0745098, 1 )
 
 [sub_resource type="StyleBoxFlat" id=25]
 bg_color = Color( 0.952941, 0.466667, 0.466667, 1 )
@@ -155,7 +156,7 @@ animations = [ {
 } ]
 
 [sub_resource type="DynamicFont" id=42]
-size = 8
+size = 7
 font_data = ExtResource( 3 )
 
 [node name="SceneTransition" type="CanvasLayer"]
@@ -190,18 +191,18 @@ anchor_bottom = 1.0
 margin_left = -129.0
 
 [node name="LoadingIcon" type="AnimatedSprite" parent="LoadingContainer"]
-position = Vector2( 77, 160 )
-scale = Vector2( 0.1, 0.1 )
+position = Vector2( 86, 161 )
+scale = Vector2( 0.08, 0.08 )
 frames = SubResource( 41 )
-frame = 11
+frame = 10
 playing = true
 
 [node name="LoadingMessage" type="Label" parent="LoadingContainer"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 85.0
-margin_top = -24.0
+margin_left = 92.0
+margin_top = -23.0
 custom_fonts/font = SubResource( 42 )
 text = "Loading"
 

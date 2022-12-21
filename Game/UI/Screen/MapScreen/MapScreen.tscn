@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Resource/Buttons/Choose-1.png" type="Texture" id=1]
 [ext_resource path="res://Resource/Buttons/Choose-2.png" type="Texture" id=2]
-[ext_resource path="res://Resource/Buttons/Return-1-v2.png" type="Texture" id=3]
+[ext_resource path="res://Resource/Buttons/Return-1.png" type="Texture" id=3]
 [ext_resource path="res://Resource/Maps/autumn_icon.png" type="Texture" id=4]
 [ext_resource path="res://Resource/Maps/summer_icon.png" type="Texture" id=5]
 [ext_resource path="res://Resource/Maps/winter_icon.png" type="Texture" id=6]
@@ -10,16 +10,14 @@
 [ext_resource path="res://Resource/Fonts/Bungee-Regular.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://Resource/Maps/spring_icon.png" type="Texture" id=9]
 [ext_resource path="res://Resource/Buttons/Return-2.png" type="Texture" id=10]
-[ext_resource path="res://Game/UI/Screen/Background/Linear/ParallaxLinear.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Game/Characters/Wallet/Wallet.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Resource/Maps/spring_title.png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=3]
-size = 12
+size = 11
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 8 )
-
-[sub_resource type="StreamTexture" id=4]
-flags = 4
 
 [node name="MapScreen" type="Control"]
 anchor_right = 1.0
@@ -55,48 +53,49 @@ margin_bottom = 64.0
 mouse_filter = 2
 custom_constants/separation = 17
 
-[node name="CardMenu1" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer"]
+[node name="Spring" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer"]
 margin_right = 64.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer/CardMenu1"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer/Spring"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_scale = Vector2( 0.13, 0.13 )
 texture = ExtResource( 9 )
 
-[node name="CardMenu2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer"]
+[node name="Summer" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer"]
 margin_left = 81.0
 margin_right = 151.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 70, 64 )
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer/CardMenu2"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer/Summer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -6.0
 rect_scale = Vector2( 0.13, 0.13 )
 texture = ExtResource( 5 )
 
-[node name="CardMenu3" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer"]
+[node name="Autumn" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer"]
 margin_left = 168.0
 margin_right = 238.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 70, 64 )
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer/CardMenu3"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer/Autumn"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_scale = Vector2( 0.13, 0.13 )
 texture = ExtResource( 4 )
 
-[node name="CardMenu4" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer"]
+[node name="Winter" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer"]
 margin_left = 255.0
 margin_right = 325.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 70, 64 )
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer/CardMenu4"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer/Winter"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_scale = Vector2( 0.13, 0.13 )
@@ -105,9 +104,9 @@ texture = ExtResource( 6 )
 [node name="Label" type="Label" parent="."]
 visible = false
 margin_left = 131.0
-margin_top = 14.0
+margin_top = 10.0
 margin_right = 179.0
-margin_bottom = 31.0
+margin_bottom = 27.0
 custom_fonts/font = SubResource( 3 )
 text = "Name"
 align = 1
@@ -125,13 +124,14 @@ scale = Vector2( 0.1, 0.1 )
 normal = ExtResource( 3 )
 pressed = ExtResource( 10 )
 
-[node name="ParallaxLinear" parent="." instance=ExtResource( 11 )]
+[node name="Wallet" parent="." instance=ExtResource( 12 )]
+margin_top = -30.0
 
 [node name="MapName" type="Sprite" parent="."]
-position = Vector2( 160, 19 )
+position = Vector2( 155, 20 )
 scale = Vector2( 0.1, 0.1 )
-texture = SubResource( 4 )
+texture = ExtResource( 13 )
 
+[connection signal="buy" from="." to="." method="_on_MapScreen_buy"]
 [connection signal="gui_input" from="ScrollContainer" to="." method="_on_ScrollContainer_gui_input"]
-[connection signal="released" from="Choose" to="." method="_on_Choose_released"]
 [connection signal="released" from="Back" to="." method="_on_Back_released"]

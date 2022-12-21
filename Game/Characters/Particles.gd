@@ -17,7 +17,6 @@ func _physics_process(_delta):
 	match(current_state):
 		STATE.IDLE: 
 			animation_player.play("idle")
-
 		STATE.RUN: 
 			animation_player.play("run")
 			normal_run()
@@ -25,18 +24,15 @@ func _physics_process(_delta):
 			animation_player.play("jump")
 			normal_run()
 		STATE.FALL: 
+			
 			animation_player.play("fall")
 			normal_run()
 		STATE.HIT: 
 			animation_player.play("hit")
-			normal_run()	
+			normal_run()
 			
-	
-	
 	if move_and_slide(velocity, Vector2.UP): 
 		pass
-	
-	pick_new_state()
 		
 func normal_run():
 	velocity = Vector2(
@@ -44,18 +40,29 @@ func normal_run():
 		min(velocity.y + GameSettings.gravity, GameSettings.terminal_gravity)
 	)	
 
-func get_hit(damage : int):
+func get_hit():
 	current_state = STATE.HIT
+
+func jump_animation_finished():
+	current_state = STATE.IDLE
 
 func hit_animation_finished():
 	current_state = STATE.RUN
 
-func jump_animation_finished():
+func set_run_state():
 	current_state = STATE.RUN
 	
-func pick_new_state():
-	if(Input.is_action_just_pressed("jump")):
-		current_state = STATE.JUMP
+func set_idle_state():
+	current_state = STATE.IDLE
+
+func set_jump_state():
+	current_state = STATE.JUMP
+
+func set_fall_state():
+	current_state = STATE.FALL
+		
+		
+
 
 	
 		

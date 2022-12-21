@@ -39,11 +39,11 @@ func change_scene(current_scene, next_scene):
 		if error == OK:
 			# update the progress bar according to amount of data loaded
 			progress_bar.value = float(loader.get_stage())/loader.get_stage_count() * 100
-			yield(get_tree().create_timer(0.05),"timeout")
+			yield(get_tree().create_timer(0.01),"timeout")
 		# when all the data have been loaded
 		elif error == ERR_FILE_EOF:
 			progress_bar.value = float(100)
-			yield(get_tree().create_timer(0.05),"timeout")
+			yield(get_tree().create_timer(0.01),"timeout")
 			# creating scene instance from loaded data
 			var scene = loader.get_resource().instance()
 			# adding scene to the root
@@ -54,6 +54,7 @@ func change_scene(current_scene, next_scene):
 			progress_bar.visible = false
 			loading_container.visible = false
 			yield(animation_player,'animation_finished')
+
 			loading_scene_instance.queue_free()
 			return
 		else:

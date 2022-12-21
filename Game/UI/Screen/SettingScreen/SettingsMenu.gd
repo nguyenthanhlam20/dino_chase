@@ -5,22 +5,11 @@ onready var effectVolume = $GridContainer/EffectVolume
 onready var musicVolume = $GridContainer/MusicVolume
 onready var swap_input = $GridContainer/SwapInput
 onready var timer_status = $GridContainer/TimerStatus
-onready var parallax = $ParallaxRectangle
-onready var static_background = $StaticBackground
 onready var home_screen setget set_home_screen
 
-export var menu_size = 1
-export var lerp_speed = 0.25
-
-
-signal run_background()
 
 var click = 0;
 var is_first_load = true
-var _popped_up = false
-var _up_anchor = Vector2(1-menu_size,1)
-var _down_anchor = Vector2(1,1+menu_size)
-var _target_anchor = _down_anchor
 
 var show_popup_status = true
 var is_show_popup = false
@@ -32,22 +21,8 @@ func disable_btn():
 	back_btn.disconnect("released", self, "_on_Back_released")	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-
-	self.anchor_top = lerp(self.anchor_top,_target_anchor.x,lerp_speed)
-	self.anchor_bottom = lerp(self.anchor_bottom,_target_anchor.y,lerp_speed)
-	if(self.anchor_bottom >= 1 && self.anchor_bottom < 1.01 && show_popup_status):
-		emit_signal("run_background")
-	if(self.anchor_bottom >= 1.9 && self.anchor_bottom < 1.99 && is_show_popup):
-#		print(" queue free")
-		self.queue_free()
-		
 func _on_SettingsMenu_run_background():
 	show_popup_status = false
-#	print("i go to here only one time")
-	parallax.visible = true
-	parallax.start_moving(true)
-	static_background.visible = false
 	home_screen.show_main_content(false)
 	if(home_screen.name == "World"):
 		home_screen.show_paused_screen(false)
@@ -78,25 +53,15 @@ func _ready():
 	timer_status.set("pressed", GameSettings.timer_status)
 
 func showPopup():
-	if !_popped_up:
-		_target_anchor = _up_anchor
+	if(self.visible):
+		self.hide()
 	else:
-		_target_anchor = _down_anchor
-	_popped_up = !_popped_up
-	
-	if(_popped_up):
-		is_show_popup = true
 		self.show()
-	else:
-		parallax.start_moving(false)
-		static_background.visible = true
-		parallax.visible = false
-#		self.hide()
 
 
 func _on_EffectVolume_value_changed(value):
 	if(!is_first_load):
-		GameSettings.playEffect("res://Resource/Music/gain_coin_effect.mp3")
+		GameSettings.playEffect(EffectSettings.COIN_EFFECT)
 	else: 
 		is_first_load = false
 	GameSettings.set_effect_volume(value)

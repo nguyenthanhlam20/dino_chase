@@ -1,6 +1,7 @@
 extends Node2D
 
-export(int) var gravity = 35
+export(int) var gravity = 15
+export(int) var flat_bird_gravity = 5
 export(int) var terminal_gravity = 400
 export(int) var music_volume = 0 setget set_music_volume
 export(int) var effect_volume = 0 setget set_effect_volume
@@ -10,6 +11,10 @@ export(int) var music_volume_max = 12
 export(int) var music_volume_min = -40
 export(int) var effect_volume_max = 12
 export(int) var effect_volume_min = -40
+
+export(int) var player_position_x = 30
+export(int) var run_base_speed = 1
+export(int) var fly_base_speed = 1
 
 export(String) var original_trackUrl = "res://Resource/Music/music.mp3"
 
@@ -23,7 +28,7 @@ onready var game_size = Vector2(
 var random = RandomNumberGenerator.new()
 
 var is_effect_playing = false
-var FILE_SETTINGS_PATH = "user://ssettingss_data.tres"
+var FILE_SETTINGS_PATH = "user://ssetticngss_data.tres"
 
 
 func get_settings_data():

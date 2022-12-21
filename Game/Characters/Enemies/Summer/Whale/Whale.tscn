@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Game/Characters/Enemies/Spring/Chicken/Chicken.gd" type="Script" id=1]
+[ext_resource path="res://Game/Characters/CharacterClass/RunningEnemy.gd" type="Script" id=1]
 [ext_resource path="res://Resource/Arts/Enemies/Summer/Whale/Whale_66x45.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=17]
@@ -68,21 +68,21 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 11, 7.5 )
+extents = Vector2( 8, 5.125 )
 
 [node name="Whale" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.3, 0.3 )
+scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 16 )
 animation = "run"
-frame = 4
+frame = 8
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1, -1.5 )
+position = Vector2( 0, 0.125 )
 shape = SubResource( 1 )
 
 [node name="HitBox" type="Area2D" parent="."]

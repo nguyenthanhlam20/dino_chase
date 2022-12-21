@@ -17,9 +17,62 @@ func paused_game(value):
 	get_tree().paused = value
 
 func get_random_message():
-	var index = GameSettings.random.randi_range(0, 2)
+	var index = GameSettings.random.randi_range(0, 4)
 	return get_message(index)
 	
+func get_random_number(min_number, max_number):
+	var index = GameSettings.random.randi_range(min_number, max_number)
+	randomize()
+	return index
+	
+func format_number(value):
+	if(value > pow(10, 6)):
+		return str(value / pow(10, 6)) + "m"
+	elif(value > pow(10, 9)):
+		return str(value / pow(10, 9)) + "t"
+	else:
+		return str(value)	
+	
+func format_distance(value):
+	var result : String
+	var kilometers = int(value / 1000)
+	if(kilometers > 1000):
+		result = str(kilometers) + "km"
+		value -= kilometers * 1000
+		result += str(value) + "m"
+		
+	else:
+		result = str(value) + "m"
+		
+	return result
+	
+	
+func format_percent(part, total):
+	var result = float(part) / float(total)
+	return str(ceil(result * 100)) + "%"
+
+func format_time(time):
+	var result : String
+	
+	var days = int(time / (3600 * 24))
+	if(days > 0):
+		result = str(days) + "d"
+		time -= days * (3600 * 24)
+
+	var hours =  int(time / 3600)
+	if(hours > 0):
+		result += str(hours) + "h"
+		time -= hours * 3600
+
+	var minutes = int(time / 60)
+	if(minutes > 0):
+		result += str(minutes) + "m"
+		time -= minutes * 60
+	
+	result += str(int(time)) + "s"
+		
+	
+	return result
 	
 #(Un)pauses a single node
 func set_pause_node(node : Node, pause : bool) -> void:

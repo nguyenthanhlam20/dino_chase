@@ -12,29 +12,39 @@ func _ready():
 	enable_buttons()
 
 func disable_buttons():
-	home_btn.disconnect("released", self, "_on_Home_released")
-	settings_btn.disconnect("released", self, "_on_Settings_released")
-	restart_btn.disconnect("released", self, "_on_Restart_released")
-	play_btn.disconnect("released", self, "_on_Play_released")
-
+	if(home_btn.is_connected("released", self, "_on_Home_released")):
+		home_btn.disconnect("released", self, "_on_Home_released")
+		
+	if(settings_btn.is_connected("released", self, "_on_Settings_released")):
+		settings_btn.disconnect("released", self, "_on_Settings_released")
+		
+	if(restart_btn.is_connected("released", self, "_on_Restart_released")):
+		restart_btn.disconnect("released", self, "_on_Restart_released")
+		
+	if(play_btn.is_connected("released", self, "_on_Play_released")):
+		play_btn.disconnect("released", self, "_on_Play_released")
+	
 func enable_buttons():
-	home_btn.connect("released", self, "_on_Home_released")
-	settings_btn.connect("released", self, "_on_Settings_released")
-	restart_btn.connect("released", self, "_on_Restart_released")
-	play_btn.connect("released", self, "_on_Play_released")
+	if(!home_btn.is_connected("released", self, "_on_Home_released")):
+		home_btn.connect("released", self, "_on_Home_released")
+		
+	if(!settings_btn.is_connected("released", self, "_on_Settings_released")):
+		settings_btn.connect("released", self, "_on_Settings_released")
+		
+	if(!restart_btn.is_connected("released", self, "_on_Restart_released")):
+		restart_btn.connect("released", self, "_on_Restart_released")
+		
+	if(!play_btn.is_connected("released", self, "_on_Play_released")):
+		play_btn.connect("released", self, "_on_Play_released")
 	
 func _on_Home_released():
-	print("press home")
 	disable_buttons()
 	yield(get_tree().create_timer(0.2), "timeout")
 	Common.paused_game(false) 
-	print("paused mode before ", root_node.pause_mode)
-	root_node.set("pause_mode", Node.PAUSE_MODE_STOP)
-	print("paused mode after ", root_node.pause_mode)
+	root_node.stop_all_objects()
 	SceneTransition.change_scene(root_node, screens.get("HOME_SCREEN"))
 
 func _on_Settings_released():
-	print("press settin")
 	disable_buttons()
 	yield(get_tree().create_timer(0.2), "timeout")
 	var screen = load(screens.get("SETTINGS_SCREEN")).instance()

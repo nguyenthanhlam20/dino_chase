@@ -1,27 +1,10 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
-[ext_resource path="res://Game/Characters/Enemies/Autumn/Bat/Bat.gd" type="Script" id=1]
-[ext_resource path="res://Resource/Arts/Enemies/Autumn/Orange/Idle32x32.png" type="Texture" id=2]
+[ext_resource path="res://Game/Characters/Enemies/Autumn/Orange/Orange.gd" type="Script" id=1]
 [ext_resource path="res://Resource/Arts/Enemies/Autumn/Orange/Roll_Start32x32.png" type="Texture" id=3]
 [ext_resource path="res://Resource/Arts/Enemies/Autumn/Orange/Rolling32x32.png" type="Texture" id=4]
 [ext_resource path="res://Resource/Arts/Enemies/Autumn/Orange/Roll_Stop32x32.png" type="Texture" id=5]
 [ext_resource path="res://Resource/Arts/Enemies/Autumn/Orange/Walking32x32.png" type="Texture" id=6]
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 2 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 2 )
-region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 3 )
@@ -97,11 +80,6 @@ region = Rect2( 160, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=8]
 animations = [ {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
-"loop": true,
-"name": "idle",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
 "name": "roll_start",
@@ -119,27 +97,130 @@ animations = [ {
 }, {
 "frames": [ SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
 "loop": true,
-"name": "walking",
+"name": "run",
 "speed": 10.0
 } ]
 
+[sub_resource type="Animation" id=34]
+resource_name = "roll_start"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "roll_start" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "roll_start_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=36]
+resource_name = "roll_stop"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "roll_stop" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "roll_stop_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=35]
+resource_name = "rolling"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "rolling" ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "run"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "run" ]
+}
+
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 6.5, 8 )
+extents = Vector2( 5, 5.95833 )
+
+[sub_resource type="RectangleShape2D" id=37]
+extents = Vector2( 64, 76.25 )
+
+[sub_resource type="RectangleShape2D" id=38]
+extents = Vector2( 34, 75 )
 
 [node name="Orange" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.8, 0.8 )
+scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 8 )
-animation = "idle"
-frame = 2
+animation = "rolling"
+frame = 3
 playing = true
 flip_h = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/roll_start = SubResource( 34 )
+anims/roll_stop = SubResource( 36 )
+anims/rolling = SubResource( 35 )
+anims/run = SubResource( 33 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 5 )
+position = Vector2( 0, 3.7 )
 scale = Vector2( 1, 0.96 )
 shape = SubResource( 9 )
 
@@ -152,4 +233,18 @@ collision_mask = 8
 position = Vector2( -1, 1.19209e-07 )
 scale = Vector2( 1.08, 0.971445 )
 
+[node name="RollStartArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RollStartArea"]
+position = Vector2( -183, -65 )
+shape = SubResource( 37 )
+
+[node name="RollStopArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RollStopArea"]
+position = Vector2( -46, -64 )
+shape = SubResource( 38 )
+
 [connection signal="body_shape_entered" from="HitBox" to="." method="_on_HitBox_body_shape_entered"]
+[connection signal="body_shape_entered" from="RollStartArea" to="." method="_on_RollStartArea_body_shape_entered"]
+[connection signal="body_shape_entered" from="RollStopArea" to="." method="_on_RollStopArea_body_shape_entered"]

@@ -8,8 +8,15 @@ onready var card_nodes: Array = $ScrollContainer/CenterContainer/MarginContainer
 onready var label = $Label
 onready var back_btn = $Back
 onready var choose_btn = $Choose
-onready var parallax = $ParallaxLinear
 onready var map_name = $MapName
+onready var map_unlock = User.data.completion.map
+onready var coins = User.data.general.coins.value
+onready var choose_btn_normal = load("res://Resource/Buttons/Choose-1.png")
+onready var choose_btn_pressed = load("res://Resource/Buttons/Choose-2.png")
+onready var question_mark = load("res://Resource/Buy/question_mark.png")
+
+onready var card_container = $ScrollContainer/CenterContainer/MarginContainer/HBoxContainer
+onready var maps = MapSettings.maps
 
 export(int, 0.5, 1, 0.1) var card_scale = 1
 export(float, 1, 1.5, 0.1) var card_current_scale = 1.3
@@ -17,18 +24,21 @@ export(float, 0.1, 1, 0.1) var scroll_duration = 1.3
 
 var card_current_index: int = 0
 var card_x_positions: Array = []
+onready var cover_background = load(ScreenSettings.screens.get("COVER_BACKGROUND"))
+onready var not_enough_screen = load(ScreenSettings.screens.get("NOT_ENOUGH_SCREEN"))
+onready var confirm_screen = load(ScreenSettings.screens.get("CONFIRM_SCREEN"))
 
 
-func disable_buttons():
-	back_btn.disconnect("released", self, "_on_Back_released")
-	choose_btn.disconnect("released", self, "_on_Choose_released")
+signal buy
 
 func show_popup(value):
 	self.visible = value
 
 
 func _ready() -> void:
-	parallax.start = true
+	get_tree().paused = false
+	get_tree().set_current_scene(self)
+	put_map()
 	card_current_index = MapSettings.current_map_index
 	map_name.texture = load(get_map_title(card_current_index))
 	
@@ -45,7 +55,16 @@ func _ready() -> void:
 		
 	scroll_container.scroll_horizontal = card_x_positions[card_current_index]
 	scroll()
-	yield(get_tree().create_timer(1), "timeout")
+	
+
+	
+func put_map():
+	for map in maps:
+		var map_texture_container = card_container.get_node(map.get("map_name")).get_child(0)
+		if(map.get("index") in map_unlock):
+			map_texture_container.texture = load(map.get("map_unlock"))
+		else:
+			map_texture_container.texture = load(map.get("map_lock"))
 
 
 
@@ -89,19 +108,35 @@ func scroll() -> void:
 			Tween.TRANS_QUAD,
 			Tween.EASE_OUT))
 #		yield(get_tree().create_timer(0.1), "timeout")
-	map_name.texture = load(get_map_title(card_current_index))
-#	label.text = get_map_name(card_current_index)
+
+	if(card_current_index in map_unlock):
+		choose_btn.normal = choose_btn_normal
+		choose_btn.pressed = choose_btn_pressed
+		map_name.texture = load(get_map_title(card_current_index))
+		if(!choose_btn.is_connected("released", self, "_on_Choose_released")):
+			choose_btn.connect("released", self, "_on_Choose_released")
+		if(choose_btn.is_connected("released", self, "_on_MapScreen_buy")):
+			choose_btn.disconnect("released", self, "_on_MapScreen_buy")
+	else:
+		map_name.texture = question_mark
+		choose_btn.normal = load(maps[card_current_index].get("buy_btn_normal"))
+		choose_btn.pressed = load(maps[card_current_index].get("buy_btn_pressed"))
+		
+		
+		if(!choose_btn.is_connected("released", self, "_on_MapScreen_buy")):
+			choose_btn.connect("released", self, "_on_MapScreen_buy")
+		if(choose_btn.is_connected("released", self, "_on_Choose_released")):
+			choose_btn.disconnect("released", self, "_on_Choose_released")
+
+		
 	print('scroll tween start: ', scroll_tween.start())
 
 
 func _on_ScrollContainer_gui_input(event: InputEvent) -> void:
-#	print("go here", event)
 	if event is InputEventMouseButton:
 		if event.pressed:
 			print("stop all in map screen: ", scroll_tween.stop_all())
-#			print("stop")
 		else:
-#			print("scroll")
 			scroll()
 
 
@@ -110,6 +145,11 @@ func get_map_title(index):
 			
 func get_map_name(index):
 	return MapSettings.maps[index].get("map_name")
+
+
+func disable_buttons():
+	back_btn.disconnect("released", self, "_on_Back_released")
+	choose_btn.disconnect("released", self, "_on_Choose_released")
 
 
 func _on_Back_released():
@@ -122,5 +162,36 @@ func _on_Choose_released():
 	yield(get_tree().create_timer(0.2), "timeout")
 	SceneTransition.change_scene(self, "res://Game/UI/Screen/CharacterScreen/CharacterScreen.tscn")
 	MapSettings.current_map_index = card_current_index
-	EnemyFactory.set_enemies(card_current_index)
+	EnemyFactory.set_enemies()
 	GameSettings.save_settings_data()
+
+
+func _on_MapScreen_buy():
+	get_tree().paused = true
+	var map_price = maps[card_current_index].get("price")
+	if(coins > map_price): 
+		if(!self.has_node("ConfirmScreen")):
+			var cover_background_instance = cover_background.instance()
+			self.add_child(cover_background_instance)
+			
+			var confirm_screen_instance = confirm_screen.instance()
+			confirm_screen_instance.set_root_node(self)
+			confirm_screen_instance.set_item(card_current_index, map_price, "map")
+			self.add_child(confirm_screen_instance)
+			confirm_screen_instance.show_popup()
+	else: 
+		if(!self.has_node("NotEnoughScreen")):
+			var cover_background_instance = cover_background.instance()
+			var not_enough_instance = not_enough_screen.instance()
+			self.add_child(cover_background_instance)
+			not_enough_instance.set_root_node(self)
+			self.add_child(not_enough_instance)
+			not_enough_instance.show_popup()
+		
+func clear_cover_background():
+	get_tree().paused = false
+	self.remove_child(self.get_node("CoverBackground"))
+
+func add_new_child(new_child: Popup):
+	self.add_child(new_child)
+	new_child.show_popup()

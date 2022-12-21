@@ -54,7 +54,7 @@ script = ExtResource( 2 )
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 8 )
 animation = "run"
-frame = 2
+frame = 6
 playing = true
 flip_h = true
 

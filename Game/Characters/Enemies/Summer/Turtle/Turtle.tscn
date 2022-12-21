@@ -1,6 +1,6 @@
 [gd_scene load_steps=52 format=2]
 
-[ext_resource path="res://Game/Characters/Enemies/Autumn/Bat/Bat.gd" type="Script" id=1]
+[ext_resource path="res://Game/Characters/CharacterClass/RunningEnemy.gd" type="Script" id=1]
 [ext_resource path="res://Resource/Arts/Enemies/Summer/Turtle/Idle1_44x26.png" type="Texture" id=2]
 [ext_resource path="res://Resource/Arts/Enemies/Summer/Turtle/Spikes_in_44x26.png" type="Texture" id=3]
 [ext_resource path="res://Resource/Arts/Enemies/Summer/Turtle/Spikes_out_44x26.png" type="Texture" id=4]
@@ -201,7 +201,7 @@ script = ExtResource( 1 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 8 )
 animation = "run"
-frame = 25
+frame = 24
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

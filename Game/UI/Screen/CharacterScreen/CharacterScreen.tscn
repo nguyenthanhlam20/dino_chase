@@ -1,13 +1,13 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Resource/Buttons/Return-1-v2.png" type="Texture" id=1]
-[ext_resource path="res://Resource/Buttons/Play-1-v2.png" type="Texture" id=2]
-[ext_resource path="res://Game/UI/Screen/Background/Circle/ParallaxCirle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Resource/Buttons/Return-1.png" type="Texture" id=1]
+[ext_resource path="res://Resource/Buttons/Play-1.png" type="Texture" id=2]
 [ext_resource path="res://Game/Characters/Players/Blueberry/BlueberryAvatar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/UI/Screen/CharacterScreen/CharacterScreen.gd" type="Script" id=5]
 [ext_resource path="res://Resource/Buttons/Return-2.png" type="Texture" id=6]
 [ext_resource path="res://Resource/Buttons/Play-2.png" type="Texture" id=7]
 [ext_resource path="res://Resource/Buttons/Maps-1.png" type="Texture" id=8]
+[ext_resource path="res://Game/Characters/Wallet/Wallet.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Resource/Fonts/Bungee-Regular.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://Resource/Buttons/Maps-2.png" type="Texture" id=11]
 
@@ -34,7 +34,7 @@ corner_radius_bottom_right = 10
 shadow_color = Color( 0, 0, 0, 0 )
 
 [sub_resource type="DynamicFont" id=1]
-size = 8
+size = 9
 font_data = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -57,7 +57,7 @@ margin_left = 50.0
 margin_top = 41.0
 margin_right = -50.0
 margin_bottom = -49.0
-rect_min_size = Vector2( 0, 90 )
+rect_min_size = Vector2( 220, 90 )
 custom_styles/normal = SubResource( 4 )
 
 [node name="GridContainer" type="GridContainer" parent="MainContent/BorderColor"]
@@ -117,16 +117,16 @@ margin_bottom = -10.0
 
 [node name="CharacterName" type="Label" parent="MainContent/BorderColor/GridContainer/ColorText/Container"]
 margin_right = 88.0
-margin_bottom = 9.0
+margin_bottom = 10.0
 rect_min_size = Vector2( 88, 0 )
 custom_fonts/font = SubResource( 1 )
 text = "Name"
 autowrap = true
 
 [node name="CharacterDetail" type="Label" parent="MainContent/BorderColor/GridContainer/ColorText/Container"]
-margin_top = 13.0
+margin_top = 14.0
 margin_right = 88.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 rect_min_size = Vector2( 88, 0 )
 custom_fonts/font = SubResource( 2 )
 text = "Infoasdasdasdasdasd"
@@ -162,8 +162,9 @@ margin_right = -104.0
 margin_bottom = 30.0
 custom_constants/separation = 4
 
-[node name="ParallaxCirle" parent="." instance=ExtResource( 3 )]
+[node name="Wallet" parent="MainContent" instance=ExtResource( 9 )]
+margin_top = -31.0
 
+[connection signal="buy" from="." to="." method="_on_CharacterScreen_buy"]
 [connection signal="released" from="MainContent/Buttons/Back" to="." method="_on_Back_released"]
-[connection signal="released" from="MainContent/Buttons/Play" to="." method="_on_Play_released"]
 [connection signal="released" from="MainContent/Buttons/Map" to="." method="_on_Map_released"]

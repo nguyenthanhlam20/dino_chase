@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Game/Characters/Enemies/Spring/Chicken/Chicken.gd" type="Script" id=1]
+[ext_resource path="res://Game/Characters/CharacterClass/RunningEnemy.gd" type="Script" id=1]
 [ext_resource path="res://Resource/Arts/Enemies/Summer/Henry/Henry_30x28.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=17]
@@ -78,7 +78,7 @@ script = ExtResource( 1 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 16 )
 animation = "run"
-frame = 13
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -36,21 +36,21 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 9, 6.84211 )
+extents = Vector2( 9, 6.34211 )
 
 [node name="Grizzly" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.6, 0.6 )
+scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 8 )
 animation = "run"
-frame = 4
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 0.157895 )
+position = Vector2( 0, -0.7 )
 shape = SubResource( 9 )
 
 [node name="HitBox" type="Area2D" parent="."]
