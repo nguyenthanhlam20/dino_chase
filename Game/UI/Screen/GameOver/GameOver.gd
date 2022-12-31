@@ -1,7 +1,7 @@
 extends Popup
 
 export var menu_size = 1
-export var lerp_speed = 0.2
+export var lerp_speed = 0.3
 
 var _popped_up = false
 var _up_anchor = Vector2(1-menu_size,1)
@@ -9,19 +9,17 @@ var _down_anchor = Vector2(1,1+menu_size)
 var _target_anchor = _down_anchor
 
 
-onready var home_btn = $Home
-onready var play_again_btn = $PlayAgain
+onready var home_btn = $CenterBottomPosition/Home
+onready var play_again_btn = $CenterBottomPosition/PlayAgain
 onready var miles_label = $VBoxContainer/Miles
 onready var message_label = $VBoxContainer/Message
 onready var coin_label = $ColorRect/CenterContainer/GridContainer/CoinContainer/CoinValue
 onready var time_label = $ColorRect/CenterContainer/GridContainer/TimeContainer/TimeValue
 onready var longest_run_label = $ColorRect/CenterContainer/GridContainer/LRunContainer/LongestRunValue
-onready var screens = ScreenSettings.get_screens()
 
 var root_node setget set_root_node
 func set_root_node(value):
 	root_node = value
-
 
 func show_result(player):
 	var message = Common.get_random_message()
@@ -58,19 +56,19 @@ func enable_buttons():
 
 func _on_Home_released():
 	disable_buttons()
-	yield(get_tree().create_timer(0.2), "timeout")
+	yield(get_tree().create_timer(0.1), "timeout")
 	Common.paused_game(false)
 	root_node.pause_mode = PAUSE_MODE_STOP
-	SceneTransition.change_scene(root_node, screens.get("HOME_SCREEN"))
+	SceneTransition.change_scene(root_node, Constants.HOME_SCREEN)
 	self.queue_free()
 
 func _on_PlayAgain_released():
 	disable_buttons()
-	yield(get_tree().create_timer(0.2), "timeout")	
-	var count_down_screen = load(screens.get("COUNTDOWN_SCREEN")).instance()
-	root_node.add_popup_screen(count_down_screen)
+	yield(get_tree().create_timer(0.1), "timeout")
+	var count_down_screen = load(Constants.COUNTDOWN_SCREEN).instance()
+	root_node.add_child(count_down_screen)
+	root_node.remove_background()
 	count_down_screen.set_root_node(root_node)
 	count_down_screen.set_is_reload(true)
-	count_down_screen.show_popup()
 	count_down_screen.start_count_down()
 	self.queue_free()

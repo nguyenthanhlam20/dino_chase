@@ -1,0 +1,99 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Game/UI/Screen/StatisticScreen/StatsScreen/BarContainer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/UI/Screen/StatisticScreen/StatsScreen/MapPick/MapPick.gd" type="Script" id=3]
+[ext_resource path="res://Game/UI/Theme/title_theme.tres" type="Theme" id=4]
+
+[sub_resource type="StyleBoxFlat" id=5]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="MapPick" type="Label"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -95.0
+margin_top = -40.0
+margin_right = 95.0
+margin_bottom = 40.0
+mouse_filter = 1
+custom_styles/normal = SubResource( 5 )
+script = ExtResource( 3 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -85.0
+margin_top = -37.0
+margin_right = 85.0
+margin_bottom = 37.0
+mouse_filter = 1
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer"]
+margin_right = 170.0
+margin_bottom = 74.0
+rect_min_size = Vector2( 170, 0 )
+custom_constants/vseparation = 9
+
+[node name="Title" type="HBoxContainer" parent="CenterContainer/GridContainer"]
+margin_right = 170.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 0, 10 )
+custom_constants/separation = 10
+
+[node name="Value" type="Label" parent="CenterContainer/GridContainer/Title"]
+margin_right = 170.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 65, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 4 )
+text = "Map Pick"
+
+[node name="Spring" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 19.0
+margin_right = 170.0
+margin_bottom = 26.0
+
+[node name="Summer" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 35.0
+margin_right = 170.0
+margin_bottom = 42.0
+
+[node name="Autumn" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 51.0
+margin_right = 170.0
+margin_bottom = 58.0
+
+[node name="Winter" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 67.0
+margin_right = 170.0
+margin_bottom = 74.0

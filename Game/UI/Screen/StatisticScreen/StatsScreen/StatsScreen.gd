@@ -1,10 +1,10 @@
-extends Popup
+extends Control
 
 onready var scroll_container = $ScrollContainer
-onready var general_box = $ScrollContainer/VBoxContainer/GeneralBox
-onready var best_distance = $ScrollContainer/VBoxContainer/BestDistance
-onready var character_pick = $ScrollContainer/VBoxContainer/CharacterPick
-onready var map_pick = $ScrollContainer/VBoxContainer/MapPick
+onready var general_box = $ScrollContainer/CenterContainer/VBoxContainer/GeneralBox
+onready var best_distance = $ScrollContainer/CenterContainer/VBoxContainer/BestDistance
+onready var character_pick = $ScrollContainer/CenterContainer/VBoxContainer/CharacterPick
+onready var map_pick = $ScrollContainer/CenterContainer/VBoxContainer/MapPick
 onready var root_node = self.get_parent()
 
 #var current_mouse_position : float
@@ -21,7 +21,7 @@ func _ready() -> void:
 	
 func _on_Return_pressed():
 	yield(get_tree().create_timer(0.2), "timeout")
-	self.hide()
-	root_node.show_button_group(true)
 	root_node.enable_buttons()
+	root_node.show_button_group(true)
+	self.queue_free()
 

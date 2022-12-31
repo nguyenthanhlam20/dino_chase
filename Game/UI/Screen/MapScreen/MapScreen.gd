@@ -5,15 +5,14 @@ onready var scroll_tween: Tween = Tween.new()
 onready var margin_r: int = $ScrollContainer/CenterContainer/MarginContainer.get("custom_constants/margin_right")
 onready var card_space: float = $ScrollContainer/CenterContainer/MarginContainer/HBoxContainer.get("custom_constants/separation")
 onready var card_nodes: Array = $ScrollContainer/CenterContainer/MarginContainer/HBoxContainer.get_children()
-onready var label = $Label
 onready var back_btn = $Back
-onready var choose_btn = $Choose
-onready var map_name = $MapName
+onready var choose_btn = $BottomPosition/Choose
+onready var map_name =$CenterTopPosition/MapName
 onready var map_unlock = User.data.completion.map
 onready var coins = User.data.general.coins.value
-onready var choose_btn_normal = load("res://Resource/Buttons/Choose-1.png")
-onready var choose_btn_pressed = load("res://Resource/Buttons/Choose-2.png")
-onready var question_mark = load("res://Resource/Buy/question_mark.png")
+onready var choose_btn_normal = load(Constants.CHOOSE_BUTTON_NORMAL)
+onready var choose_btn_pressed = load(Constants.CHOOSE_BUTTON_PRESSED)
+onready var question_mark = load(Constants.QUESTION_MARK)
 
 onready var card_container = $ScrollContainer/CenterContainer/MarginContainer/HBoxContainer
 onready var maps = MapSettings.maps
@@ -24,12 +23,9 @@ export(float, 0.1, 1, 0.1) var scroll_duration = 1.3
 
 var card_current_index: int = 0
 var card_x_positions: Array = []
-onready var cover_background = load(ScreenSettings.screens.get("COVER_BACKGROUND"))
-onready var not_enough_screen = load(ScreenSettings.screens.get("NOT_ENOUGH_SCREEN"))
-onready var confirm_screen = load(ScreenSettings.screens.get("CONFIRM_SCREEN"))
-
-
-signal buy
+onready var cover_background = load(Constants.COVER_BACKGROUND)
+onready var not_enough_screen = load(Constants.NOT_ENOUGH_SCREEN)
+onready var confirm_screen = load(Constants.CONFIRM_SCREEN)
 
 func show_popup(value):
 	self.visible = value
@@ -39,7 +35,7 @@ func _ready() -> void:
 	get_tree().paused = false
 	get_tree().set_current_scene(self)
 	put_map()
-	card_current_index = MapSettings.current_map_index
+	card_current_index = MapSettings.current_map
 	map_name.texture = load(get_map_title(card_current_index))
 	
 #	print(card_current_index)
@@ -145,31 +141,39 @@ func get_map_title(index):
 			
 func get_map_name(index):
 	return MapSettings.maps[index].get("map_name")
-
+	
+func enable_buttons():
+	if(!back_btn.is_connected("released", self, "_on_Back_released")):
+		back_btn.connect("released", self, "_on_Back_released")
+	if(!choose_btn.is_connected("released", self, "_on_MapScreen_buy")):
+		choose_btn.connect("released", self, "_on_MapScreen_buy")
 
 func disable_buttons():
-	back_btn.disconnect("released", self, "_on_Back_released")
-	choose_btn.disconnect("released", self, "_on_Choose_released")
+	if(back_btn.is_connected("released", self, "_on_Back_released")):
+		back_btn.disconnect("released", self, "_on_Back_released")
+		
+	if(choose_btn.is_connected("released", self, "_on_Choose_released")):
+		choose_btn.disconnect("released", self, "_on_Choose_released")
+	else:
+		choose_btn.disconnect("released", self, "_on_MapScreen_buy")
 
 
 func _on_Back_released():
 	disable_buttons()
-	yield(get_tree().create_timer(0.2), "timeout")
-	SceneTransition.change_scene(self, "res://Game/UI/Screen/CharacterScreen/CharacterScreen.tscn")
+	yield(get_tree().create_timer(0.1), "timeout")
+	SceneTransition.change_scene(self, Constants.CHARACTER_SCREEN)
 	
 func _on_Choose_released():
 	disable_buttons()
-	yield(get_tree().create_timer(0.2), "timeout")
-	SceneTransition.change_scene(self, "res://Game/UI/Screen/CharacterScreen/CharacterScreen.tscn")
-	MapSettings.current_map_index = card_current_index
-	EnemyFactory.set_enemies()
+	yield(get_tree().create_timer(0.1), "timeout")
+	SceneTransition.change_scene(self, Constants.CHARACTER_SCREEN)
+	MapSettings.current_map = card_current_index
 	GameSettings.save_settings_data()
-
 
 func _on_MapScreen_buy():
 	get_tree().paused = true
 	var map_price = maps[card_current_index].get("price")
-	if(coins > map_price): 
+	if(coins >= map_price): 
 		if(!self.has_node("ConfirmScreen")):
 			var cover_background_instance = cover_background.instance()
 			self.add_child(cover_background_instance)

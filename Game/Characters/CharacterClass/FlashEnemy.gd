@@ -4,8 +4,8 @@ class_name FlashEnemy
 
 onready var animated_sprite = $AnimatedSprite
 var velocity : Vector2
-var position_x = 300
-var position_y = 120
+var position_x = GameSettings.right_position.x + 10
+var position_y = GameSettings.right_position.y - 60
 
 enum STATE {RUN, RUN_FASTER}
 
@@ -23,14 +23,14 @@ func _physics_process(_delta):
 		STATE.RUN:
 			animated_sprite.play("run")
 			velocity = Vector2(
-				velocity.x - float(moving_speed / 2) ,
-				min(velocity.y + GameSettings.gravity, GameSettings.terminal_gravity)
+				-moving_speed,
+				min(velocity.y + gravity, GameSettings.terminal_gravity)
 			)
 		STATE.RUN_FASTER:
-			animated_sprite.play("run_fater")
+			animated_sprite.play("run_faster")
 			velocity = Vector2(
-				velocity.x - (float(moving_speed / 2) * 5),
-				min(velocity.y + GameSettings.gravity, GameSettings.terminal_gravity)
+				-(moving_speed + 50),
+				min(velocity.y + gravity, GameSettings.terminal_gravity)
 			)
 			
 	if move_and_slide(velocity, Vector2.UP): 
@@ -38,12 +38,13 @@ func _physics_process(_delta):
 
 
 
-func _on_HitBox_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	print("body shape entered hit box of flying enemy", body_rid, body_shape_index, body_shape_index, local_shape_index)
+func _on_HitBox_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):
 	body.get_hit(1)
 
 
-
-func _on_RunFasterZone_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if(body is Player && moving_style == MOVING_STYLE.RUN_FASTER):
+func _on_RunFasterZone_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
+	if(moving_style == MOVING_STYLE.RUN_FASTER):
 		current_state = STATE.RUN_FASTER
+		
+func do_action():
+	pass

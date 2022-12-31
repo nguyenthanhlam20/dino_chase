@@ -1,11 +1,11 @@
 extends Node
 
-var FILE_PATH = "user://sgsgsgd.tres"
+var FILE_PATH = "user://adcscds.tres"
 var data = {
 	"general": {
 		"coins": {
 			"title": "Coins",
-			"value": 6000,
+			"value": 8000,
 			"value_format": "0", 
 			"sprite": "res://Resource/Icons/time-96.png"
 		},
@@ -136,6 +136,9 @@ var data = {
 	}
 }
 
+func get_user_info(key_parent: String, key_child: String):
+	return data.get(key_parent).get(key_child).get("value")
+
 
 func get_unlock_enemies():
 	var map_unlock = data.completion.map
@@ -192,4 +195,5 @@ func save_user_data():
 	file.store_string(to_json(data))
 	file.close()
 	
-	
+func get_longest_distance(season: String):
+	return data.get("best_distance").get(season).get("value")

@@ -11,10 +11,6 @@ content_margin_right = 20.0
 content_margin_top = 20.0
 content_margin_bottom = 20.0
 bg_color = Color( 0.560784, 0.466667, 0.466667, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -34,8 +30,8 @@ bg_color = Color( 0.6, 0.6, 0.6, 0 )
 [sub_resource type="StyleBoxFlat" id=16]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
-[node name="SettingsMenu" type="Popup"]
-visible = true
+[node name="SettingsMenu" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -44,40 +40,29 @@ script = ExtResource( 2 )
 [node name="Background" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 25.0
-margin_top = 25.0
-margin_right = -20.0
-margin_bottom = -20.0
 custom_styles/normal = SubResource( 17 )
-
-[node name="Back" type="TouchScreenButton" parent="."]
-position = Vector2( 274, 33 )
-scale = Vector2( 0.1, 0.1 )
-normal = ExtResource( 4 )
-pressed = ExtResource( 3 )
-action = "back"
 
 [node name="GridContainer" type="GridContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 40.0
+margin_left = 30.0
 margin_top = 56.0
-margin_right = -35.0
+margin_right = -30.0
 margin_bottom = -44.0
 custom_constants/vseparation = 5
-custom_constants/hseparation = 20
+custom_constants/hseparation = -5
 columns = 2
 
 [node name="Label" type="Label" parent="GridContainer"]
 margin_top = 3.0
-margin_right = 113.0
+margin_right = 133.0
 margin_bottom = 12.0
 size_flags_horizontal = 3
 text = "Music Volume"
 
 [node name="MusicVolume" type="HSlider" parent="GridContainer"]
-margin_left = 133.0
-margin_right = 245.0
+margin_left = 128.0
+margin_right = 260.0
 margin_bottom = 16.0
 size_flags_horizontal = 11
 size_flags_vertical = 1
@@ -86,15 +71,15 @@ max_value = 24.0
 
 [node name="Label2" type="Label" parent="GridContainer"]
 margin_top = 24.0
-margin_right = 113.0
+margin_right = 133.0
 margin_bottom = 33.0
 size_flags_horizontal = 3
 text = "Effect Volume"
 
 [node name="EffectVolume" type="HSlider" parent="GridContainer"]
-margin_left = 133.0
+margin_left = 128.0
 margin_top = 21.0
-margin_right = 245.0
+margin_right = 260.0
 margin_bottom = 37.0
 size_flags_horizontal = 11
 size_flags_vertical = 1
@@ -103,15 +88,15 @@ max_value = 24.0
 
 [node name="Label4" type="Label" parent="GridContainer"]
 margin_top = 45.0
-margin_right = 113.0
+margin_right = 133.0
 margin_bottom = 54.0
 size_flags_horizontal = 3
 text = "Swap Input Controls"
 
 [node name="SwapInput" type="CheckBox" parent="GridContainer"]
-margin_left = 133.0
+margin_left = 128.0
 margin_top = 42.0
-margin_right = 245.0
+margin_right = 260.0
 margin_bottom = 58.0
 custom_constants/hseparation = 9
 custom_styles/hover = SubResource( 11 )
@@ -125,15 +110,15 @@ icon_align = 1
 
 [node name="Label5" type="Label" parent="GridContainer"]
 margin_top = 66.0
-margin_right = 113.0
+margin_right = 133.0
 margin_bottom = 75.0
 size_flags_horizontal = 3
 text = "Show Timer"
 
 [node name="TimerStatus" type="CheckBox" parent="GridContainer"]
-margin_left = 133.0
+margin_left = 128.0
 margin_top = 63.0
-margin_right = 245.0
+margin_right = 260.0
 margin_bottom = 79.0
 custom_constants/hseparation = 9
 custom_styles/hover = SubResource( 11 )
@@ -145,8 +130,19 @@ custom_styles/normal = SubResource( 16 )
 text = "off"
 icon_align = 1
 
-[connection signal="released" from="Back" to="." method="_on_Back_released"]
+[node name="TopRightPos" type="Control" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+
+[node name="Back" type="TouchScreenButton" parent="TopRightPos"]
+position = Vector2( -30, 10 )
+scale = Vector2( 0.1, 0.1 )
+normal = ExtResource( 4 )
+pressed = ExtResource( 3 )
+action = "back"
+
 [connection signal="value_changed" from="GridContainer/MusicVolume" to="." method="_on_MusicVolume_value_changed"]
 [connection signal="value_changed" from="GridContainer/EffectVolume" to="." method="_on_EffectVolume_value_changed"]
 [connection signal="pressed" from="GridContainer/SwapInput" to="." method="_on_SwapInput_pressed"]
 [connection signal="pressed" from="GridContainer/TimerStatus" to="." method="_on_TimerStatus_pressed"]
+[connection signal="released" from="TopRightPos/Back" to="." method="_on_Back_released"]

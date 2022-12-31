@@ -30,4 +30,5 @@ func show_popup():
 
 func _on_OK_released():
 	root_node.clear_cover_background()
+	root_node.enable_buttons()
 	self.queue_free()

@@ -2,24 +2,27 @@ extends Control
 
 onready var character_name = $MainContent/BorderColor/GridContainer/ColorText/Container/CharacterName
 onready var character_detail = $MainContent/BorderColor/GridContainer/ColorText/Container/CharacterDetail
-onready var character_container =  $MainContent/BorderColor/GridContainer/ColorCharacter/CenterContainer/CharacterContainer
+onready var character_avatar = $MainContent/BorderColor/GridContainer/ColorCharacter/CenterContainer/CharacterContainer/Avatar
 onready var color_character = $MainContent/BorderColor/GridContainer/ColorCharacter
 onready var color_text = $MainContent/BorderColor/GridContainer/ColorText
 onready var main_content = $MainContent
-onready var player_navigation = $MainContent/PlayerNavigation
+onready var player_navigation = $MainContent/CenterPosition/PlayerNavigation
 
-onready var play_btn = $MainContent/Buttons/Play
-onready var back_btn = $MainContent/Buttons/Back
-onready var map_btn = $MainContent/Buttons/Map
+onready var play_btn = $MainContent/BottomPosition/Play
+onready var back_btn = $MainContent/Back
+onready var map_btn = $MainContent/TopRightPosition/Map
 
-onready var cover_background = load(ScreenSettings.screens.get("COVER_BACKGROUND"))
-onready var not_enough_screen = load(ScreenSettings.screens.get("NOT_ENOUGH_SCREEN"))
-onready var confirm_screen = load(ScreenSettings.screens.get("CONFIRM_SCREEN"))
+onready var cover_background = load(Constants.COVER_BACKGROUND)
+onready var not_enough_screen = load(Constants.NOT_ENOUGH_SCREEN)
+onready var confirm_screen = load(Constants.CONFIRM_SCREEN)
 
-onready var bar_nomal = load("res://Resource/Buttons/Play-1.png")
-onready var bar_pressed = load("res://Resource/Buttons/Play-2.png")
+onready var bar_nomal = load(Constants.PLAY_BUTTON_NORMAL)
+onready var bar_pressed = load(Constants.PLAY_BUTTON_PRESSED)
 
-signal buy
+var reusable_ins 
+
+var btn_buy_normal : String
+var btn_buy_pressed : String
 
 var style_box_flat = StyleBoxFlat.new()
 var background_btn_active = StyleBoxFlat.new()
@@ -31,45 +34,45 @@ var button : Button
 var sprite : Sprite
 
 var player_info
+var player_color : String
+var total_coins : int
+var player_price : int
+var player_avatar : KinematicBody2D
 var buttons_in_navigation : Array
 var character_unlock : Array
-
 var current_index = 0
+var avt_path : String
+var reusable_int : int = 0
+var reusable_bool : bool
 
 func disable_buttons():
 	if(back_btn.is_connected("released", self, "_on_Back_released")):
 		back_btn.disconnect("released", self, "_on_Back_released")
 		
-	if(play_btn.is_connected("released", self, "_on_Play_released")):
-		play_btn.disconnect("released", self, "_on_Play_released")
-		
+	if(play_btn.is_connected("released", self, "_on_CharacterScreen_buy")):
+		play_btn.disconnect("released", self, "_on_CharacterScreen_buy")
+
 	if(map_btn.is_connected("released", self, "_on_Map_released")):
 		map_btn.disconnect("released", self, "_on_Map_released")
 	
 func enable_buttons():
 	if(!back_btn.is_connected("released", self, "_on_Back_released")):
-		back_btn.disconnect("released", self, "_on_Back_released")
+		back_btn.connect("released", self, "_on_Back_released")
 		
-	if(!play_btn.is_connected("released", self, "_on_Play_released")):
-		play_btn.disconnect("released", self, "_on_Play_released")
-		
+	if(!play_btn.is_connected("released", self, "_on_CharacterScreen_buy")):
+		play_btn.connect("released", self, "_on_CharacterScreen_buy")
+	
 	if(!map_btn.is_connected("released", self, "_on_Map_released")):
-		map_btn.disconnect("released", self, "_on_Map_released")
+		map_btn.connect("released", self, "_on_Map_released")
 	
-	
-
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	get_tree().paused = false
 	get_tree().set_current_scene(self)
 	character_unlock = User.data.completion.character
 	create_style_box()
 	add_style_box()
 	generate_buttons()
 	buttons_in_navigation = player_navigation.get_children()
-	set_player_info(PlayerSettings.current_player_index)
+	set_player_info(PlayerSettings.current_player)
 	current_index =  player_info.get("index");
 
 
@@ -94,10 +97,9 @@ func create_label(player) -> void:
 	sprite.set("position", Vector2(10, 10))
 	sprite.set("scale", Vector2(0.8, 0.8))
 	
-	var player_index = player.get("index");
-	var avt_path : String
-	
-	if(player_index in character_unlock):
+	reusable_int = player.get("index");
+
+	if(reusable_int in character_unlock):
 		avt_path = player.get("unlock")
 	else:
 		avt_path = player.get("lock")
@@ -162,18 +164,20 @@ func change_button_status(index, style, pressed):
 	btn.set_pressed(pressed)
 	
 func set_player_info(index : int):
-	player_info = PlayerSettings.players[index]
-	var color = player_info.get("color")
-	var is_unlock = index in character_unlock
+	player_info = PlayerSettings.get_player(index)
 	
+	character_avatar.set_player_avatar(player_info.get("frame"))
+	player_color = player_info.get("color") 
+	reusable_bool = index in character_unlock
 	change_button_status(current_index, background_btn_deactive, false)
 	
 	buttons_in_navigation[index].set_pressed(true)
 	
 	current_index = index 
-	set_style_box_flat(9, 0, 9, 0,color)
-	if(is_unlock):
-		PlayerSettings.current_player_index = index
+	set_style_box_flat(9, 0, 9, 0, player_color)
+	if(reusable_bool):
+		character_avatar.set_current_state(1)
+		PlayerSettings.current_player = index
 		character_name.text = player_info.get("character_name")
 		character_detail.text = player_info.get("character_detail")
 		play_btn.normal = bar_nomal
@@ -183,12 +187,13 @@ func set_player_info(index : int):
 		if(!play_btn.is_connected("released", self, "_on_Play_released")):
 			play_btn.connect("released", self, "_on_Play_released")
 	else:
+		character_avatar.set_current_state(0)
 		character_name.text = "???"
 		character_detail.text = "???"
-		var buy_btn_normal = player_info.get("buy_btn_normal")
-		var buy_btn_pressed = player_info.get("buy_btn_pressed")
-		play_btn.normal = load(buy_btn_normal)
-		play_btn.pressed = load(buy_btn_pressed)
+		btn_buy_normal = player_info.get("buy_btn_normal")
+		btn_buy_pressed = player_info.get("buy_btn_pressed")
+		play_btn.normal = load(btn_buy_normal)
+		play_btn.pressed = load(btn_buy_pressed)
 		if(!play_btn.is_connected("released", self, "_on_CharacterScreen_buy")):
 			play_btn.connect("released", self, "_on_CharacterScreen_buy")
 		if(play_btn.is_connected("released", self, "_on_Play_released")):
@@ -196,66 +201,52 @@ func set_player_info(index : int):
 		
 		
 	color_character.set("custom_styles/normal", style_box_flat)
-	change_background_color(background_btn_active, color)
+	change_background_color(background_btn_active, player_color)
 	
-	var avatar = PlayerSettings.get_current_avatar()
+
 	
 	change_button_status(current_index, background_btn_active, true)
 
-	
-	if(character_container.get_child_count() > 0):
-		var current_avatar = character_container.get_child(character_container.get_child_count() - 1)
-		character_container.remove_child(current_avatar)
-		avatar.scale.x = 1.5
-		avatar.scale.y = 1.5
-		if(is_unlock):
-			avatar.set_current_state("UNLOCK")
-		else:
-			avatar.set_current_state("LOCK")
-		
-#		print(avatar.name)
-		character_container.add_child(avatar)
-
 func _on_player_navigation_pressed():
-	var index = 0
+	reusable_int = 0
 	for btn in player_navigation.get_children():
 		if(btn.is_pressed()):
-			if(current_index != index):
-				set_player_info(index)
-		index = index + 1
+			if(current_index != reusable_int):
+				set_player_info(reusable_int)
+		reusable_int = reusable_int + 1
 		
 func _on_Back_released():
 	disable_buttons()
-	yield(get_tree().create_timer(0.2), "timeout")
-	SceneTransition.change_scene(self, "res://Game/UI/Screen/HomeScreen/HomeScreen.tscn")
+	yield(get_tree().create_timer(0.1), "timeout")
+	SceneTransition.change_scene(self, Constants.HOME_SCREEN)
 	
 func _on_Play_released():
-	var is_unlock = current_index in character_unlock
-	if(is_unlock):
-		disable_buttons()
-		yield(get_tree().create_timer(0.2), "timeout")
-		SceneTransition.change_scene(self,"res://Game/World/World.tscn")
-		GameSettings.save_settings_data()
+	disable_buttons()
+	yield(get_tree().create_timer(0.1), "timeout")
+	SceneTransition.change_scene(self, Constants.WORLD_SCREEN)
+	GameSettings.save_settings_data()
+		
 
 func _on_Map_released():
 	disable_buttons()
-	yield(get_tree().create_timer(0.2), "timeout")
-	SceneTransition.change_scene(self,"res://Game/UI/Screen/MapScreen/MapScreen.tscn")
+	yield(get_tree().create_timer(0.1), "timeout")
+	SceneTransition.change_scene(self, Constants.MAP_SCREEN)
 
 
 
 func _on_CharacterScreen_buy():
+	disable_buttons()
 	get_tree().paused = true
-	var coins = User.data.general.coins.value
-	var price = PlayerSettings.players[current_index].get("price")
-	if(coins > price): 
+	total_coins = User.get_user_info("general", "coins")
+	player_price = player_info.get("price")
+	if(total_coins >= player_price): 
 		if(!self.has_node("ConfirmScreen")):
 			var cover_background_instance = cover_background.instance()
 			self.add_child(cover_background_instance)
 			
 			var confirm_screen_instance = confirm_screen.instance()
 			confirm_screen_instance.set_root_node(self)
-			confirm_screen_instance.set_item(current_index, price, "character")
+			confirm_screen_instance.set_item(current_index, player_price, "character")
 			self.add_child(confirm_screen_instance)
 			confirm_screen_instance.show_popup()
 	else: 

@@ -3,8 +3,6 @@ extends KinematicBody2D
 
 export(int) var move_speed = 10
 onready var animation_player = $AnimationPlayer
-# var a = 2
-# var b = "text"
 enum STATE {IDLE, MOVE_BACKWARD, MOVE_FORWARD, STOP}
 
 var velocity : Vector2
@@ -16,14 +14,11 @@ func set_root_node(value):
 	root_node = value
 
 # Called when the node enters the scene tree for the first time.
-func _physics_process(delta):
+func _physics_process(_delta):
 	if(Input.is_action_just_pressed("jump")):
-		print("start object jump")
 		current_state = STATE.MOVE_BACKWARD
 		root_node.starting()
 		root_node.change_start_object_layer()
-
-#		player.position.x = 25
 	match(current_state):
 		STATE.IDLE: 
 			animation_player.play("idle")

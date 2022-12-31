@@ -1,121 +1,7 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Resource/Arts/Enemies/Spring/Zoe/Zoe_32x28.png" type="Texture" id=1]
-[ext_resource path="res://Game/Characters/Enemies/AvatarScript.gd" type="Script" id=2]
-[ext_resource path="res://Resource/Arts/Enemies/Others/Bird_32x28_lock.png" type="Texture" id=3]
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 1 )
-region = Rect2( 160, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 1 )
-region = Rect2( 224, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 1 )
-region = Rect2( 256, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=34]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=35]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 32, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=36]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 64, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=37]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 96, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=38]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 128, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=39]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 160, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=40]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 192, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=41]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 224, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=42]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 256, 0, 32, 28 )
-
-[sub_resource type="AtlasTexture" id=43]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 192, 0, 32, 28 )
-
-[sub_resource type="SpriteFrames" id=8]
-animations = [ {
-"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
-"loop": true,
-"name": "active",
-"speed": 15.0
-}, {
-"frames": [ SubResource( 33 ) ],
-"loop": true,
-"name": "deactive",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ) ],
-"loop": true,
-"name": "lock_active",
-"speed": 15.0
-}, {
-"frames": [ SubResource( 43 ) ],
-"loop": true,
-"name": "lock_deactive",
-"speed": 5.0
-} ]
+[ext_resource path="res://Game/Characters/Enemies/Spring/Zoe/ZoeAvt.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Game/Characters/Enemies/EnemyAvatar.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=23]
 
@@ -124,7 +10,7 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.6, 0.6 )
-frames = SubResource( 8 )
+frames = ExtResource( 1 )
 animation = "lock_deactive"
 playing = true
 

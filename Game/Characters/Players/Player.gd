@@ -1,4 +1,4 @@
-extends Character
+extends KinematicBody2D
 
 class_name Player
 		
@@ -6,10 +6,9 @@ onready var animated_sprite = $AnimatedSprite
 onready var animation_player = $AnimationPlayer
 onready var collision_shape = $CollisionShape2D
 onready var invicible_time = $InvincibleTime
-onready var current_character_name = PlayerSettings.get_current_player_name()
-onready var current_map_name = MapSettings.get_current_map_name() 
+onready var current_character_name = PlayerSettings.get_player_info("key_name")
+onready var current_map_name = MapSettings.get_map_info("map_name").to_lower()
 
-onready var bullet_enemy_appear : bool
 
 # Properties
 export(int) var move_speed = 100
@@ -21,6 +20,7 @@ export(Vector2) var velocity : Vector2
 
 
 var root_node setget set_root_node
+var small_particle setget set_particle
 
 var current_health = 2
 var coin = 0 
@@ -37,6 +37,9 @@ var is_death = false
 func set_heath(value: int):
 	current_health = value
 
+func set_particle(value):
+	small_particle = value
+	
 enum STATE {EGG_MOVE, EGG_CRACK, EGG_HATCH, APPEAR, 
 	IDLE, RUN, JUMP, HOLD, FALL, BEND_DOWN, BEND_DOWN_IDLE, 
 	HIT, JUMP_DEATH, PRE_DEATH, POST_DEATH, DEATH, GRAVE}
@@ -47,9 +50,8 @@ func set_is_start(value : bool) -> void:
 	is_start = value 
 	
 func _ready():
-#	animation_player.play("egg_move")
-#	print(User.data)
-	longest_distance = float(User.data.get("best_distance").get(current_map_name).get("value"))
+	animated_sprite.frames = load(PlayerSettings.get_player_info("frame"))
+	longest_distance = float(User.get_longest_distance(current_map_name))
 
 
 func _process(_delta):
@@ -86,7 +88,7 @@ func _physics_process(_delta):
 			collision_shape.position.x = -0.5
 			collision_shape.scale.y = 0.85
 			collision_shape.scale.x = 0.75
-			root_node.set_particle_idle_state()
+			small_particle.set_idle_state()
 			root_node.set_running(false)
 			normal_run()
 			animation_player.play("idle")
@@ -96,7 +98,7 @@ func _physics_process(_delta):
 			collision_shape.scale.y = 0.85
 			collision_shape.scale.x = 0.75
 			animation_player.play("run")
-			root_node.set_particle_run_state()
+			small_particle.set_run_state()
 			root_node.set_running(true)
 			normal_run()
 		
@@ -112,27 +114,20 @@ func _physics_process(_delta):
 			collision_shape.position.x = 3
 			collision_shape.scale.y = 0.75
 			collision_shape.scale.x = 0.9
-			root_node.set_particle_run_state()
+			small_particle.set_run_state()
 			animation_player.play("bend_down")
 			normal_run()
-			if(bullet_enemy_appear == true):
-				root_node.set_running(false)
-			else:
-				root_node.set_running(true)
+			root_node.set_running(true)
 		STATE.JUMP:
 			if(is_on_floor()):
 				jump()
-				root_node.set_particle_jump_state()
-				if(bullet_enemy_appear == false):
-					root_node.set_running(true)
+				small_particle.set_jump_state()
+				root_node.set_running(true)
 		STATE.FALL:
 			animation_player.play("fall")
 			normal_run()
 			if(is_on_floor()):
-				if(bullet_enemy_appear == false):
-					current_state = STATE.RUN
-				else:
-					current_state = STATE.IDLE
+				current_state = STATE.RUN
 		STATE.HIT:
 			collision_shape.position.x = -1.5
 			collision_shape.position.y = 0
@@ -141,7 +136,7 @@ func _physics_process(_delta):
 
 			animation_player.play("hit")
 			root_node.set_running(false)
-			root_node.set_particle_idle_state()
+			small_particle.set_idle_state()
 			normal_run()
 			
 		STATE.JUMP_DEATH:
@@ -151,7 +146,7 @@ func _physics_process(_delta):
 			collision_shape.scale.x = 0.73
 			animation_player.play("pre_death")
 			root_node.stop_spawning_enemy()
-			root_node.set_particle_idle_state()
+			small_particle.set_idle_state()
 			play_hit_effect()
 			jump_death()
 			
@@ -222,7 +217,9 @@ func play_death():
 		
 
 func jump_death():
+
 	velocity = Vector2(velocity.x + 0.5, -jump_death_force)
+
 
 func normal_run():
 	velocity = Vector2(
@@ -231,7 +228,7 @@ func normal_run():
 	)	
 	
 func play_hit_effect():
-	GameSettings.playEffect("res://Resource/Music/hit_effect.mp3")
+	GameSettings.playEffect(Constants.HIT_EFFECT)
 	
 func game_over():
 	Common.paused_game(true)
@@ -243,6 +240,8 @@ func game_over():
 	update_user_data()
 
 func update_user_data():
+	
+
 	User.data.best_distance.get(current_map_name).value = longest_distance
 	User.data.map_pick.get(current_map_name).value += 1
 	User.data.character_pick.get(current_character_name).value += 1
@@ -292,11 +291,8 @@ func idle_animation_finished():
 	root_node.enable_touch_screen_btns(true)
 	
 func animation_finished():
-	if(bullet_enemy_appear):
-		current_state = STATE.IDLE
-	else:
-		current_state = STATE.RUN
-		root_node.set_running(true)
+	current_state = STATE.RUN
+	root_node.set_running(true)
 	
 func jump():
 	play_jump_effect()
@@ -304,7 +300,7 @@ func jump():
 	
 
 func play_jump_effect():
-	GameSettings.playEffect(EffectSettings.JUMP_EFFECT)
+	GameSettings.playEffect(Constants.JUMP_EFFECT)
 
 func get_hit(damage : int) -> void:
 	if(!invicible && !is_death):
@@ -312,8 +308,13 @@ func get_hit(damage : int) -> void:
 		self.health -= damage
 		root_node.remove_health(self.health)
 		if(self.health == 0):
+			
 			is_death = true
 			self.rotation_degrees = -360
+			if(is_on_floor()):
+				jump_death_force = 300
+			else: 
+				jump_death_force = 250
 			current_state = STATE.JUMP_DEATH
 		else:
 			current_state = STATE.HIT
@@ -321,10 +322,6 @@ func get_hit(damage : int) -> void:
 		if move_and_slide(velocity, Vector2.UP): 
 			pass
 
-func set_bullet_enemy_appear(value: bool) -> void:
-	print("----", value)
-	bullet_enemy_appear = value
-	
 func start_invicible_time():
 	invicible = true
 	invicible_time.start()
@@ -338,28 +335,18 @@ func pick_new_state():
 		if(Input.is_action_just_pressed("jump") && is_on_floor()):
 			current_state = STATE.JUMP
 		elif(Input.is_action_pressed("bend_down") && is_on_floor()):
-			if(bullet_enemy_appear):
-				current_state = STATE.BEND_DOWN_IDLE
-			else:
-				current_state = STATE.BEND_DOWN
+			current_state = STATE.BEND_DOWN
 		elif((current_state == STATE.BEND_DOWN || current_state == STATE.BEND_DOWN_IDLE)):
-			if(bullet_enemy_appear):
-				current_state = STATE.IDLE
-			else:
-				current_state = STATE.RUN
+			current_state = STATE.RUN
 
 func hit_animation_finished():
 	is_allow_touch_screen = true
-	if(bullet_enemy_appear):
-		current_state = STATE.IDLE
-	else:
-		current_state = STATE.RUN
+	current_state = STATE.RUN
 		
 func _on_InvincibleTime_timeout():
 	invicible = false
 
 func set_running_state(value: bool):
-	bullet_enemy_appear = !value
 	if(value):
 		current_state = STATE.RUN
 	else:

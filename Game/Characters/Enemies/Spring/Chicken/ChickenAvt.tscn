@@ -1,6 +1,6 @@
 [gd_scene load_steps=36 format=2]
 
-[ext_resource path="res://Game/Characters/Enemies/AvatarScript.gd" type="Script" id=1]
+[ext_resource path="res://Game/Characters/Enemies/EnemyAvatar.gd" type="Script" id=1]
 [ext_resource path="res://Resource/Arts/Enemies/Spring/Chicken/Run_32x34.png" type="Texture" id=2]
 [ext_resource path="res://Resource/Arts/Enemies/Spring/Chicken/Run_32x34_lock.png" type="Texture" id=3]
 

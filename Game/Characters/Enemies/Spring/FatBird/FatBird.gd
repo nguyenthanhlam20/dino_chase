@@ -3,15 +3,13 @@ extends Enemy
 class_name FatBird
 
 var velocity : Vector2
-export(int) var jump_force = 200
 onready var animation_player = $AnimationPlayer
 onready var jump_zone = $JumpZone
 
-onready var fat_bird_gravity = GameSettings.flat_bird_gravity
 
-var position_x = 245
+var position_x = GameSettings.right_position.x + 10
 
-var position_y = 0
+var position_y = GameSettings.right_position.x - 60
 
 
 enum STATE {RUN, JUMP, JUMP_HIGHER, FALL}
@@ -43,15 +41,15 @@ func moving():
 func run():
 	animation_player.play("run")
 	velocity = Vector2(
-		velocity.x- moving_speed, 
-		min(velocity.y + fat_bird_gravity, GameSettings.terminal_gravity)
+		-moving_speed, 
+		min(velocity.y + gravity, GameSettings.terminal_gravity)
 	)
 
 func jump_higher():
 	animation_player.play("jump")
 	current_state = STATE.FALL
 	velocity = Vector2(
-		velocity.x - moving_speed,
+		-moving_speed,
 		-jump_force
 	)
 
@@ -59,15 +57,15 @@ func jump():
 	animation_player.play("jump")
 	current_state = STATE.FALL
 	velocity = Vector2(
-		velocity.x - moving_speed, 
+		-jump_speed, 
 		-jump_force
 	)
 	
 func fall():
 	animation_player.play("fall")
 	velocity = Vector2(
-		velocity.x - moving_speed,
-		min(velocity.y + fat_bird_gravity, GameSettings.terminal_gravity)
+		-moving_speed,
+		min(velocity.y + gravity, GameSettings.terminal_gravity)
 	)
 	if(is_on_floor()):
 		current_state = STATE.RUN
@@ -83,7 +81,9 @@ func go_jump_over():
 	if(moving_style == 1 || moving_style == 3):
 		current_state = STATE.JUMP_HIGHER
 		
-func _on_JumpZone_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if(body is Player):
-		go_jump_over()
-		jump_zone.queue_free()
+func _on_JumpZone_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
+	go_jump_over()
+	jump_zone.queue_free()
+
+func do_action():
+	go_jump()

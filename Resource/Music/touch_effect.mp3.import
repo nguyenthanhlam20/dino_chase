@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/touch_effect.mp3-881aa01271045b83789667ccf27e8746.mp3str"
+
+[deps]
+
+source_file="res://Resource/Music/touch_effect.mp3"
+dest_files=[ "res://.import/touch_effect.mp3-881aa01271045b83789667ccf27e8746.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

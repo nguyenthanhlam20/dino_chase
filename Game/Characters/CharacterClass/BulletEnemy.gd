@@ -3,68 +3,50 @@ extends Enemy
 class_name BulletEnemy
 
 onready var animation_player = $AnimationPlayer
-onready var bullet = load("res://Game/Characters/Enemies/Spring/Plant/PlantBullet.tscn")
 
 var velocity : Vector2
-var position_x = 300
-var position_y = 120
-var root_node setget set_root_node
-var number_of_bullet = 0
-var current_state = STATE.RUN
-enum STATE {RUN, IDLE, ATTACK, HIT, DEATH}
+var position_x = GameSettings.right_position.x + 10
+var position_y = GameSettings.right_position.x + 30 - 70
+var is_bomb = false
 
-func set_root_node(value) -> void:
-	root_node = value	
+enum STATE {RUN, ATTACK}
+var current_state = STATE.RUN 
+
+enum MOVING_STYLE {RUN, TWO_ATTACK, ONE_ATTACK}
+var moving_style : int
+
+func _ready():
+	moving_speed -= 30
+	moving_style = Common.get_random_number(0, MOVING_STYLE.size() - 1)
 	
-func go_stop():
-	current_state = STATE.IDLE
-
 func _physics_process(_delta):
+	moving()
+	
+func moving():
 	match(current_state):
 		STATE.RUN:
-			animation_player.play("idle")
-			velocity = Vector2(
-				velocity.x - moving_speed,
-				min(velocity.y + GameSettings.gravity, GameSettings.terminal_gravity)
-			)
-		STATE.IDLE:
-			animation_player.play("idle")
-			velocity = Vector2(
-				0,
-				min(velocity.y + GameSettings.gravity, GameSettings.terminal_gravity)
-			)
+			animation_player.play("run")
 		STATE.ATTACK:
 			animation_player.play("attack")
-			velocity = Vector2(
-				0,
-				min(velocity.y + GameSettings.gravity, GameSettings.terminal_gravity)
-			)
-		STATE.HIT:
-			animation_player.play("hit")
-		STATE.DEATH:
-			animation_player.play("death")
-		
-	if(move_and_slide(velocity, Vector2.UP)):
+	run()	
+	if move_and_slide(velocity, Vector2.UP): 
 		pass
+		
 
-func idle_animation_finished():
-	
-	if(number_of_bullet == 3):
-		current_state = STATE.HIT
-	else:
+func run():
+	velocity = Vector2(
+		-moving_speed, 
+		min(velocity.y + gravity, GameSettings.terminal_gravity)
+	)
+
+
+func go_run():
+	current_state = STATE.RUN
+
+			
+func go_attack():
+	if(moving_style == MOVING_STYLE.TWO_ATTACK):
 		current_state = STATE.ATTACK
 
-func death_animation_finished():
-	root_node.stop_running(true)
-	root_node.set_bullet_enemy_appear(false)
-	self.queue_free()
-
-func hit_animation_finished():
-	current_state = STATE.DEATH
-	
-func attack_animation_finished():
-	var bullet_instance = bullet.instance()
-	bullet_instance.set("position", Vector2(-8, -1))
-	number_of_bullet += 1
-	self.add_child(bullet_instance)
-	current_state = STATE.IDLE
+func do_action():
+	go_attack()

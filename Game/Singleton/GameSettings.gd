@@ -1,7 +1,7 @@
-extends Node2D
+extends Control
 
 export(int) var gravity = 15
-export(int) var flat_bird_gravity = 5
+export(int) var fat_bird_gravity = 12
 export(int) var terminal_gravity = 400
 export(int) var music_volume = 0 setget set_music_volume
 export(int) var effect_volume = 0 setget set_effect_volume
@@ -16,19 +16,25 @@ export(int) var player_position_x = 30
 export(int) var run_base_speed = 1
 export(int) var fly_base_speed = 1
 
-export(String) var original_trackUrl = "res://Resource/Music/music.mp3"
+export(String) var original_trackUrl = Constants.BACKGROUND_MUSIC
 
-onready var viewport = get_viewport()
 onready var music_player = $Music
 onready var effect_player = $Effect
-onready var game_size = Vector2(
-	ProjectSettings.get_setting("display/window/size/width"),
-	ProjectSettings.get_setting("display/window/size/height"))
+onready var right_pos = $RightPos
 
-var random = RandomNumberGenerator.new()
-
+var right_position : Vector2
 var is_effect_playing = false
-var FILE_SETTINGS_PATH = "user://ssetticngss_data.tres"
+var FILE_SETTINGS_PATH = "user://ssetticngssd_data.tres"
+
+
+func _ready():
+	get_settings_data()
+	right_position = right_pos.rect_position
+	print("right_position", right_position)
+
+#	Play music
+#	music_player.autoplay = true
+#	playMusic(original_trackUrl)
 
 
 func get_settings_data():
@@ -40,8 +46,8 @@ func get_settings_data():
 		effect_volume = float(data.effect_volume)
 		swap_input = bool(data.swap_input)
 		timer_status = bool(data.timer_status)
-		PlayerSettings.current_player_index = int(data.current_player_index)
-		MapSettings.current_map_index = int(data.current_map_index)
+		PlayerSettings.current_player = int(data.current_player)
+		MapSettings.current_map = int(data.current_map)
 		set_music_volume(music_volume)
 		set_effect_volume(effect_volume)
 		file.close()
@@ -57,49 +63,14 @@ func save_settings_data():
 		"effect_volume" : effect_volume,
 		"swap_input" : swap_input,
 		"timer_status": timer_status,
-		"current_player_index": PlayerSettings.current_player_index,
-		"current_map_index": MapSettings.current_map_index
+		"current_player": PlayerSettings.current_player,
+		"current_map": MapSettings.current_map
 	}
 #	print(settings_data)
 	file.store_string(to_json(settings_data))
 	file.close()
 
-func _ready():
-#	Get settings data
-	get_settings_data()
-#	Resize viewport
-#	viewport.connect("size_changed", self, "resize_viewport")
-#	resize_viewport()
-#	Create random number
-	random.randomize()
-#	Play music
-	music_player.autoplay = true
-	playMusic(original_trackUrl)
 
-func resize_viewport():
-#	OS.get_real_window_size()
-	var new_size = OS.get_window_size()
-	var scale_factor
-	print("original window size", new_size)
-
-	if new_size.x > game_size.x:
-		scale_factor = new_size.x/game_size.x
-		new_size = Vector2(new_size.x/scale_factor, new_size.y)
-	else:
-		scale_factor = game_size.x/new_size.x
-		new_size = Vector2(new_size.x*scale_factor, new_size.y)
-		
-	if new_size.y > game_size.y:
-		scale_factor = new_size.y/game_size.y
-		new_size = Vector2(new_size.x, new_size.y/scale_factor)
-	else:
-		scale_factor = game_size.y/new_size.y
-		new_size = Vector2(new_size.x, new_size.y*scale_factor)
-		
-	print("old size", game_size, "new size", new_size)
-		
-	viewport.set_size_override(true, new_size)
-	
 func playMusic(trackUrl : String):
 	music_player.stream = load(trackUrl)
 	music_player.play()
@@ -114,6 +85,7 @@ func set_music_volume(value : float):
 func playEffect(trackUrl : String):
 	is_effect_playing = true
 	effect_player.stream = load(trackUrl)
+	effect_player.autoplay = false
 	effect_player.play()
 	
 func stopEffect():

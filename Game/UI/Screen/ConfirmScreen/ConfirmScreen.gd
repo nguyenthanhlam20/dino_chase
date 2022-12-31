@@ -1,6 +1,6 @@
 extends Popup
 
-onready var congrat_screen = load(ScreenSettings.screens.get("CONGRAT_SCREEN"))
+onready var congrat_screen = load(Constants.CONGRAT_SCREEN)
 
 export var menu_size = 1
 export var lerp_speed = 0.2
@@ -15,7 +15,7 @@ var root_node setget set_root_node
 var item_index : int
 var item_type : String
 var item_price : int
-
+var item_info : Dictionary
 
 func set_root_node(value):
 	root_node = value
@@ -42,30 +42,33 @@ func show_popup():
 
 func _on_NO_released():
 	root_node.clear_cover_background()
+	root_node.enable_buttons()
 	self.queue_free()
 
 func _on_YES_released():
 	var congrat_screen_instance = congrat_screen.instance()
 	if(item_type == "character"):
-		PlayerSettings.current_player_index = item_index
+		PlayerSettings.current_player = item_index
+		item_info = PlayerSettings.get_player(item_index)
 		User.data.completion.character.append(item_index)
 		User.data.general.coins.value -= item_price
 		congrat_screen_instance.set_item("character", 
 			"new character unlock", 
-			PlayerSettings.get_current_avatar_path(), 
-			PlayerSettings.get_current_player_fullname(),
-			PlayerSettings.get_current_player_color())
+			item_info.get("frame"), 
+			item_info.get("character_name"),
+			item_info.get("color"))
 	else:
-		MapSettings.current_map_index = item_index
+		MapSettings.current_map = item_index
+		item_info = MapSettings.get_map(item_index)
 		User.data.completion.map.append(item_index)
 		User.data.general.coins.value -= item_price
 		congrat_screen_instance.set_item("map",
 			"new map unlock", 
-			MapSettings.get_current_map_avatar(), 
-			MapSettings.get_current_map_fullname(),
-			MapSettings.get_current_map_color())
+			item_info.get("map_unlock"), 
+			item_info.get("map_name"),
+			item_info.get("color"))
 	User.save_user_data()
-	
+	congrat_screen_instance.set_root_node(root_node)
 	root_node.add_new_child(congrat_screen_instance)
 	root_node.clear_cover_background()
 	self.queue_free()

@@ -215,6 +215,16 @@ var spring_enemies = [
 		"avatar": "res://Game/Characters/Enemies/Spring/Plant/PlantAvt.tscn",
 		"sprite": "res://Game/Characters/Enemies/Spring/Plant/Plant.tscn",
 		"color": "#FFCD58"
+	},
+	{
+		"index": 21,
+		"enemy_name": "Plant",
+		"description": "this is a Plant",
+		"unlock_at": 0,
+		"lock_message": "unlock at score 60",
+		"avatar": "res://Game/Characters/Enemies/Spring/Plant/PlantAvt.tscn",
+		"sprite": "res://Game/Characters/Enemies/Spring/Plant/Plant.tscn",
+		"color": "#FFCD58"
 	}
 ]
 
@@ -323,7 +333,7 @@ var summer_enemies = [
 		"color": "#ECE3F0"
 	},
 	{
-		"index": 11,
+		"index": 10,
 		"enemy_name": "Duck",
 		"description": "this is a Duck",
 		"unlock_at": 0,
@@ -335,7 +345,7 @@ var summer_enemies = [
 		
 	},
 	{
-		"index": 12,
+		"index": 11,
 		"enemy_name": "Henry",
 		"description": "this is a Henry",
 		"unlock_at": 0,
@@ -346,7 +356,7 @@ var summer_enemies = [
 	
 	},
 	{
-		"index": 13,
+		"index": 12,
 		"enemy_name": "Fire",
 		"description": "this is a GumBot",
 		"unlock_at": 0,
@@ -357,7 +367,7 @@ var summer_enemies = [
 	
 	},
 	{
-		"index": 14,
+		"index": 13,
 		"enemy_name": "Crabby",
 		"description": "this is a Crabby",
 		"unlock_at": 0,
@@ -368,7 +378,7 @@ var summer_enemies = [
 		
 	},
 	{
-		"index": 15,
+		"index": 14,
 		"enemy_name": "Mig",
 		"description": "this is a Mig",
 		"unlock_at": 0,
@@ -378,7 +388,7 @@ var summer_enemies = [
 		"color": "#ECE3F0"
 	},
 	{
-		"index": 16,
+		"index": 15,
 		"enemy_name": "Cucumber",
 		"description": "this is a Cucumber",
 		"unlock_at": 0,
@@ -388,7 +398,7 @@ var summer_enemies = [
 		"color": "#ECE3F0"
 	},
 	{
-		"index": 17,
+		"index": 16,
 		"enemy_name": "Fierce Tooth",
 		"description": "this is a FierceTooth",
 		"unlock_at": 0,
@@ -398,7 +408,7 @@ var summer_enemies = [
 		"color": "#ECE3F0"
 	},
 	{
-		"index": 18,
+		"index": 17,
 		"enemy_name": "Pink Star",
 		"description": "this is a PinkStar",
 		"unlock_at": 0,
@@ -408,7 +418,7 @@ var summer_enemies = [
 		"color": "#ECE3F0"
 	},
 	{
-		"index": 19,
+		"index": 18,
 		"enemy_name": "Whale",
 		"description": "this is a Whale",
 		"unlock_at": 0,
@@ -418,13 +428,24 @@ var summer_enemies = [
 		"color": "#ECE3F0"
 	},
 	{
-		"index": 20,
+		"index": 19,
 		"enemy_name": "Alien",
 		"description": "this is a Alien",
 		"unlock_at": 0,
 		"lock_message": "unlock at score 20",
 		"avatar": "res://Game/Characters/Enemies/Summer/Alien/AlienAvt.tscn",
 		"sprite": "res://Game/Characters/Enemies/Summer/Alien/Alien.tscn",
+		"color": "#ECE3F0"
+		
+	},
+	{
+		"index": 20,
+		"enemy_name": "Mage",
+		"description": "this is a Mage",
+		"unlock_at": 0,
+		"lock_message": "unlock at score 10",
+		"avatar": "res://Game/Characters/Enemies/Summer/Mage/MageAvt.tscn",
+		"sprite": "res://Game/Characters/Enemies/Summer/Mage/Mage.tscn",
 		"color": "#ECE3F0"
 		
 	},
@@ -524,13 +545,14 @@ var autumn_enemies = [
 	},
 	{
 		"index": 8,
-		"enemy_name": "King Pig",
-		"description": "this is a KingPig",
+		"enemy_name": "Assassin",
+		"description": "this is a Assassin",
 		"unlock_at": 0,
-		"lock_message": "unlock at score 10",
-		"avatar": "res://Game/Characters/Enemies/Autumn/KingPig/KingPigAvt.tscn",
-		"sprite": "res://Game/Characters/Enemies/Autumn/KingPig/KingPig.tscn",
+		"lock_message": "unlock at score 20",
+		"avatar": "res://Game/Characters/Enemies/Autumn/Assassin/AssassinAvt.tscn",
+		"sprite": "res://Game/Characters/Enemies/Autumn/Assassin/Assassin.tscn",
 		"color": "#ECE3F0"
+		
 	},
 	{
 		"index": 9,
@@ -645,13 +667,25 @@ var autumn_enemies = [
 	},
 	{
 		"index": 20,
-		"enemy_name": "Assassin",
-		"description": "this is a Assassin",
+		"enemy_name": "Pig",
+		"description": "this is a Pig",
 		"unlock_at": 0,
 		"lock_message": "unlock at score 20",
-		"avatar": "res://Game/Characters/Enemies/Autumn/Assassin/AssassinAvt.tscn",
-		"sprite": "res://Game/Characters/Enemies/Autumn/Assassin/Assassin.tscn",
+		"avatar": "res://Game/Characters/Enemies/Autumn/Pig/PigAvt.tscn",
+		"sprite": "res://Game/Characters/Enemies/Autumn/Pig/Pig.tscn",
 		"color": "#ECE3F0"
+		
+	},
+	{
+		"index": 21,
+		"enemy_name": "Pig",
+		"description": "this is a Pig",
+		"unlock_at": 0,
+		"lock_message": "unlock at score 20",
+		"avatar": "res://Game/Characters/Enemies/Autumn/Pig/PigAvt.tscn",
+		"sprite": "res://Game/Characters/Enemies/Autumn/Pig/Pig.tscn",
+		"color": "#ECE3F0"
+		
 	}
 	
 ]
@@ -733,12 +767,12 @@ var winter_enemies = [
 	},
 	{
 		"index": 7,
-		"enemy_name": "Rojo",
-		"description": "this is a Rojo",
+		"enemy_name": "Dragoon",
+		"description": "this is a Dragoon",
 		"unlock_at": 0,
 		"lock_message": "unlock at score 20",
-		"avatar": "res://Game/Characters/Enemies/Winter/Rojo/RojoAvt.tscn",
-		"sprite": "res://Game/Characters/Enemies/Winter/Rojo/Rojo.tscn",
+		"avatar": "res://Game/Characters/Enemies/Winter/Dragoon/DragoonAvt.tscn",
+		"sprite": "res://Game/Characters/Enemies/Winter/Dragoon/Dragoon.tscn",
 		"color": "#ECE3F0"
 	},
 	{
@@ -747,7 +781,7 @@ var winter_enemies = [
 		"description": "this is a Rino",
 		"unlock_at": 0,
 		"lock_message": "unlock at score 10",
-		"avatar": "res://Game/Characters/Enemies/Winter/Rino/RinoAvatar.tscn",
+		"avatar": "res://Game/Characters/Enemies/Winter/Rino/RinoAvt.tscn",
 		"sprite": "res://Game/Characters/Enemies/Winter/Rino/Rino.tscn",
 		"color": "#ECE3F0"
 	},
@@ -773,12 +807,12 @@ var winter_enemies = [
 	},
 	{
 		"index": 11,
-		"enemy_name": "Pig",
-		"description": "this is a Pig",
+		"enemy_name": "King Pig",
+		"description": "this is a KingPig",
 		"unlock_at": 0,
-		"lock_message": "unlock at score 20",
-		"avatar": "res://Game/Characters/Enemies/Winter/Pig/PigAvt.tscn",
-		"sprite": "res://Game/Characters/Enemies/Winter/Pig/Pig.tscn",
+		"lock_message": "unlock at score 10",
+		"avatar": "res://Game/Characters/Enemies/Winter/KingPig/KingPigAvt.tscn",
+		"sprite": "res://Game/Characters/Enemies/Winter/KingPig/KingPig.tscn",
 		"color": "#ECE3F0"
 	},
 	{
@@ -870,6 +904,16 @@ var winter_enemies = [
 		"avatar": "res://Game/Characters/Enemies/Winter/Pikachu/PikachuAvt.tscn",
 		"sprite": "res://Game/Characters/Enemies/Winter/Pikachu/Pikachu.tscn",
 		"color": "#ECE3F0"
+	},
+	{
+		"index": 21,
+		"enemy_name": "Pika Pika",
+		"description": "this is a Pikachu",
+		"unlock_at": 0,
+		"lock_message": "unlock at score 20",
+		"avatar": "res://Game/Characters/Enemies/Winter/Pikachu/PikachuAvt.tscn",
+		"sprite": "res://Game/Characters/Enemies/Winter/Pikachu/Pikachu.tscn",
+		"color": "#ECE3F0"
 	}
 	
 ]
@@ -877,13 +921,12 @@ var winter_enemies = [
 
 
 func get_enemies():
-	var map_index = MapSettings.current_map_index
-	match(map_index):
-		0:
+	match(MapSettings.current_map):
+		MapSettings.MAP.SPRING:
 			return EnemySettings.spring_enemies
-		1: 
+		MapSettings.MAP.SUMMER:
 			return EnemySettings.summer_enemies
-		2: 
+		MapSettings.MAP.AUTUMN: 
 			return EnemySettings.autumn_enemies
-		3: 
+		MapSettings.MAP.WINTER: 
 			return EnemySettings.winter_enemies

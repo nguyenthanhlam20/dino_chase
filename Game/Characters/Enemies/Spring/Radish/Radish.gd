@@ -7,13 +7,14 @@ var velocity : Vector2
 var position_x = 200
 var position_y = 105  
 var current_position_y : float
-var moving_style : int
 
-var current_state = STATE.FLY
 enum STATE {FLY, FLY_UPWARD, RUN}
+var current_state = STATE.FLY
 
+enum MOVING_STYLE {FLY, RUN, FLY_UPWARD}
+var moving_style : int
 func _ready():
-	moving_style = Common.get_random_number(0, 2)
+	moving_style = Common.get_random_number(0, MOVING_STYLE.size() - 1)
 
 func _physics_process(_delta):
 	moving()
@@ -31,7 +32,7 @@ func moving():
 			current_position_y = min(velocity.y + GameSettings.gravity, GameSettings.terminal_gravity)
 			
 	velocity = Vector2(
-		velocity.x - moving_speed,
+		-moving_speed,
 		current_position_y
 	)
 	
@@ -40,12 +41,13 @@ func moving():
 	
 
 func go_to_run_state():
-	if(moving_style == 1):
+	if(moving_style == MOVING_STYLE.RUN):
 		current_state = STATE.RUN	
-	if(moving_style == 2):
+	if(moving_style == MOVING_STYLE.FLY_UPWARD):
 		current_state = STATE.FLY_UPWARD 
 	
-func _on_HitBox_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	print("body shape entered hit box of flying enemy", body_rid, body_shape_index, body_shape_index, local_shape_index)
+func _on_HitBox_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):
 	body.get_hit(1)
 
+func _on_RunZone_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
+	go_to_run_state()

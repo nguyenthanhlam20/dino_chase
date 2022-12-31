@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Resource/Buttons/Return-1.png" type="Texture" id=1]
 [ext_resource path="res://Resource/Buttons/Play-1.png" type="Texture" id=2]
-[ext_resource path="res://Game/Characters/Players/Blueberry/BlueberryAvatar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game/Characters/Players/Avatar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/UI/Screen/CharacterScreen/CharacterScreen.gd" type="Script" id=5]
 [ext_resource path="res://Resource/Buttons/Return-2.png" type="Texture" id=6]
 [ext_resource path="res://Resource/Buttons/Play-2.png" type="Texture" id=7]
@@ -51,24 +51,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="BorderColor" type="Label" parent="MainContent"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 50.0
-margin_top = 41.0
-margin_right = -50.0
-margin_bottom = -49.0
-rect_min_size = Vector2( 220, 90 )
-custom_styles/normal = SubResource( 4 )
-
-[node name="GridContainer" type="GridContainer" parent="MainContent/BorderColor"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -110.0
-margin_top = -45.0
+margin_top = -47.0
 margin_right = 110.0
-margin_bottom = 45.0
+margin_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 220, 90 )
+size_flags_vertical = 1
+custom_styles/normal = SubResource( 4 )
+
+[node name="GridContainer" type="GridContainer" parent="MainContent/BorderColor"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 custom_constants/vseparation = 0
 custom_constants/hseparation = -1
 columns = 2
@@ -76,7 +77,8 @@ columns = 2
 [node name="ColorCharacter" type="Label" parent="MainContent/BorderColor/GridContainer"]
 margin_right = 111.0
 margin_bottom = 90.0
-rect_min_size = Vector2( 110, 90 )
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/normal = SubResource( 5 )
@@ -97,13 +99,14 @@ margin_top = 38.0
 margin_right = 50.0
 margin_bottom = 38.0
 
-[node name="Character" parent="MainContent/BorderColor/GridContainer/ColorCharacter/CenterContainer/CharacterContainer" instance=ExtResource( 4 )]
+[node name="Avatar" parent="MainContent/BorderColor/GridContainer/ColorCharacter/CenterContainer/CharacterContainer" instance=ExtResource( 4 )]
+scale = Vector2( 1.5, 1.5 )
 
 [node name="ColorText" type="Label" parent="MainContent/BorderColor/GridContainer"]
 margin_left = 110.0
 margin_right = 220.0
 margin_bottom = 90.0
-size_flags_horizontal = 11
+size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/normal = SubResource( 6 )
 
@@ -132,39 +135,49 @@ custom_fonts/font = SubResource( 2 )
 text = "Infoasdasdasdasdasd"
 autowrap = true
 
-[node name="Buttons" type="Control" parent="MainContent"]
-anchor_right = 1.0
+[node name="Wallet" parent="MainContent" instance=ExtResource( 9 )]
+margin_top = -27.0
+
+[node name="BottomPosition" type="Control" parent="MainContent"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
 
-[node name="Back" type="TouchScreenButton" parent="MainContent/Buttons"]
+[node name="Play" type="TouchScreenButton" parent="MainContent/BottomPosition"]
+position = Vector2( -40, -34 )
+scale = Vector2( 0.15, 0.15 )
+normal = ExtResource( 2 )
+pressed = ExtResource( 7 )
+
+[node name="TopRightPosition" type="Control" parent="MainContent"]
+anchor_left = 1.0
+anchor_right = 1.0
+
+[node name="Map" type="TouchScreenButton" parent="MainContent/TopRightPosition"]
+position = Vector2( -26, 7 )
+scale = Vector2( 0.1, 0.1 )
+normal = ExtResource( 11 )
+pressed = ExtResource( 8 )
+
+[node name="CenterPosition" type="Control" parent="MainContent"]
+anchor_left = 0.5
+anchor_right = 0.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayerNavigation" type="HBoxContainer" parent="MainContent/CenterPosition"]
+margin_left = -51.0
+margin_top = 9.0
+margin_right = 56.0
+margin_bottom = 31.0
+custom_constants/separation = 4
+
+[node name="Back" type="TouchScreenButton" parent="MainContent"]
 position = Vector2( 8, 8 )
 scale = Vector2( 0.1, 0.1 )
 normal = ExtResource( 1 )
 pressed = ExtResource( 6 )
 
-[node name="Play" type="TouchScreenButton" parent="MainContent/Buttons"]
-position = Vector2( 120, 144 )
-scale = Vector2( 0.15, 0.15 )
-normal = ExtResource( 2 )
-pressed = ExtResource( 7 )
-
-[node name="Map" type="TouchScreenButton" parent="MainContent/Buttons"]
-position = Vector2( 296, 8 )
-scale = Vector2( 0.1, 0.1 )
-normal = ExtResource( 11 )
-pressed = ExtResource( 8 )
-
-[node name="PlayerNavigation" type="HBoxContainer" parent="MainContent"]
-anchor_right = 1.0
-margin_left = 110.0
-margin_top = 8.0
-margin_right = -104.0
-margin_bottom = 30.0
-custom_constants/separation = 4
-
-[node name="Wallet" parent="MainContent" instance=ExtResource( 9 )]
-margin_top = -31.0
-
-[connection signal="buy" from="." to="." method="_on_CharacterScreen_buy"]
-[connection signal="released" from="MainContent/Buttons/Back" to="." method="_on_Back_released"]
-[connection signal="released" from="MainContent/Buttons/Map" to="." method="_on_Map_released"]
+[connection signal="released" from="MainContent/TopRightPosition/Map" to="." method="_on_Map_released"]
+[connection signal="released" from="MainContent/Back" to="." method="_on_Back_released"]

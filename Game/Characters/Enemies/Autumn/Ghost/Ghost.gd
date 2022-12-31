@@ -42,8 +42,7 @@ func moving():
 		pass
 	
 	
-func _on_HitBox_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	print("body shape entered hit box of flying enemy", body_rid, body_shape_index, body_shape_index, local_shape_index)
+func _on_HitBox_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):
 	body.get_hit(1)
 	
 func go_appear():
@@ -63,12 +62,12 @@ func appear_animation_finished():
 func disappear_animation_finished():
 	current_state = STATE.IDLE
 
-func _on_AppearZone_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if(body is Player && moving_style > MOVING_STYLE.RUN):
+func _on_AppearZone_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
+	if(moving_style > MOVING_STYLE.RUN):
 		go_appear()
 
-func _on_DisappearZone_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if(body is Player && moving_style == MOVING_STYLE.DISAPPEAR):
+func _on_DisappearZone_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
+	if(moving_style == MOVING_STYLE.DISAPPEAR):
 		go_disappear()
 			
 		

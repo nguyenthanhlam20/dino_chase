@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/gain_coin_effect.mp3-b4f8af391897db0a5ba70d333b826ac5.mp3str"
+
+[deps]
+
+source_file="res://Resource/Music/gain_coin_effect.mp3"
+dest_files=[ "res://.import/gain_coin_effect.mp3-b4f8af391897db0a5ba70d333b826ac5.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

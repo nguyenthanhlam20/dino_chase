@@ -1,0 +1,227 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Resource/Fonts/Bungee-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Resource/Buttons/Paused-1.png" type="Texture" id=2]
+[ext_resource path="res://Game/Characters/StartObject.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/World/World.gd" type="Script" id=6]
+[ext_resource path="res://Game/UI/Screen/PausedScreen/PausedSceen.tscn" type="PackedScene" id=7]
+
+[sub_resource type="DynamicFont" id=24]
+size = 9
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_space = 1
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=22]
+size = 5
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=23]
+size = 9
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 32, 120.797 )
+
+[sub_resource type="RectangleShape2D" id=32]
+extents = Vector2( 10, 80.9757 )
+
+[sub_resource type="RectangleShape2D" id=28]
+extents = Vector2( 9.01008, 22.5347 )
+
+[sub_resource type="RectangleShape2D" id=31]
+extents = Vector2( 11, 80 )
+
+[node name="World" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+
+[node name="MainContent" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Map" type="Node2D" parent="MainContent"]
+
+[node name="Enemies" type="Node2D" parent="MainContent"]
+
+[node name="TouchScreenBtns" type="HBoxContainer" parent="MainContent"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = -1
+
+[node name="BendownContainer" type="MarginContainer" parent="MainContent/TouchScreenBtns"]
+margin_right = 160.0
+margin_bottom = 180.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BendDown" type="TouchScreenButton" parent="MainContent/TouchScreenBtns/BendownContainer"]
+action = "bend_down"
+visibility_mode = 1
+
+[node name="JumpContainer" type="MarginContainer" parent="MainContent/TouchScreenBtns"]
+margin_left = 159.0
+margin_right = 320.0
+margin_bottom = 180.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Jump" type="TouchScreenButton" parent="MainContent/TouchScreenBtns/JumpContainer"]
+scale = Vector2( 1, 1.25 )
+action = "jump"
+visibility_mode = 1
+
+[node name="TopLeftPos" type="Control" parent="MainContent"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Health" type="HBoxContainer" parent="MainContent/TopLeftPos"]
+margin_left = 15.0
+margin_top = 12.0
+margin_right = 15.0
+margin_bottom = 12.0
+custom_constants/separation = 15
+
+[node name="TopCenterPos" type="Control" parent="MainContent"]
+anchor_left = 0.5
+anchor_right = 0.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Score" type="Label" parent="MainContent/TopCenterPos"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -19.0
+margin_top = 7.0
+margin_right = 19.0
+margin_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 24 )
+text = "Coin: 0"
+align = 1
+valign = 1
+
+[node name="TopRightPos" type="Control" parent="MainContent"]
+anchor_left = 1.0
+anchor_right = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pause" type="TouchScreenButton" parent="MainContent/TopRightPos"]
+position = Vector2( -20, 5 )
+scale = Vector2( 0.08, 0.08 )
+normal = ExtResource( 2 )
+
+[node name="BottomLeftPos" type="Control" parent="MainContent"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContent/BottomLeftPos"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -23.0
+custom_constants/separation = 1
+
+[node name="TimeLabel" type="Label" parent="MainContent/BottomLeftPos/VBoxContainer"]
+margin_right = 28.0
+margin_bottom = 6.0
+custom_fonts/font = SubResource( 22 )
+text = "00:00:00"
+
+[node name="MileLabel" type="Label" parent="MainContent/BottomLeftPos/VBoxContainer"]
+margin_top = 7.0
+margin_right = 28.0
+margin_bottom = 17.0
+custom_fonts/font = SubResource( 23 )
+text = "0m"
+
+[node name="TimerGroup" type="Node2D" parent="MainContent"]
+
+[node name="SpawnEnemyTimer" type="Timer" parent="MainContent/TimerGroup"]
+wait_time = 2.5
+autostart = true
+
+[node name="MileTimer" type="Timer" parent="MainContent/TimerGroup"]
+wait_time = 0.5
+autostart = true
+
+[node name="CoinTimer" type="Timer" parent="MainContent/TimerGroup"]
+wait_time = 3.2
+one_shot = true
+
+[node name="RemoveCoinTimer" type="Timer" parent="MainContent/TimerGroup"]
+wait_time = 5.0
+one_shot = true
+
+[node name="DeathZone" type="Area2D" parent="MainContent"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainContent/DeathZone"]
+position = Vector2( -40, -39.2033 )
+shape = SubResource( 15 )
+
+[node name="DeathZoneRight" type="Area2D" parent="MainContent"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainContent/DeathZoneRight"]
+position = Vector2( 441, 80 )
+scale = Vector2( 1.00137, 0.998757 )
+shape = SubResource( 32 )
+
+[node name="StopZoneLeft" type="Area2D" parent="MainContent"]
+scale = Vector2( 1.05438, 1.00085 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainContent/StopZoneLeft"]
+position = Vector2( 43.1533, 104.465 )
+scale = Vector2( 1, 0.999999 )
+shape = SubResource( 28 )
+
+[node name="StopZoneRight" type="Area2D" parent="MainContent"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainContent/StopZoneRight"]
+position = Vector2( 280, 80 )
+shape = SubResource( 31 )
+
+[node name="Camera2D" type="Camera2D" parent="MainContent"]
+anchor_mode = 0
+current = true
+
+[node name="StartObject" parent="MainContent" instance=ExtResource( 3 )]
+position = Vector2( -71, 102 )
+
+[node name="Background" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.392157 )
+
+[node name="PopupScreens" type="Control" parent="."]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PausedSceen" parent="PopupScreens" instance=ExtResource( 7 )]
+
+[connection signal="pressed" from="MainContent/TopRightPos/Pause" to="." method="_on_Pause_pressed"]
+[connection signal="timeout" from="MainContent/TimerGroup/SpawnEnemyTimer" to="." method="_on_SpawnEnemyTimer_timeout"]
+[connection signal="timeout" from="MainContent/TimerGroup/MileTimer" to="." method="_on_MileTimer_timeout"]
+[connection signal="timeout" from="MainContent/TimerGroup/CoinTimer" to="." method="_on_CoinTimer_timeout"]
+[connection signal="timeout" from="MainContent/TimerGroup/RemoveCoinTimer" to="." method="_on_RemoveCoinTimer_timeout"]
+[connection signal="body_shape_entered" from="MainContent/DeathZone" to="." method="_on_DeathZone_body_shape_entered"]
+[connection signal="body_shape_entered" from="MainContent/DeathZoneRight" to="." method="_on_DeathZone_body_shape_entered"]
+[connection signal="body_shape_entered" from="MainContent/StopZoneLeft" to="." method="_on_StopZoneLeft_body_shape_entered"]
+[connection signal="body_shape_entered" from="MainContent/StopZoneRight" to="." method="_on_StopZoneRight_body_shape_entered"]

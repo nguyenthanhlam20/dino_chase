@@ -1,0 +1,220 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://Game/UI/Screen/SceneTransition/circle-loading.png" type="Texture" id=1]
+[ext_resource path="res://Game/UI/Screen/SceneTransition/transition.gdshader" type="Shader" id=2]
+[ext_resource path="res://Resource/Fonts/Bungee-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Game/UI/Screen/SceneTransition/AvatarContainer.gd" type="Script" id=4]
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 2 )
+shader_param/saw_b_shift = -0.267
+shader_param/saw_a_interval = 1.0
+shader_param/saw_b_interval = 2.0
+shader_param/saw_a_scale = 1.0
+shader_param/saw_b_scale = 0.821
+shader_param/uv_scale = Vector2( 3, 8 )
+shader_param/color = Color( 0, 0, 0, 1 )
+shader_param/right = 1.2
+shader_param/left = 1.2
+
+[sub_resource type="Animation" id=1]
+resource_name = "RESET"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("DissolveRect:material:shader_param/right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DissolveRect:material:shader_param/left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.2 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "dissolve"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("DissolveRect:material:shader_param/right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.2, 4.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DissolveRect:material:shader_param/left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.2, -1.0 ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "loading"
+loop = true
+
+[sub_resource type="DynamicFont" id=23]
+size = 10
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=24]
+bg_color = Color( 0.956863, 0.698039, 0.0745098, 1 )
+
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0.952941, 0.466667, 0.466667, 1 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 104, 104 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 104, 104, 104 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 208, 104, 104 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 312, 104, 104 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 416, 104, 104 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 520, 104, 104 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 624, 104, 104 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 728, 104, 104 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 832, 104, 104 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 936, 104, 104 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1040, 104, 104 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1144, 104, 104 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1248, 104, 104 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1352, 104, 104 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1456, 104, 104 )
+
+[sub_resource type="SpriteFrames" id=41]
+animations = [ {
+"frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ) ],
+"loop": true,
+"name": "default",
+"speed": 20.0
+} ]
+
+[sub_resource type="DynamicFont" id=42]
+size = 7
+font_data = ExtResource( 3 )
+
+[node name="SceneTransition" type="CanvasLayer"]
+
+[node name="DissolveRect" type="ColorRect" parent="."]
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/dissolve = SubResource( 2 )
+anims/loading = SubResource( 22 )
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -11.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 23 )
+custom_styles/fg = SubResource( 24 )
+custom_styles/bg = SubResource( 25 )
+
+[node name="LoadingContainer" type="Control" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="LoadingIcon" type="AnimatedSprite" parent="LoadingContainer"]
+position = Vector2( -47, -20 )
+scale = Vector2( 0.08, 0.08 )
+frames = SubResource( 41 )
+frame = 4
+playing = true
+
+[node name="LoadingMessage" type="Label" parent="LoadingContainer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -39.0
+margin_top = -24.0
+margin_right = -5.0
+margin_bottom = -14.0
+custom_fonts/font = SubResource( 42 )
+text = "Loading"
+
+[node name="AvatarContainer" type="CenterContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+script = ExtResource( 4 )

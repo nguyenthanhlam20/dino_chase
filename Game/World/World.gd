@@ -1,33 +1,33 @@
 extends Control
 
 
-onready var player : KinematicBody2D
-onready var enemies = $MainContent/Enemies
-onready var pause_btn = $MainContent/TopControls/Right/Pause
-onready var bottom_controls = $MainContent/BottomControls
-onready var paused_screen = $PopupScreens/PausedSceen
-onready var popup_screens = $PopupScreens
-onready var health_container = $MainContent/Profile/Health
-onready var main_content = $MainContent
-onready var mile_lable = $MainContent/LabelGroup/VBoxContainer/MileLabel
-onready var time_label = $MainContent/LabelGroup/VBoxContainer/TimeLabel
-onready var mile_timer = $MainContent/TimerGroup/MileTimer
-onready var coin_timer = $MainContent/TimerGroup/CoinTimer
-onready var remove_coin_timer = $MainContent/TimerGroup/RemoveCoinTimer
-onready var spawn_timer = $MainContent/TimerGroup/SpawnEnemyTimer
-onready var stop_zone = $MainContent/StopZone
+onready var player = $Player
+onready var enemies = $Enemies
+onready var pause_btn = $TopControls/Right/Pause
+onready var bottom_controls = $BottomControls
+onready var health_container = $Profile/Health
+onready var mile_lable = $LabelGroup/VBoxContainer/MileLabel
+onready var time_label = $LabelGroup/VBoxContainer/TimeLabel
+onready var mile_timer = $TimerGroup/MileTimer
+onready var coin_timer = $TimerGroup/CoinTimer
+onready var remove_coin_timer = $TimerGroup/RemoveCoinTimer
+onready var spawn_timer = $TimerGroup/SpawnEnemyTimer
+onready var stop_zone = $StopZone
 onready var background = $Background
-onready var score_label = $MainContent/TopControls/CenterContainer/Score
-onready var health_node = $MainContent/Profile/Health
-onready var map_container = $MainContent/Map
-onready var start_object = $MainContent/StartObject
-onready var bend_down = $MainContent/BottomControls/BendownContainer/BendDown
-onready var Heart = preload("res://Game/Characters/Heart.tscn")
-onready var particles = preload("res://Game/Characters/Particles.tscn")
-onready var coin = preload("res://Game/Characters/Coin/Coin.tscn")
-onready var screens = ScreenSettings.get_screens()
+onready var score_label = $TopControls/CenterContainer/Score
+onready var health_node = $Profile/Health
+onready var map_container = $Map
+onready var start_object = $StartObject
+onready var bend_down = $BottomControls/BendownContainer/BendDown
+
+onready var Heart = load(Constants.HEART)
+onready var particles = load(Constants.PARTICLES)
+onready var coin = load(Constants.COIN)
+onready var game_over_screen = load(Constants.GAME_OVER_SCREEN)
+onready var paused_screen = load(Constants.PAUSED_SCREEN)
+
 onready var season_enemies = EnemySettings.get_enemies()
-onready var original_enemy = EnemyFactory.get_enemies()
+onready var original_enemy = []
 var unlock_enemies = []
 var particle_instance : KinematicBody2D
 var enemy : KinematicBody2D
@@ -64,7 +64,7 @@ func enable_buttons():
 	paused_screen.enable_buttons()
 	
 func add_hearts():
-	player_health = PlayerSettings.get_player_health()
+	player_health = PlayerSettings.get_player_info("health")
 	for number in range(0, player_health):
 		print('add heart: ', number + 1)
 		var heart = Heart.instance()
@@ -86,8 +86,8 @@ func put_player():
 	paricles_inst.position = Vector2(29.5, 100)
 	
 	particle_instance = paricles_inst
-	main_content.add_child(paricles_inst)
-	main_content.add_child(current_player)
+	self.add_child(paricles_inst)
+	self.add_child(current_player)
 	
 	player = current_player
 	player.set_root_node(self)
@@ -151,20 +151,8 @@ func _on_SpawnEnemyTimer_timeout():
 	spawn_enemy()
 #	pass
 
-func show_main_content(value):
-	main_content.visible = value
-	show_background(value)
-	show_paused_btn(value)
-	
-func show_background(value):
-	background.visible = value
-	
 func show_paused_btn(value):
 	pause_btn.visible = value
-	
-func show_paused_screen(value):
-	paused_screen.visible = value
-
 	
 func show_label(value):
 #	time_label.visible = value
@@ -180,9 +168,7 @@ func _on_DeathZone_body_shape_entered(body_rid, body, body_shape_index, local_sh
 	body.queue_free()
 
 func _on_Pause_pressed():
-	show_paused_screen(true)
 	show_paused_btn(false)
-	show_background(true)
 	get_tree().paused = true
 #	Common.set_pause_node(get_tree().get_root().get_node("World"), false)
 
@@ -212,16 +198,14 @@ func _on_MileTimer_timeout():
 func show_game_over_screen():
 	player.set_enemy_completion(unlock_enemies)
 	show_label(false)
-	show_paused_screen(false)
-	show_background(true)
-	var game_over_screen = load(screens.get("GAME_OVER_SCREEN")).instance()
-	add_popup_screen(game_over_screen)
+	var gos_ins = game_over_screen.instance()
+	
 	game_over_screen.show_result(player)
 	game_over_screen.set_root_node(self)
-	game_over_screen.show_popup()
+	self.add_child(gos_ins)
 
 func update_coin(value):
-#	main_content.get_node("Coin").queue_free()
+#	self.get_node("Coin").queue_free()
 	score_label.text = "Coin: " + str(value)
 	reset_coin_timer()
 
@@ -235,10 +219,6 @@ func set_running(value):
 	var map = map_container.get_child(0)
 	map.set_is_running(value)
 
-func add_popup_screen(screen):
-#	print("on world add popup screen")
-	popup_screens.add_child(screen)
-
 func update_time(value):
 	time_label.text = value
 	
@@ -251,12 +231,12 @@ func reset_coin_timer():
 func _on_CoinTimer_timeout():
 	var coin_instance = coin.instance()
 	coin_instance.set("position", Vector2(29, 78))
-	main_content.add_child(coin_instance)
+	self.add_child(coin_instance)
 	remove_coin_timer.start()
 
 func _on_RemoveCoinTimer_timeout():
-	if(main_content.has_node("Coin")):
-		var coin_node = main_content.get_node("Coin")
+	if(self.has_node("Coin")):
+		var coin_node = self.get_node("Coin")
 		coin_node.play_disappear()
 		coin_timer.start()
 
@@ -313,9 +293,9 @@ func set_particle_fall_state():
 	particle_instance.set_fall_state()
 
 func remove_coin():
-	if(main_content.has_node("Coin")):
-		var coin_node = main_content.get_node("Coin")
-		main_content.remove_child(coin_node)
+	if(self.has_node("Coin")):
+		var coin_node = self.get_node("Coin")
+		self.remove_child(coin_node)
 
 func stop_timer() -> void:
 	spawn_timer.stop()
@@ -331,5 +311,5 @@ func stop_all_objects():
 	set_running(false)
 	spawn_timer.stop()
 	player.play_stop()
-	main_content.remove_child(main_content.get_node("Enemies"))
+	self.remove_child(self.get_node("Enemies"))
 	

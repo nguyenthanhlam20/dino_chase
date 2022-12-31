@@ -1,33 +1,18 @@
-extends Popup
+extends Control
 
-onready var back_btn = $Back
+onready var back_btn = $TopRightPos/Back
 onready var effectVolume = $GridContainer/EffectVolume
 onready var musicVolume = $GridContainer/MusicVolume
 onready var swap_input = $GridContainer/SwapInput
 onready var timer_status = $GridContainer/TimerStatus
-onready var home_screen setget set_home_screen
+onready var root_node setget set_root_node
 
-
-var click = 0;
-var is_first_load = true
-
-var show_popup_status = true
-var is_show_popup = false
-
-func set_home_screen(value):
-	home_screen = value
+func set_root_node(value):
+	root_node = value
 	
 func disable_btn():
 	back_btn.disconnect("released", self, "_on_Back_released")	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _on_SettingsMenu_run_background():
-	show_popup_status = false
-	home_screen.show_main_content(false)
-	if(home_screen.name == "World"):
-		home_screen.show_paused_screen(false)
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 #	Set min and max for music and effect
 	musicVolume.max_value = GameSettings.music_volume_max
@@ -52,18 +37,8 @@ func _ready():
 	swap_input.set("pressed", GameSettings.swap_input)
 	timer_status.set("pressed", GameSettings.timer_status)
 
-func showPopup():
-	if(self.visible):
-		self.hide()
-	else:
-		self.show()
-
-
 func _on_EffectVolume_value_changed(value):
-	if(!is_first_load):
-		GameSettings.playEffect(EffectSettings.COIN_EFFECT)
-	else: 
-		is_first_load = false
+	GameSettings.playEffect(Constants.COIN_EFFECT)
 	GameSettings.set_effect_volume(value)
 
 
@@ -80,9 +55,9 @@ func _on_SwapInput_pressed():
 		GameSettings.swap_input = true
 		swap_input.text = "on"
 	
-	if(home_screen.name == "World"):
-		home_screen.set_input_position() 
-#	print(GameSettings.swap_input)
+	if(root_node.name == "World"):
+		root_node.set_input_position() 
+
 
 
 func _on_MusicVolume_changed():
@@ -98,16 +73,14 @@ func _on_TimerStatus_pressed():
 		GameSettings.timer_status = true
 		timer_status.text = "on"
 	
-	if(home_screen.name == "World"):
-		home_screen.show_timer() 
+	if(root_node.name == "World"):
+		root_node.show_timer() 
 
 func _on_Back_released():
 	disable_btn()
-	yield(get_tree().create_timer(0.2), "timeout")
-	showPopup()
-	home_screen.show_main_content(true)
-	home_screen.enable_buttons()
-	if(home_screen.name == "World"):
-		home_screen.show_paused_screen(true)
-		home_screen.show_background(true)
+	yield(get_tree().create_timer(0.1), "timeout")
 	GameSettings.save_settings_data()
+	root_node.enable_buttons()
+	if(root_node.name == "HomeScreen"):
+		get_tree().paused = false
+	self.queue_free()

@@ -60,18 +60,16 @@ func roll_start_animation_finished():
 func roll_stop_animation_finished():
 	current_state = STATE.RUN
 
-func _on_RollStartArea_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if(body is Player):
+func _on_RollStartArea_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
 		if(moving_style == MOVING_STYLE.RUN_ROLLING_RUN):
 			go_roll_start()
 		if(moving_style == MOVING_STYLE.ROLLING_RUN_ROLLING):
 			go_roll_stop()
 
-func _on_RollStopArea_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if(body is Player):
-		if(moving_style == MOVING_STYLE.RUN_ROLLING_RUN 
+func _on_RollStopArea_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
+	if(moving_style == MOVING_STYLE.RUN_ROLLING_RUN 
 		|| moving_style == MOVING_STYLE.ROLLING_RUN):
-			go_roll_stop()
-		if(moving_style == MOVING_STYLE.RUN_ROLLING
+		go_roll_stop()
+	if(moving_style == MOVING_STYLE.RUN_ROLLING
 		|| moving_style == MOVING_STYLE.ROLLING_RUN_ROLLING):
-			go_roll_start()
+		go_roll_start()

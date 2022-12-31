@@ -34,7 +34,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="GameOver" type="Popup"]
-visible = true
+pause_mode = 2
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -62,10 +62,12 @@ text = "Miles"
 align = 1
 
 [node name="ColorRect" type="Label" parent="."]
-margin_left = 85.0
-margin_top = 57.0
-margin_right = 85.0
-margin_bottom = 120.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -76.5
+margin_top = 56.0
+margin_right = 76.5
+margin_bottom = 126.0
 rect_min_size = Vector2( 153, 70 )
 custom_styles/normal = SubResource( 5 )
 
@@ -200,17 +202,21 @@ theme = ExtResource( 4 )
 text = "0"
 align = 2
 
-[node name="Home" type="TouchScreenButton" parent="."]
-position = Vector2( 72, 144 )
+[node name="CenterBottomPosition" type="Control" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+
+[node name="Home" type="TouchScreenButton" parent="CenterBottomPosition"]
+position = Vector2( -87, 143 )
 scale = Vector2( 0.15, 0.15 )
 normal = ExtResource( 11 )
 pressed = ExtResource( 7 )
 
-[node name="PlayAgain" type="TouchScreenButton" parent="."]
-position = Vector2( 168, 144 )
+[node name="PlayAgain" type="TouchScreenButton" parent="CenterBottomPosition"]
+position = Vector2( 6, 143 )
 scale = Vector2( 0.15, 0.15 )
 normal = ExtResource( 2 )
 pressed = ExtResource( 10 )
 
-[connection signal="released" from="Home" to="." method="_on_Home_released"]
-[connection signal="released" from="PlayAgain" to="." method="_on_PlayAgain_released"]
+[connection signal="released" from="CenterBottomPosition/Home" to="." method="_on_Home_released"]
+[connection signal="released" from="CenterBottomPosition/PlayAgain" to="." method="_on_PlayAgain_released"]

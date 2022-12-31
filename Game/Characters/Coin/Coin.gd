@@ -17,12 +17,11 @@ func appear_animation_finished():
 func disappear_animation_finished():
 	self.queue_free()
 
-func _on_Hitbox_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_Hitbox_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):
 	if(body.name == "Player"):
-		GameSettings.playEffect(EffectSettings.COIN_EFFECT)
+		GameSettings.playEffect(Constants.COIN_EFFECT)
 		animation_player.play("disappear")
 		body.gain_coin()
-		print("body shape entered: ",body_rid, body, body_shape_index, local_shape_index )
-		
+
 func play_disappear():
 	animation_player.play("disappear")

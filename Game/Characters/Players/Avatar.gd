@@ -1,23 +1,34 @@
 extends KinematicBody2D
 
-#onready var animation_player = $AnimationPlayer
-#onready var animation_player = $AnimationPlayer
+enum STATE {LOCK, UNLOCK}
+enum MOVING_STYLE {IDLE, BEND_DOWN}
+var moving_style = MOVING_STYLE.IDLE
 
+var current_state : int setget set_current_state
 
-var current_state = "LOCK" setget set_current_state
-
+func _process(_delta):
+	match(moving_style):
+		MOVING_STYLE.IDLE:
+			match(current_state):
+				STATE.LOCK:
+					$AnimationPlayer.play("idle_lock")
+				STATE.UNLOCK:
+					$AnimationPlayer.play("idle")
+		MOVING_STYLE.BEND_DOWN:
+			match(current_state):
+				STATE.LOCK:
+					$AnimationPlayer.play("bend_down_lock")
+				STATE.UNLOCK:
+					$AnimationPlayer.play("bend_down")
+					
 func set_current_state(value):
 	current_state = value
-
-func _ready():
-	match(current_state):
-		"LOCK":
-#			print("lock")
-			$AnimationPlayer.play("bend_down_lock")
-		"UNLOCK":
-#			print("unlock")
-			$AnimationPlayer.play("bend_down")
-		"IDLE":
-			$AnimationPlayer.play("idle")
-			$AnimatedSprite.flip_h = true
 	
+func set_player_avatar(value) -> void:
+	$AnimatedSprite.frames = load(value)
+	
+func idle_animation_finished():
+	moving_style = MOVING_STYLE.BEND_DOWN
+			
+func bend_down_animation_finished():
+	moving_style = MOVING_STYLE.IDLE

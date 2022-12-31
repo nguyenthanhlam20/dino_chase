@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Game/Characters/Enemies/AvatarScript.gd" type="Script" id=1]
+[ext_resource path="res://Game/Characters/Enemies/EnemyAvatar.gd" type="Script" id=1]
 [ext_resource path="res://Resource/Arts/Enemies/Autumn/Assassin/assassin_41x35.png" type="Texture" id=2]
 [ext_resource path="res://Resource/Arts/Enemies/Autumn/Assassin/assassin_41x35_lock.png" type="Texture" id=3]
 
@@ -85,10 +85,10 @@ animations = [ {
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -6, -4 )
+position = Vector2( -7, -5 )
 scale = Vector2( 0.7, 0.7 )
 frames = SubResource( 8 )
-animation = "lock_active"
+animation = "active"
 frame = 1
 playing = true
 flip_h = true

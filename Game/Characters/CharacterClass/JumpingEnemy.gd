@@ -4,11 +4,10 @@ class_name JumpingEnemy
 
 onready var animation_player = $AnimationPlayer
 onready var jump_zone = $JumpZone
-export(int) var jump_force = 350
 
 var velocity : Vector2
-var position_x = 280
-var position_y = 110
+var position_x = GameSettings.right_position.x + 10
+var position_y =  GameSettings.right_position.y - 70
 
 enum STATE {RUN, JUMP, JUMP_HIGHER, FALL}
 var current_state = STATE.RUN 
@@ -38,31 +37,31 @@ func moving():
 func run():
 	animation_player.play("run")
 	velocity = Vector2(
-		velocity.x- moving_speed, 
-		min(velocity.y + GameSettings.gravity, GameSettings.terminal_gravity)
+		-moving_speed, 
+		min(velocity.y + gravity, GameSettings.terminal_gravity)
 	)
 
 func jump_higher():
 	animation_player.play("jump")
 	current_state = STATE.FALL
 	velocity = Vector2(
-		velocity.x - moving_speed,
-		-(jump_force - 30)
+		-moving_speed,
+		-(jump_force + 20)
 	)
 
 func jump():
 	animation_player.play("jump")
 	current_state = STATE.FALL
 	velocity = Vector2(
-		velocity.x - moving_speed, 
+		-moving_speed, 
 		-jump_force
 	)
 	
 func fall():
 	animation_player.play("fall")
 	velocity = Vector2(
-		velocity.x - moving_speed,
-		min(velocity.y + GameSettings.gravity, GameSettings.terminal_gravity)
+		-moving_speed,
+		min(velocity.y + gravity, GameSettings.terminal_gravity)
 	)
 	if(is_on_floor()):
 		current_state = STATE.RUN
@@ -76,10 +75,12 @@ func jump_animation_finished():
 		
 func go_jump_over():
 	if(moving_style == MOVING_STYLE.ONE_JUMP_NEAR 
-		|| moving_style == MOVING_STYLE.TWO_JUMP):
+	|| moving_style == MOVING_STYLE.TWO_JUMP):
 		current_state = STATE.JUMP_HIGHER
 		
-func _on_JumpZone_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if(body is Player):
-		go_jump_over()
-		jump_zone.queue_free()
+func _on_JumpZone_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
+	go_jump_over()
+	jump_zone.queue_free()
+		
+func do_action():
+	go_jump()

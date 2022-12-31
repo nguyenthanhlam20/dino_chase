@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Game/Maps/Maps.gd" type="Script" id=2]
+[ext_resource path="res://Resource/Background/Top/Spring/sunny-mountains-sky.png" type="Texture" id=4]
+[ext_resource path="res://Resource/Background/Top/Spring/sunny-mountains-far-back.png" type="Texture" id=7]
+[ext_resource path="res://Resource/Background/Top/Spring/sunny-mountains-hills.png" type="Texture" id=8]
+
+[node name="SpringBackground" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Background" type="ParallaxBackground" parent="."]
+
+[node name="Layer1" type="ParallaxLayer" parent="Background"]
+position = Vector2( 0, -25 )
+motion_mirroring = Vector2( 332, 0 )
+
+[node name="Sprite" type="Sprite" parent="Background/Layer1"]
+position = Vector2( 166, 87 )
+scale = Vector2( 0.65, 0.65 )
+texture = ExtResource( 4 )
+
+[node name="Layer2" type="ParallaxLayer" parent="Background"]
+motion_mirroring = Vector2( 332, 0 )
+
+[node name="Sprite" type="Sprite" parent="Background/Layer2"]
+position = Vector2( 166, 80 )
+scale = Vector2( 0.65, 0.65 )
+texture = ExtResource( 7 )
+
+[node name="Layer3" type="ParallaxLayer" parent="Background"]
+motion_mirroring = Vector2( 332, 0 )
+
+[node name="Sprite" type="Sprite" parent="Background/Layer3"]
+position = Vector2( 166, 111 )
+scale = Vector2( 0.65, 0.65 )
+texture = ExtResource( 8 )
+
+[node name="Layer4" type="ParallaxLayer" parent="Background"]
+motion_mirroring = Vector2( 374, 0 )
+
+[node name="Sprite" type="Sprite" parent="Background/Layer4"]
+position = Vector2( 187, 71 )
+scale = Vector2( 0.65, 0.65 )
+
+[node name="Layer5" type="ParallaxLayer" parent="Background"]
+motion_mirroring = Vector2( 374, 0 )
+
+[node name="Sprite" type="Sprite" parent="Background/Layer5"]
+position = Vector2( 187, 71 )
+scale = Vector2( 0.65, 0.65 )
+
+[node name="Ground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Ground"]
+motion_mirroring = Vector2( 400, 0 )
+
+[node name="Sprite" type="Sprite" parent="Ground/ParallaxLayer"]
+position = Vector2( 200, 312 )
