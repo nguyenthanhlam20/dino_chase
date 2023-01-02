@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Options-short-2.png-e4cb787341effa2314b75ecaa7df56cb.stex"
+path="res://import/Options-short-2.png-e4cb787341effa2314b75ecaa7df56cb.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Buttons/Options-short-2.png"
-dest_files=[ "res://.import/Options-short-2.png-e4cb787341effa2314b75ecaa7df56cb.stex" ]
+dest_files=[ "res://import/Options-short-2.png-e4cb787341effa2314b75ecaa7df56cb.stex" ]
 
 [params]
 

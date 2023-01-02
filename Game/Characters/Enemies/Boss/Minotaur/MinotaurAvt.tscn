@@ -1,0 +1,96 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Game/Characters/Enemies/EnemyAvatar.gd" type="Script" id=1]
+[ext_resource path="res://Resource/Arts/Enemies/Boss/Minotaur/mi_attack_three_75x65.png" type="Texture" id=3]
+[ext_resource path="res://Resource/Arts/Enemies/Boss/Minotaur/Minotaur_lock.png" type="Texture" id=4]
+
+[sub_resource type="CircleShape2D" id=13]
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 75, 65 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 3 )
+region = Rect2( 75, 0, 75, 65 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 3 )
+region = Rect2( 150, 0, 75, 65 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 3 )
+region = Rect2( 225, 0, 75, 65 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 3 )
+region = Rect2( 300, 0, 75, 65 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 3 )
+region = Rect2( 375, 0, 75, 65 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 75, 65 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 75, 65 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 4 )
+region = Rect2( 75, 0, 75, 65 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 4 )
+region = Rect2( 150, 0, 75, 65 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 4 )
+region = Rect2( 225, 0, 75, 65 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 4 )
+region = Rect2( 300, 0, 75, 65 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 75, 65 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "active",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 29 ) ],
+"loop": true,
+"name": "deactive",
+"speed": 1.0
+}, {
+"frames": [ SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ) ],
+"loop": true,
+"name": "lock_active",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 35 ) ],
+"loop": true,
+"name": "lock_deactive",
+"speed": 1.0
+} ]
+
+[node name="MinotaurAvt" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 13 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 1, -2 )
+scale = Vector2( 0.4, 0.4 )
+frames = SubResource( 8 )
+animation = "deactive"
+playing = true
+flip_h = true

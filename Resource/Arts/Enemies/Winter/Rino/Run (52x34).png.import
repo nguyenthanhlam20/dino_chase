@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Run (52x34).png-dd02232a39a44d938065b2148eb843dc.stex"
+path="res://import/Run (52x34).png-dd02232a39a44d938065b2148eb843dc.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Winter/Rino/Run (52x34).png"
-dest_files=[ "res://.import/Run (52x34).png-dd02232a39a44d938065b2148eb843dc.stex" ]
+dest_files=[ "res://import/Run (52x34).png-dd02232a39a44d938065b2148eb843dc.stex" ]
 
 [params]
 

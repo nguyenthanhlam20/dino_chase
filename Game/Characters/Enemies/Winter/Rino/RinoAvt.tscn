@@ -4,6 +4,8 @@
 [ext_resource path="res://Game/Characters/Enemies/EnemyAvatar.gd" type="Script" id=2]
 [ext_resource path="res://Resource/Arts/Enemies/Winter/Rino/Rino_52x34_lock.png" type="Texture" id=3]
 
+[sub_resource type="CircleShape2D" id=31]
+
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 52, 34 )
@@ -83,19 +85,15 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7, 8 )
-
 [node name="RinoAvt" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 31 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 16 )
 animation = "lock_deactive"
 playing = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource( 1 )

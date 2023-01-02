@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Choose-2.png-a08a53e3367761836796b313ef80bdba.stex"
+path="res://import/Choose-2.png-a08a53e3367761836796b313ef80bdba.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Buttons/Choose-2.png"
-dest_files=[ "res://.import/Choose-2.png-a08a53e3367761836796b313ef80bdba.stex" ]
+dest_files=[ "res://import/Choose-2.png-a08a53e3367761836796b313ef80bdba.stex" ]
 
 [params]
 

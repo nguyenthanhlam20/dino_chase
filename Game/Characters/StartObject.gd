@@ -48,7 +48,7 @@ func _physics_process(_delta):
 		pass
 
 
-func play_stop():
+func do_action():
 	current_state = STATE.STOP
 	
 func stop_animation_finished():

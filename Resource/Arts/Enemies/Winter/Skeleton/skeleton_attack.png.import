@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/skeleton_attack.png-739ee160280f9c1f01e002c860c0138e.stex"
+path="res://import/skeleton_attack.png-739ee160280f9c1f01e002c860c0138e.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Winter/Skeleton/skeleton_attack.png"
-dest_files=[ "res://.import/skeleton_attack.png-739ee160280f9c1f01e002c860c0138e.stex" ]
+dest_files=[ "res://import/skeleton_attack.png-739ee160280f9c1f01e002c860c0138e.stex" ]
 
 [params]
 

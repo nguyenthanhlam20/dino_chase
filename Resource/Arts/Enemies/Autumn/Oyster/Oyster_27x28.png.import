@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Oyster_27x28.png-fcbc46a5f60568caff9d1a69270829d1.stex"
+path="res://import/Oyster_27x28.png-fcbc46a5f60568caff9d1a69270829d1.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Autumn/Oyster/Oyster_27x28.png"
-dest_files=[ "res://.import/Oyster_27x28.png-fcbc46a5f60568caff9d1a69270829d1.stex" ]
+dest_files=[ "res://import/Oyster_27x28.png-fcbc46a5f60568caff9d1a69270829d1.stex" ]
 
 [params]
 

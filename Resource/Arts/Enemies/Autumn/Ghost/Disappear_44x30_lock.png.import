@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Disappear_44x30_lock.png-d443852042e84385248f4db0d09b74fc.stex"
+path="res://import/Disappear_44x30_lock.png-d443852042e84385248f4db0d09b74fc.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Autumn/Ghost/Disappear_44x30_lock.png"
-dest_files=[ "res://.import/Disappear_44x30_lock.png-d443852042e84385248f4db0d09b74fc.stex" ]
+dest_files=[ "res://import/Disappear_44x30_lock.png-d443852042e84385248f4db0d09b74fc.stex" ]
 
 [params]
 

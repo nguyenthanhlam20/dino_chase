@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rainbow_crack.png-b52078fbddc41ffc3ff9be99c7339f95.stex"
+path="res://import/rainbow_crack.png-b52078fbddc41ffc3ff9be99c7339f95.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Others/Egg/Rainbow/rainbow_crack.png"
-dest_files=[ "res://.import/rainbow_crack.png-b52078fbddc41ffc3ff9be99c7339f95.stex" ]
+dest_files=[ "res://import/rainbow_crack.png-b52078fbddc41ffc3ff9be99c7339f95.stex" ]
 
 [params]
 

@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/big_mouth_27x32_lock.png-40460959329f5a3d3fb80af7bef68ac5.stex"
+path="res://import/big_mouth_27x32_lock.png-40460959329f5a3d3fb80af7bef68ac5.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Winter/BigMouth/big_mouth_27x32_lock.png"
-dest_files=[ "res://.import/big_mouth_27x32_lock.png-40460959329f5a3d3fb80af7bef68ac5.stex" ]
+dest_files=[ "res://import/big_mouth_27x32_lock.png-40460959329f5a3d3fb80af7bef68ac5.stex" ]
 
 [params]
 

@@ -8,13 +8,13 @@
 [node name="VarbuAvt" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 23 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -5, -2 )
-scale = Vector2( 0.7, 0.7 )
+position = Vector2( -6, -1 )
+scale = Vector2( 0.8, 0.8 )
 frames = ExtResource( 1 )
 animation = "lock_deactive"
 playing = true
 flip_h = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 23 )

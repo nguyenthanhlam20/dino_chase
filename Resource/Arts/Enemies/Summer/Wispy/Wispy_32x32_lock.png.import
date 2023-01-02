@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Wispy_32x32_lock.png-64a1db122e379ea18e24201913239afe.stex"
+path="res://import/Wispy_32x32_lock.png-64a1db122e379ea18e24201913239afe.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Summer/Wispy/Wispy_32x32_lock.png"
-dest_files=[ "res://.import/Wispy_32x32_lock.png-64a1db122e379ea18e24201913239afe.stex" ]
+dest_files=[ "res://import/Wispy_32x32_lock.png-64a1db122e379ea18e24201913239afe.stex" ]
 
 [params]
 

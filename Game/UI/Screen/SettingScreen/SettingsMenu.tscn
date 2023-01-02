@@ -66,6 +66,7 @@ margin_right = 260.0
 margin_bottom = 16.0
 size_flags_horizontal = 11
 size_flags_vertical = 1
+theme = ExtResource( 1 )
 min_value = -24.0
 max_value = 24.0
 

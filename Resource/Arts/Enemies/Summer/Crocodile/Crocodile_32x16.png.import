@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Crocodile_32x16.png-78c6289eef51c5a09b255c240e2838d3.stex"
+path="res://import/Crocodile_32x16.png-78c6289eef51c5a09b255c240e2838d3.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Summer/Crocodile/Crocodile_32x16.png"
-dest_files=[ "res://.import/Crocodile_32x16.png-78c6289eef51c5a09b255c240e2838d3.stex" ]
+dest_files=[ "res://import/Crocodile_32x16.png-78c6289eef51c5a09b255c240e2838d3.stex" ]
 
 [params]
 

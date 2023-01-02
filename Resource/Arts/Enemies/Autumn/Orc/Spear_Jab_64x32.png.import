@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Spear_Jab_64x32.png-b74758f16e25b92cfa85288e428f1769.stex"
+path="res://import/Spear_Jab_64x32.png-b74758f16e25b92cfa85288e428f1769.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Autumn/Orc/Spear_Jab_64x32.png"
-dest_files=[ "res://.import/Spear_Jab_64x32.png-b74758f16e25b92cfa85288e428f1769.stex" ]
+dest_files=[ "res://import/Spear_Jab_64x32.png-b74758f16e25b92cfa85288e428f1769.stex" ]
 
 [params]
 

@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Cancel-1.png-8b0e2e61f83521dd75701d32537cf118.stex"
+path="res://import/Cancel-1.png-8b0e2e61f83521dd75701d32537cf118.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Buttons/Cancel-1.png"
-dest_files=[ "res://.import/Cancel-1.png-8b0e2e61f83521dd75701d32537cf118.stex" ]
+dest_files=[ "res://import/Cancel-1.png-8b0e2e61f83521dd75701d32537cf118.stex" ]
 
 [params]
 

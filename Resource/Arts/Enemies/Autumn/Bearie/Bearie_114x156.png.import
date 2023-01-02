@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Bearie_114x156.png-3bf3df1ab6ed6c494d0db609aa1491d4.stex"
+path="res://import/Bearie_114x156.png-3bf3df1ab6ed6c494d0db609aa1491d4.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Autumn/Bearie/Bearie_114x156.png"
-dest_files=[ "res://.import/Bearie_114x156.png-3bf3df1ab6ed6c494d0db609aa1491d4.stex" ]
+dest_files=[ "res://import/Bearie_114x156.png-3bf3df1ab6ed6c494d0db609aa1491d4.stex" ]
 
 [params]
 

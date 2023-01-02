@@ -4,15 +4,16 @@ onready var option_btn = $LeftPos/Options
 onready var play_btn = $CenterPos/Play
 onready var more_btn = $RightPos/More
 onready var tile_map = $TileMap
+onready var animation_player = $AnimationPlayer
 
 onready var right_position = $RightPos
 onready var center_position = $CenterPos
 onready var setting_screen = load(Constants.SETTINGS_SCREEN)
 
 var settings_screen : Control
-
 var size_decrease : int
 var player : KinematicBody2D
+
 func change_player_speed():
 	size_decrease = right_position.rect_position.x - center_position.rect_position.x - 80
 	if(player.move_speed > 0):
@@ -21,12 +22,20 @@ func change_player_speed():
 		player.jump_speed = -size_decrease
 	player.jump_force = 380
 
+func normal_animation_finished():
+	animation_player.play("zoom")
+
+func zoom_animation_finished():
+	animation_player.play("normal")
+		
+
 func _ready():
+	animation_player.play("normal")
 	GameSettings.gravity = 15
 	tile_map.visible = false
 	var player_movement = load(PlayerSettings.get_player_info("move")).instance()
 	var map_background = load(MapSettings.get_map_info("map_background")).instance()
-	map_background.base_speed = -15
+	map_background.base_speed = -30
 	player_movement.position = Vector2(more_btn.global_position.x + 30, more_btn.global_position.y)
 	self.add_child(player_movement)
 	self.add_child(map_background)

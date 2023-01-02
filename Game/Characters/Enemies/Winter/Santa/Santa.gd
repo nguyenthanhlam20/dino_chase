@@ -51,7 +51,6 @@ func attack():
 			animation_player.play("attack_two")
 		ATTACK_STYLE.THREE:
 			animation_player.play("attack_three")
-		
 	
 	velocity = Vector2(
 		-moving_speed, 

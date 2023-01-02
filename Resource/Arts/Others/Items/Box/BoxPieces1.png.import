@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BoxPieces1.png-7383be5710486748bf06513a67c9fc90.stex"
+path="res://import/BoxPieces1.png-7383be5710486748bf06513a67c9fc90.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Others/Items/Box/BoxPieces1.png"
-dest_files=[ "res://.import/BoxPieces1.png-7383be5710486748bf06513a67c9fc90.stex" ]
+dest_files=[ "res://import/BoxPieces1.png-7383be5710486748bf06513a67c9fc90.stex" ]
 
 [params]
 

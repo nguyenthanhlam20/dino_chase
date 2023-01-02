@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Ozzy_31x31.png-ab39fa468050142acd49402f57b315ff.stex"
+path="res://import/Ozzy_31x31.png-ab39fa468050142acd49402f57b315ff.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Autumn/Ozzy/Ozzy_31x31.png"
-dest_files=[ "res://.import/Ozzy_31x31.png-ab39fa468050142acd49402f57b315ff.stex" ]
+dest_files=[ "res://import/Ozzy_31x31.png-ab39fa468050142acd49402f57b315ff.stex" ]
 
 [params]
 

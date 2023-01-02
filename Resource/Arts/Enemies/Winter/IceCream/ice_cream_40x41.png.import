@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ice_cream_40x41.png-0bc95ed56b18f8e335393151b1222158.stex"
+path="res://import/ice_cream_40x41.png-0bc95ed56b18f8e335393151b1222158.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Winter/IceCream/ice_cream_40x41.png"
-dest_files=[ "res://.import/ice_cream_40x41.png-0bc95ed56b18f8e335393151b1222158.stex" ]
+dest_files=[ "res://import/ice_cream_40x41.png-0bc95ed56b18f8e335393151b1222158.stex" ]
 
 [params]
 

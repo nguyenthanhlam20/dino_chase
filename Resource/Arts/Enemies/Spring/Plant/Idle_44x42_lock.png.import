@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Idle_44x42_lock.png-0ee321a57fd44e3b7b9b99abc8094ad3.stex"
+path="res://import/Idle_44x42_lock.png-0ee321a57fd44e3b7b9b99abc8094ad3.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Spring/Plant/Idle_44x42_lock.png"
-dest_files=[ "res://.import/Idle_44x42_lock.png-0ee321a57fd44e3b7b9b99abc8094ad3.stex" ]
+dest_files=[ "res://import/Idle_44x42_lock.png-0ee321a57fd44e3b7b9b99abc8094ad3.stex" ]
 
 [params]
 

@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Spikes_in_44x26_lock.png-088e0d4ca7e7ee35d4bbc40cdcecaae5.stex"
+path="res://import/Spikes_in_44x26_lock.png-088e0d4ca7e7ee35d4bbc40cdcecaae5.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Summer/Turtle/Spikes_in_44x26_lock.png"
-dest_files=[ "res://.import/Spikes_in_44x26_lock.png-088e0d4ca7e7ee35d4bbc40cdcecaae5.stex" ]
+dest_files=[ "res://import/Spikes_in_44x26_lock.png-088e0d4ca7e7ee35d4bbc40cdcecaae5.stex" ]
 
 [params]
 

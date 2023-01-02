@@ -1,6 +1,6 @@
 extends Node
 
-var FILE_PATH = "user://adcscds.tres"
+var FILE_PATH = "user://addccsscds.tres"
 var data = {
 	"general": {
 		"coins": {
@@ -136,11 +136,15 @@ var data = {
 	}
 }
 
+func get_unlock_enemies(key_season : String):
+	return data.get("completion").get("enemy").get(key_season)
+
 func get_user_info(key_parent: String, key_child: String):
+	print("key_parent: ", key_parent, ", key_child: ", key_child)
 	return data.get(key_parent).get(key_child).get("value")
 
 
-func get_unlock_enemies():
+func count_unlock_enemies():
 	var map_unlock = data.completion.map
 	var count = 0
 	var map_index : int
@@ -158,7 +162,7 @@ func format_data():
 	data.general.character_completion.value_format = Common.format_percent(data.completion.character.size(), 4)
 	data.general.map_completion.value_format = Common.format_percent(data.completion.map.size(), 4)
 	
-	var number_of_enemies = get_unlock_enemies()
+	var number_of_enemies = count_unlock_enemies()
 	data.general.enemy_completion.value_format = Common.format_percent(number_of_enemies, 21 * 4)
 	
 	data.character_pick.tomato.value_format = Common.format_number(data.character_pick.tomato.value)

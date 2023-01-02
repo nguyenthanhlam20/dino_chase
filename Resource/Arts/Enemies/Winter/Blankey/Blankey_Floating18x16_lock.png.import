@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Blankey_Floating18x16_lock.png-b0573805a3c4cf26a414c15e18e6cf08.stex"
+path="res://import/Blankey_Floating18x16_lock.png-b0573805a3c4cf26a414c15e18e6cf08.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Winter/Blankey/Blankey_Floating18x16_lock.png"
-dest_files=[ "res://.import/Blankey_Floating18x16_lock.png-b0573805a3c4cf26a414c15e18e6cf08.stex" ]
+dest_files=[ "res://import/Blankey_Floating18x16_lock.png-b0573805a3c4cf26a414c15e18e6cf08.stex" ]
 
 [params]
 

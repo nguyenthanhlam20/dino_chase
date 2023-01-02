@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Credits-1.png-77d65155983ad060c23351c65dfe15d1.stex"
+path="res://import/Credits-1.png-77d65155983ad060c23351c65dfe15d1.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Buttons/Credits-1.png"
-dest_files=[ "res://.import/Credits-1.png-77d65155983ad060c23351c65dfe15d1.stex" ]
+dest_files=[ "res://import/Credits-1.png-77d65155983ad060c23351c65dfe15d1.stex" ]
 
 [params]
 

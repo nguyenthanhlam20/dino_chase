@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dragon_attack_45x25.png-512a4d55afdade334cdb423cd0e59261.stex"
+path="res://import/dragon_attack_45x25.png-512a4d55afdade334cdb423cd0e59261.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Winter/Dragon/dragon_attack_45x25.png"
-dest_files=[ "res://.import/dragon_attack_45x25.png-512a4d55afdade334cdb423cd0e59261.stex" ]
+dest_files=[ "res://import/dragon_attack_45x25.png-512a4d55afdade334cdb423cd0e59261.stex" ]
 
 [params]
 

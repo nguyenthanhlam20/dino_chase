@@ -119,5 +119,4 @@ animation = "lock_deactive"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 23 )

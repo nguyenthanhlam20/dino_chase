@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Trees.png-81812ef4fec8c5edb31e76605ef85f1c.stex"
+path="res://import/Trees.png-81812ef4fec8c5edb31e76605ef85f1c.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Background/Top/Autumn/Trees.png"
-dest_files=[ "res://.import/Trees.png-81812ef4fec8c5edb31e76605ef85f1c.stex" ]
+dest_files=[ "res://import/Trees.png-81812ef4fec8c5edb31e76605ef85f1c.stex" ]
 
 [params]
 

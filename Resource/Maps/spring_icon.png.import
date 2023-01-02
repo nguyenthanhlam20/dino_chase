@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spring_icon.png-9fc6cbe6564b963ff6c4fdef4b55d14a.stex"
+path="res://import/spring_icon.png-9fc6cbe6564b963ff6c4fdef4b55d14a.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Maps/spring_icon.png"
-dest_files=[ "res://.import/spring_icon.png-9fc6cbe6564b963ff6c4fdef4b55d14a.stex" ]
+dest_files=[ "res://import/spring_icon.png-9fc6cbe6564b963ff6c4fdef4b55d14a.stex" ]
 
 [params]
 

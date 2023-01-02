@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/feaf_top.png-c1c6a6b46db753170b422209e0b533fc.stex"
+path="res://import/feaf_top.png-c1c6a6b46db753170b422209e0b533fc.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Background/Top/Autumn/feaf_top.png"
-dest_files=[ "res://.import/feaf_top.png-c1c6a6b46db753170b422209e0b533fc.stex" ]
+dest_files=[ "res://import/feaf_top.png-c1c6a6b46db753170b422209e0b533fc.stex" ]
 
 [params]
 

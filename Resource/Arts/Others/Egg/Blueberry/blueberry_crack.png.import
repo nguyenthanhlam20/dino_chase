@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blueberry_crack.png-d0b23fdef060666b8bf24aa7807805da.stex"
+path="res://import/blueberry_crack.png-d0b23fdef060666b8bf24aa7807805da.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Others/Egg/Blueberry/blueberry_crack.png"
-dest_files=[ "res://.import/blueberry_crack.png-d0b23fdef060666b8bf24aa7807805da.stex" ]
+dest_files=[ "res://import/blueberry_crack.png-d0b23fdef060666b8bf24aa7807805da.stex" ]
 
 [params]
 

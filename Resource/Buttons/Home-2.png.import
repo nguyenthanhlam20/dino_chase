@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Home-2.png-3d489728abd4af32479771ab13cd2a8f.stex"
+path="res://import/Home-2.png-3d489728abd4af32479771ab13cd2a8f.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Buttons/Home-2.png"
-dest_files=[ "res://.import/Home-2.png-3d489728abd4af32479771ab13cd2a8f.stex" ]
+dest_files=[ "res://import/Home-2.png-3d489728abd4af32479771ab13cd2a8f.stex" ]
 
 [params]
 

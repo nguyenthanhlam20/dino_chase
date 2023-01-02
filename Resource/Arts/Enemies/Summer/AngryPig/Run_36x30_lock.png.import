@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Run_36x30_lock.png-90c3aeb939e33179d8067db9a33d5928.stex"
+path="res://import/Run_36x30_lock.png-90c3aeb939e33179d8067db9a33d5928.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Summer/AngryPig/Run_36x30_lock.png"
-dest_files=[ "res://.import/Run_36x30_lock.png-90c3aeb939e33179d8067db9a33d5928.stex" ]
+dest_files=[ "res://import/Run_36x30_lock.png-90c3aeb939e33179d8067db9a33d5928.stex" ]
 
 [params]
 

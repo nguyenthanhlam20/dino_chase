@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Buy_100_1.png-368a2a2ad7f3bd886a004510daec6242.stex"
+path="res://import/Buy_100_1.png-368a2a2ad7f3bd886a004510daec6242.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Buy/Buy_100_1.png"
-dest_files=[ "res://.import/Buy_100_1.png-368a2a2ad7f3bd886a004510daec6242.stex" ]
+dest_files=[ "res://import/Buy_100_1.png-368a2a2ad7f3bd886a004510daec6242.stex" ]
 
 [params]
 

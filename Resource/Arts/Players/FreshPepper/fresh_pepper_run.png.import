@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fresh_pepper_run.png-86d4aa3b20019c4a3ef608afd80a424c.stex"
+path="res://import/fresh_pepper_run.png-86d4aa3b20019c4a3ef608afd80a424c.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Players/FreshPepper/fresh_pepper_run.png"
-dest_files=[ "res://.import/fresh_pepper_run.png-86d4aa3b20019c4a3ef608afd80a424c.stex" ]
+dest_files=[ "res://import/fresh_pepper_run.png-86d4aa3b20019c4a3ef608afd80a424c.stex" ]
 
 [params]
 

@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Play-again-2.png-ff72687cfbaed0a64f1c9c44951c2430.stex"
+path="res://import/Play-again-2.png-ff72687cfbaed0a64f1c9c44951c2430.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Buttons/Play-again-2.png"
-dest_files=[ "res://.import/Play-again-2.png-ff72687cfbaed0a64f1c9c44951c2430.stex" ]
+dest_files=[ "res://import/Play-again-2.png-ff72687cfbaed0a64f1c9c44951c2430.stex" ]
 
 [params]
 

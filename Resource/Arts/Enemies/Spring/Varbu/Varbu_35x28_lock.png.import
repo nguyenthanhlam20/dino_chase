@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Varbu_35x28_lock.png-1c940f6f4573f94343c3bc622d4cec86.stex"
+path="res://import/Varbu_35x28_lock.png-1c940f6f4573f94343c3bc622d4cec86.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Spring/Varbu/Varbu_35x28_lock.png"
-dest_files=[ "res://.import/Varbu_35x28_lock.png-1c940f6f4573f94343c3bc622d4cec86.stex" ]
+dest_files=[ "res://import/Varbu_35x28_lock.png-1c940f6f4573f94343c3bc622d4cec86.stex" ]
 
 [params]
 

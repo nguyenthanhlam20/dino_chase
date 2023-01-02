@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Enemies-1.png-e11c47f161bf59b6e4321d8a1bb44cf5.stex"
+path="res://import/Enemies-1.png-e11c47f161bf59b6e4321d8a1bb44cf5.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Buttons/Enemies-1.png"
-dest_files=[ "res://.import/Enemies-1.png-e11c47f161bf59b6e4321d8a1bb44cf5.stex" ]
+dest_files=[ "res://import/Enemies-1.png-e11c47f161bf59b6e4321d8a1bb44cf5.stex" ]
 
 [params]
 

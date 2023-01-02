@@ -3,7 +3,7 @@
 [ext_resource path="res://Game/Characters/Enemies/Spring/Bettle/BettleAvt.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Game/Characters/Enemies/EnemyAvatar.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="CircleShape2D" id=1]
 
 [node name="BettleAvt" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -12,9 +12,9 @@ script = ExtResource( 2 )
 scale = Vector2( 0.6, 0.6 )
 frames = ExtResource( 1 )
 animation = "lock_active"
-frame = 3
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource( 14 )
+position = Vector2( 0, 1 )
+shape = SubResource( 1 )

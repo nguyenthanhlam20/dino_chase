@@ -1,4 +1,4 @@
-extends Popup
+extends Control
 
 export var menu_size = 1
 export var lerp_speed = 0.3
@@ -41,8 +41,7 @@ func show_popup():
 		_target_anchor = _down_anchor
 	
 	_popped_up = !_popped_up
-	if(_popped_up):
-		self.show()
+	
 		
 		
 func disable_buttons():
@@ -67,7 +66,6 @@ func _on_PlayAgain_released():
 	yield(get_tree().create_timer(0.1), "timeout")
 	var count_down_screen = load(Constants.COUNTDOWN_SCREEN).instance()
 	root_node.add_child(count_down_screen)
-	root_node.remove_background()
 	count_down_screen.set_root_node(root_node)
 	count_down_screen.set_is_reload(true)
 	count_down_screen.start_count_down()

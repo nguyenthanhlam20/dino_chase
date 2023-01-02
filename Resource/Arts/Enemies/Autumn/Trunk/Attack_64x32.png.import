@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Attack_64x32.png-86363ca427b426b67ae14f78e0fd6dec.stex"
+path="res://import/Attack_64x32.png-86363ca427b426b67ae14f78e0fd6dec.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Autumn/Trunk/Attack_64x32.png"
-dest_files=[ "res://.import/Attack_64x32.png-86363ca427b426b67ae14f78e0fd6dec.stex" ]
+dest_files=[ "res://import/Attack_64x32.png-86363ca427b426b67ae14f78e0fd6dec.stex" ]
 
 [params]
 

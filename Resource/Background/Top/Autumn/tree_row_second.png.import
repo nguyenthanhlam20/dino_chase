@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tree_row_second.png-a2a5baa8662a37cf34cd9bdec6934e31.stex"
+path="res://import/tree_row_second.png-a2a5baa8662a37cf34cd9bdec6934e31.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Background/Top/Autumn/tree_row_second.png"
-dest_files=[ "res://.import/tree_row_second.png-a2a5baa8662a37cf34cd9bdec6934e31.stex" ]
+dest_files=[ "res://import/tree_row_second.png-a2a5baa8662a37cf34cd9bdec6934e31.stex" ]
 
 [params]
 

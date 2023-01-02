@@ -42,3 +42,8 @@ const LEAVE_SCREEN = "res://Game/UI/Screen/LeaveScreen/LeaveScreen.tscn"
 # Enemy
 const ENEMY_AVATAR = "res://Game/Characters/Enemies/EnemyAvatar.tscn"
 const HALF_TOTAL_ENEMY : int = 11
+const SPRING_ENEMIES = "res://Game/Data/Enemy/Spring.gd"
+const SUMMER_ENEMIES = "res://Game/Data/Enemy/Summer.gd"
+const AUTUMN_ENEMIES = "res://Game/Data/Enemy/Autumn.gd"
+const WINTER_ENEMIES = "res://Game/Data/Enemy/Winter.gd"
+const ALL_ENEMIES = "res://Game/Data/EnemySettings.gd"

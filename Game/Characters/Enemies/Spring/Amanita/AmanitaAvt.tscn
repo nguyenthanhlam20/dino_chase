@@ -3,7 +3,7 @@
 [ext_resource path="res://Game/Characters/Enemies/Spring/Amanita/AmanitaAvt.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Game/Characters/Enemies/EnemyAvatar.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="CircleShape2D" id=1]
 
 [node name="AmanitaAvt" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -16,5 +16,5 @@ playing = true
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource( 14 )
+position = Vector2( 0, 1 )
+shape = SubResource( 1 )

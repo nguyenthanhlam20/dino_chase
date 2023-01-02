@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/attack_one_31x35.png-68e1c8f006906e743e7240ee7d24ecbb.stex"
+path="res://import/attack_one_31x35.png-68e1c8f006906e743e7240ee7d24ecbb.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Winter/Santa/attack_one_31x35.png"
-dest_files=[ "res://.import/attack_one_31x35.png-68e1c8f006906e743e7240ee7d24ecbb.stex" ]
+dest_files=[ "res://import/attack_one_31x35.png-68e1c8f006906e743e7240ee7d24ecbb.stex" ]
 
 [params]
 

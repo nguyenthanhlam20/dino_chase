@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Crocodile_attack_32x16.png-af547c566d06ba93e50130248cba8b58.stex"
+path="res://import/Crocodile_attack_32x16.png-af547c566d06ba93e50130248cba8b58.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Summer/Crocodile/Crocodile_attack_32x16.png"
-dest_files=[ "res://.import/Crocodile_attack_32x16.png-af547c566d06ba93e50130248cba8b58.stex" ]
+dest_files=[ "res://import/Crocodile_attack_32x16.png-af547c566d06ba93e50130248cba8b58.stex" ]
 
 [params]
 

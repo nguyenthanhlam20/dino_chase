@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Exit-2.png-7d7f7ee08cf38d2f2f640d34390c0fee.stex"
+path="res://import/Exit-2.png-7d7f7ee08cf38d2f2f640d34390c0fee.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Buttons/Exit-2.png"
-dest_files=[ "res://.import/Exit-2.png-7d7f7ee08cf38d2f2f640d34390c0fee.stex" ]
+dest_files=[ "res://import/Exit-2.png-7d7f7ee08cf38d2f2f640d34390c0fee.stex" ]
 
 [params]
 

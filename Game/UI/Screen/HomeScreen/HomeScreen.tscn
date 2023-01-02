@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Game/UI/Screen/HomeScreen/HomeScreen.gd" type="Script" id=1]
 [ext_resource path="res://Resource/Buttons/More-1.png" type="Texture" id=2]
 [ext_resource path="res://Resource/Buttons/Play-1.png" type="Texture" id=3]
 [ext_resource path="res://Resource/Buttons/Option-1.png" type="Texture" id=4]
+[ext_resource path="res://Resource/title.png" type="Texture" id=5]
 [ext_resource path="res://Resource/Buttons/Play-2.png" type="Texture" id=6]
 [ext_resource path="res://Resource/Background/tileset.tres" type="TileSet" id=7]
 [ext_resource path="res://Resource/Buttons/More-2.png" type="Texture" id=12]
@@ -11,6 +12,66 @@
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 1.5625, 26 )
+
+[sub_resource type="Animation" id=12]
+resource_name = "normal"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "normal_animation_finished"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.2, 0.2 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "zoom"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.2, 0.2 ), Vector2( 0.205, 0.205 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "zoom_animation_finished"
+} ]
+}
 
 [node name="HomeScreen" type="Control"]
 anchor_right = 1.0
@@ -122,6 +183,19 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightPos/More/Right"]
 position = Vector2( 309.999, 121 )
 shape = SubResource( 10 )
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+
+[node name="Sprite" type="Sprite" parent="Control"]
+position = Vector2( 3, 35 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/normal = SubResource( 12 )
+anims/zoom = SubResource( 11 )
 
 [connection signal="body_shape_entered" from="LeftPos/Options/Left" to="." method="_on_Left_body_shape_entered"]
 [connection signal="body_shape_entered" from="LeftPos/Options/First" to="." method="_on_First_body_shape_entered"]

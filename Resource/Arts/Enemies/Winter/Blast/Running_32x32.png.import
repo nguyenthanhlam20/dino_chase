@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Running_32x32.png-43687ba45b369c6c1697009348f45270.stex"
+path="res://import/Running_32x32.png-43687ba45b369c6c1697009348f45270.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Winter/Blast/Running_32x32.png"
-dest_files=[ "res://.import/Running_32x32.png-43687ba45b369c6c1697009348f45270.stex" ]
+dest_files=[ "res://import/Running_32x32.png-43687ba45b369c6c1697009348f45270.stex" ]
 
 [params]
 

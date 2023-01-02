@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Home-short-1.png-9837813e79ed35b7a49aa41730ad23d2.stex"
+path="res://import/Home-short-1.png-9837813e79ed35b7a49aa41730ad23d2.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Buttons/Home-short-1.png"
-dest_files=[ "res://.import/Home-short-1.png-9837813e79ed35b7a49aa41730ad23d2.stex" ]
+dest_files=[ "res://import/Home-short-1.png-9837813e79ed35b7a49aa41730ad23d2.stex" ]
 
 [params]
 

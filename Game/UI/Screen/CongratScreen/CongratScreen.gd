@@ -20,6 +20,7 @@ func set_item(item_type: String, title_value : String, avatar_value : String, na
 		$GridContainer/ItemAvatar/Avatar.set_current_state(1)
 	else:
 		$GridContainer/ItemAvatar/Avatar.visible = false
+		$GridContainer/ItemAvatar/Avatar.pause_mode = PAUSE_MODE_STOP
 		$GridContainer/ItemAvatar/Sprite.texture = load(avatar_value)
 		$GridContainer/ItemAvatar/Sprite.position = Vector2(64, 0)
 		$GridContainer/ItemAvatar/Sprite.visible = true
@@ -31,5 +32,6 @@ func show_popup():
 	self.show()
 	
 func _on_OK_released():
-	get_tree().reload_current_scene()
+	if(get_tree().reload_current_scene()):
+		pass
 	

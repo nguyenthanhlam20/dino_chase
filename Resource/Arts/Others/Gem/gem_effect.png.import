@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gem_effect.png-d81236e3e3e313db644bfb2327936b12.stex"
+path="res://import/gem_effect.png-d81236e3e3e313db644bfb2327936b12.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Others/Gem/gem_effect.png"
-dest_files=[ "res://.import/gem_effect.png-d81236e3e3e313db644bfb2327936b12.stex" ]
+dest_files=[ "res://import/gem_effect.png-d81236e3e3e313db644bfb2327936b12.stex" ]
 
 [params]
 

@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rain_bow.png-0b0c7700297fd4381ea104dce833c10e.stex"
+path="res://import/rain_bow.png-0b0c7700297fd4381ea104dce833c10e.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Players/rain_bow.png"
-dest_files=[ "res://.import/rain_bow.png-0b0c7700297fd4381ea104dce833c10e.stex" ]
+dest_files=[ "res://import/rain_bow.png-0b0c7700297fd4381ea104dce833c10e.stex" ]
 
 [params]
 

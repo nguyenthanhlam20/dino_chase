@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Blink_32x32.png-ed3a3e297778a1ace39921eef0fa0764.stex"
+path="res://import/Blink_32x32.png-ed3a3e297778a1ace39921eef0fa0764.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Autumn/Orange/Blink_32x32.png"
-dest_files=[ "res://.import/Blink_32x32.png-ed3a3e297778a1ace39921eef0fa0764.stex" ]
+dest_files=[ "res://import/Blink_32x32.png-ed3a3e297778a1ace39921eef0fa0764.stex" ]
 
 [params]
 

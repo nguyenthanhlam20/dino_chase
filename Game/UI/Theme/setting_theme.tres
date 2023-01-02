@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=4 format=2]
+[gd_resource type="Theme" load_steps=6 format=2]
 
 [ext_resource path="res://Resource/Fonts/Bungee-Regular.ttf" type="DynamicFontData" id=1]
 
@@ -6,10 +6,18 @@
 size = 8
 font_data = ExtResource( 1 )
 
+[sub_resource type="StyleBoxFlat" id=6]
+
+[sub_resource type="StyleBoxFlat" id=7]
+
 [sub_resource type="DynamicFont" id=4]
 size = 8
 font_data = ExtResource( 1 )
 
 [resource]
 CheckBox/fonts/font = SubResource( 5 )
+CheckBox/icons/unchecked = null
+HSlider/styles/grabber_area = SubResource( 6 )
+HSlider/styles/grabber_area_highlight = SubResource( 7 )
+HSlider/styles/slider = null
 Label/fonts/font = SubResource( 4 )

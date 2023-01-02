@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/autumn_icon.png-9b738d587a38a628c3277237dfcd0ece.stex"
+path="res://import/autumn_icon.png-9b738d587a38a628c3277237dfcd0ece.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Icons/autumn_icon.png"
-dest_files=[ "res://.import/autumn_icon.png-9b738d587a38a628c3277237dfcd0ece.stex" ]
+dest_files=[ "res://import/autumn_icon.png-9b738d587a38a628c3277237dfcd0ece.stex" ]
 
 [params]
 

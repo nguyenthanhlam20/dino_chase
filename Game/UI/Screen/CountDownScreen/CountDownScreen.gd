@@ -27,6 +27,7 @@ func _on_Timer_timeout():
 		content.text = "3"
 		Common.paused_game(false)
 		root_node.show_paused_btn(true)
+		root_node.remove_node_by_name("CoverBackground")
 		if(is_reload):
 			print('reload current scene: ', get_tree().reload_current_scene())
 		timer.disconnect("timeout", self, "_on_Timer_timeout")

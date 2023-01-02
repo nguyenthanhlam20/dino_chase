@@ -12,9 +12,9 @@ func _ready():
 	$AnimationPlayer.play("fade")
 	$MessageContainer.visible = true
 	yield($AnimationPlayer,'animation_finished')
-	yield(get_tree().create_timer(0.1), "timeout")
+	yield(get_tree().create_timer(0.5), "timeout")
 	$AnimationPlayer.play_backwards("fade")
-	yield(get_tree().create_timer(0.1), "timeout")
+	yield($AnimationPlayer,'animation_finished')
 	$MessageContainer.visible = false
 	SceneTransition.change_scene(self, "res://Game/UI/Screen/HomeScreen/HomeScreen.tscn")
 

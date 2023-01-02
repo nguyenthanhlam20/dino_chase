@@ -4,6 +4,8 @@
 [ext_resource path="res://Game/Characters/Enemies/EnemyAvatar.gd" type="Script" id=2]
 [ext_resource path="res://Resource/Arts/Enemies/Spring/Bunny/Run34x44_lock.png" type="Texture" id=3]
 
+[sub_resource type="CircleShape2D" id=29]
+
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 34, 44 )
@@ -57,67 +59,54 @@ atlas = ExtResource( 1 )
 region = Rect2( 204, 0, 34, 44 )
 
 [sub_resource type="AtlasTexture" id=16]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 34, 44 )
 
 [sub_resource type="AtlasTexture" id=17]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 34, 0, 34, 44 )
 
 [sub_resource type="AtlasTexture" id=18]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 68, 0, 34, 44 )
 
 [sub_resource type="AtlasTexture" id=19]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 102, 0, 34, 44 )
 
 [sub_resource type="AtlasTexture" id=20]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 136, 0, 34, 44 )
 
 [sub_resource type="AtlasTexture" id=21]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 170, 0, 34, 44 )
 
 [sub_resource type="AtlasTexture" id=22]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 204, 0, 34, 44 )
 
 [sub_resource type="AtlasTexture" id=23]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 238, 0, 34, 44 )
 
 [sub_resource type="AtlasTexture" id=24]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 272, 0, 34, 44 )
 
 [sub_resource type="AtlasTexture" id=25]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 306, 0, 34, 44 )
 
 [sub_resource type="AtlasTexture" id=26]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 340, 0, 34, 44 )
 
 [sub_resource type="AtlasTexture" id=27]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 374, 0, 34, 44 )
 
 [sub_resource type="AtlasTexture" id=28]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 204, 0, 34, 44 )
 
@@ -144,18 +133,16 @@ animations = [ {
 "speed": 1.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=14]
-
 [node name="BunnyAvt" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 29 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 1, 0 )
+scale = Vector2( 0.45, 0.45 )
 frames = SubResource( 13 )
 animation = "lock_active"
-frame = 4
+frame = 11
 playing = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource( 14 )

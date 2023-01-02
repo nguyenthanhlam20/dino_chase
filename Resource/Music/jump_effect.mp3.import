@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/jump_effect.mp3-5c97a246312ec99f0c248397e8654b7c.mp3str"
+path="res://import/jump_effect.mp3-5c97a246312ec99f0c248397e8654b7c.mp3str"
 
 [deps]
 
 source_file="res://Resource/Music/jump_effect.mp3"
-dest_files=[ "res://.import/jump_effect.mp3-5c97a246312ec99f0c248397e8654b7c.mp3str" ]
+dest_files=[ "res://import/jump_effect.mp3-5c97a246312ec99f0c248397e8654b7c.mp3str" ]
 
 [params]
 

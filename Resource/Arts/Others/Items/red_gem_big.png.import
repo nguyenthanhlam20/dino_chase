@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/red_gem_big.png-6cdcd6247a7e29bc31a56d7acef9e00f.stex"
+path="res://import/red_gem_big.png-6cdcd6247a7e29bc31a56d7acef9e00f.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Others/Items/red_gem_big.png"
-dest_files=[ "res://.import/red_gem_big.png-6cdcd6247a7e29bc31a56d7acef9e00f.stex" ]
+dest_files=[ "res://import/red_gem_big.png-6cdcd6247a7e29bc31a56d7acef9e00f.stex" ]
 
 [params]
 

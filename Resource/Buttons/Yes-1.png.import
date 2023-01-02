@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Yes-1.png-332369a6f953a83d5e5a0978b4cb819c.stex"
+path="res://import/Yes-1.png-332369a6f953a83d5e5a0978b4cb819c.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Buttons/Yes-1.png"
-dest_files=[ "res://.import/Yes-1.png-332369a6f953a83d5e5a0978b4cb819c.stex" ]
+dest_files=[ "res://import/Yes-1.png-332369a6f953a83d5e5a0978b4cb819c.stex" ]
 
 [params]
 

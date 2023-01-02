@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Enokitake_39x40_lock.png-f3918a527e7f4a8c2cee1ddeb29b07b3.stex"
+path="res://import/Enokitake_39x40_lock.png-f3918a527e7f4a8c2cee1ddeb29b07b3.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Winter/Enokitake/Enokitake_39x40_lock.png"
-dest_files=[ "res://.import/Enokitake_39x40_lock.png-f3918a527e7f4a8c2cee1ddeb29b07b3.stex" ]
+dest_files=[ "res://import/Enokitake_39x40_lock.png-f3918a527e7f4a8c2cee1ddeb29b07b3.stex" ]
 
 [params]
 

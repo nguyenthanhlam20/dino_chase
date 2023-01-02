@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/vampire_46x53_lock.png-e158a3abd6d70f16118fcb9f77f894cb.stex"
+path="res://import/vampire_46x53_lock.png-e158a3abd6d70f16118fcb9f77f894cb.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Spring/Vampire/vampire_46x53_lock.png"
-dest_files=[ "res://.import/vampire_46x53_lock.png-e158a3abd6d70f16118fcb9f77f894cb.stex" ]
+dest_files=[ "res://import/vampire_46x53_lock.png-e158a3abd6d70f16118fcb9f77f894cb.stex" ]
 
 [params]
 

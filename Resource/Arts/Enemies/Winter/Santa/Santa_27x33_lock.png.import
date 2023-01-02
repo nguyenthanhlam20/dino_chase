@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Santa_27x33_lock.png-38ef213413ffd70897597d877a04b6eb.stex"
+path="res://import/Santa_27x33_lock.png-38ef213413ffd70897597d877a04b6eb.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Winter/Santa/Santa_27x33_lock.png"
-dest_files=[ "res://.import/Santa_27x33_lock.png-38ef213413ffd70897597d877a04b6eb.stex" ]
+dest_files=[ "res://import/Santa_27x33_lock.png-38ef213413ffd70897597d877a04b6eb.stex" ]
 
 [params]
 

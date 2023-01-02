@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fox_run_20x18_lock.png-8a685f29593398821b3dca6221e58c5b.stex"
+path="res://import/fox_run_20x18_lock.png-8a685f29593398821b3dca6221e58c5b.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://Resource/Arts/Enemies/Autumn/Fox/fox_run_20x18_lock.png"
-dest_files=[ "res://.import/fox_run_20x18_lock.png-8a685f29593398821b3dca6221e58c5b.stex" ]
+dest_files=[ "res://import/fox_run_20x18_lock.png-8a685f29593398821b3dca6221e58c5b.stex" ]
 
 [params]
 
