@@ -8,7 +8,8 @@ onready var collision_shape = $CollisionShape2D
 onready var invicible_time = $InvincibleTime
 onready var current_character_name = PlayerSettings.get_player_info("key_name")
 onready var current_map_name = MapSettings.get_map_info("map_name").to_lower()
-
+onready var start_time = $StartTime
+onready var end_time = $EndTime
 
 # Properties
 export(int) var move_speed = 100
@@ -52,7 +53,8 @@ func set_is_start(value : bool) -> void:
 func _ready():
 	animated_sprite.frames = load(PlayerSettings.get_player_info("frame"))
 	longest_distance = float(User.get_longest_distance(current_map_name))
-
+func invincible_animation_finished():
+	current_state = STATE.RUN
 
 func _process(_delta):
 	if(is_start):
@@ -342,9 +344,13 @@ func pick_new_state():
 func hit_animation_finished():
 	is_allow_touch_screen = true
 	current_state = STATE.RUN
+	start_time.start()
 		
 func _on_InvincibleTime_timeout():
 	invicible = false
+	self.modulate.a = 1
+	end_time.stop()
+	start_time.stop()
 
 func set_running_state(value: bool):
 	if(value):
@@ -354,3 +360,13 @@ func set_running_state(value: bool):
 
 func set_enemy_completion(value: Array):
 	enemy_completion = value
+
+
+func _on_StartTime_timeout():
+	self.modulate.a = 0.5
+	end_time.start()
+
+
+func _on_EndTime_timeout():
+	self.modulate.a = 1
+	start_time.start()

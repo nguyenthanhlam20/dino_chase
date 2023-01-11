@@ -48,7 +48,7 @@ func change_scene(current_scene, next_scene):
 			var scene = loader.get_resource().instance()
 			# adding scene to the root
 
-			get_tree().get_root().call_deferred("add_child",scene)
+			get_tree().get_root().call_deferred("add_child", scene)
 			# removing loading scene
 			animation_player.play_backwards('dissolve')
 			progress_bar.visible = false

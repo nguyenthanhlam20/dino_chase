@@ -38,6 +38,7 @@ const CONFIRM_SCREEN = "res://Game/UI/Screen/ConfirmScreen/ConfirmScreen.tscn"
 const CONGRAT_SCREEN = "res://Game/UI/Screen/CongratScreen/CongratScreen.tscn"
 const COVER_BACKGROUND = "res://Game/UI/Screen/CoverBackground.tscn"
 const LEAVE_SCREEN = "res://Game/UI/Screen/LeaveScreen/LeaveScreen.tscn"
+const CONTINUE_SCREEN = "res://Game/UI/Screen/ContinueScreen/ContinueScreen.tscn"
 
 # Enemy
 const ENEMY_AVATAR = "res://Game/Characters/Enemies/EnemyAvatar.tscn"

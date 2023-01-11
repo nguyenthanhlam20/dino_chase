@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Game/Characters/Players/Player.gd" type="Script" id=1]
 
@@ -321,6 +321,36 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=50]
+resource_name = "invincible"
+length = 2.0
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "invincible_animation_finished"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [sub_resource type="Animation" id=45]
 resource_name = "jump"
 length = 0.05
@@ -421,6 +451,7 @@ anims/fall = SubResource( 37 )
 anims/grave = SubResource( 48 )
 anims/hit = SubResource( 32 )
 anims/idle = SubResource( 21 )
+anims/invincible = SubResource( 50 )
 anims/jump = SubResource( 45 )
 anims/post_death = SubResource( 49 )
 anims/pre_death = SubResource( 47 )
@@ -432,7 +463,15 @@ scale = Vector2( 0.85, 0.9 )
 shape = SubResource( 43 )
 
 [node name="InvincibleTime" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 4.0
 one_shot = true
 
+[node name="StartTime" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="EndTime" type="Timer" parent="."]
+wait_time = 0.1
+
 [connection signal="timeout" from="InvincibleTime" to="." method="_on_InvincibleTime_timeout"]
+[connection signal="timeout" from="StartTime" to="." method="_on_StartTime_timeout"]
+[connection signal="timeout" from="EndTime" to="." method="_on_EndTime_timeout"]

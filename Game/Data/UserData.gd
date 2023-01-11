@@ -1,11 +1,11 @@
 extends Node
 
-var FILE_PATH = "user://addccsscds.tres"
+var FILE_PATH = "user://users.tres"
 var data = {
 	"general": {
 		"coins": {
 			"title": "Coins",
-			"value": 8000,
+			"value": 3000,
 			"value_format": "0", 
 			"sprite": "res://Resource/Icons/time-96.png"
 		},

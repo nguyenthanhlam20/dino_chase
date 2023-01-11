@@ -16,7 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="BtnContainer" type="CenterContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -26,25 +26,25 @@ margin_top = -90.0
 margin_right = 160.0
 margin_bottom = 90.0
 
-[node name="Home" type="TouchScreenButton" parent="CenterContainer"]
+[node name="Home" type="TouchScreenButton" parent="BtnContainer"]
 position = Vector2( 110, 86 )
 scale = Vector2( 0.13, 0.13 )
 normal = ExtResource( 7 )
 pressed = ExtResource( 9 )
 
-[node name="Settings" type="TouchScreenButton" parent="CenterContainer"]
+[node name="Settings" type="TouchScreenButton" parent="BtnContainer"]
 position = Vector2( 137, 86 )
 scale = Vector2( 0.13, 0.13 )
 normal = ExtResource( 6 )
 pressed = ExtResource( 10 )
 
-[node name="Restart" type="TouchScreenButton" parent="CenterContainer"]
+[node name="Restart" type="TouchScreenButton" parent="BtnContainer"]
 position = Vector2( 164, 86 )
 scale = Vector2( 0.13, 0.13 )
 normal = ExtResource( 8 )
 pressed = ExtResource( 5 )
 
-[node name="Play" type="TouchScreenButton" parent="CenterContainer"]
+[node name="Play" type="TouchScreenButton" parent="BtnContainer"]
 position = Vector2( 191, 86 )
 scale = Vector2( 0.13, 0.13 )
 normal = ExtResource( 4 )

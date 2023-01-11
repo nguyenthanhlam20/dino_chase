@@ -182,6 +182,7 @@ window/size/width=320
 window/size/height=180
 window/size/test_width=960
 window/size/test_height=540
+window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
@@ -230,3 +231,7 @@ pointing/emulate_touch_from_mouse=true
 [physics]
 
 common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_clear_color=Color( 0.329412, 0.776471, 0.745098, 1 )

@@ -23,8 +23,6 @@ func _on_Timer_timeout():
 		content.text = arr[index]
 		timer.start()	
 	else:
-		index = 3
-		content.text = "3"
 		Common.paused_game(false)
 		root_node.show_paused_btn(true)
 		root_node.remove_node_by_name("CoverBackground")

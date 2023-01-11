@@ -12,7 +12,7 @@ func _ready():
 	$AnimationPlayer.play("fade")
 	$MessageContainer.visible = true
 	yield($AnimationPlayer,'animation_finished')
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(0.2), "timeout")
 	$AnimationPlayer.play_backwards("fade")
 	yield($AnimationPlayer,'animation_finished')
 	$MessageContainer.visible = false

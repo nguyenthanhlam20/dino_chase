@@ -19,6 +19,7 @@ onready var bend_down_btn = $TouchScreenBtns/BendownContainer/BendDown
 onready var jump_btn = $TouchScreenBtns/JumpContainer/Jump
 onready var jump_container = $TouchScreenBtns/JumpContainer
 onready var stop_zone_left = $StopZoneLeft
+onready var enable_paused_timer = $TimerGroup/EnablePausedTimer
 
 onready var Heart = load(Constants.HEART)
 onready var particles = load(Constants.PARTICLES)
@@ -79,15 +80,22 @@ func _ready():
 	initialize_object()
 	get_tree().set_current_scene(self)
 	stopping()
-	enable_touch_screen_btns(false)
 	add_hearts()
 	put_map()
 	put_player()
-	show_timer()
 	set_running(false)
+	start_cfg()
+
+#	start config
+func start_cfg() -> void:
+	enable_touch_screen_btns(false)
+	time_label.visible = GameSettings.timer_status
 	coin_timer.start()
-#	spawn_enemy()
-	
+	enable_paused_timer.start()
+
+func set_input_position():
+	touch_screen_btns.move_child(touch_screen_btns.get_child(0), 1)
+
 func enable_buttons():
 	self.get_node("PausedScreen").enable_buttons()
 	
@@ -119,11 +127,6 @@ func change_start_object_layer():
 	start_object.set("collision_layer", 6)
 
 
-
-		
-func show_timer():
-	time_label.visible = GameSettings.timer_status
-		
 func spawn_enemy():
 	if(is_instance_valid(player)):
 		generate_enemy()
@@ -229,12 +232,10 @@ func remove_health(index):
 
 func set_running(value):
 	is_running = value
-	var map = map_container.get_child(0)
-	map.set_is_running(value)
+	map_container.get_child(0).set_is_running(value)
 
 func update_time(value):
 	time_label.text = value
-	
 	
 func reset_coin_timer():
 	coin_timer.start()
@@ -292,5 +293,5 @@ func _on_StopZoneLeft_body_shape_entered(_body_rid, body, _body_shape_index, _lo
 func _on_StopZoneRight_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):
 	body.do_action()
 
-		
-
+func _on_EnablePausedTimer_timeout():
+	pause_btn.connect("pressed", self, "_on_Pause_pressed")
